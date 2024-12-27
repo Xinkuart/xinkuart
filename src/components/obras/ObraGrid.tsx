@@ -152,13 +152,6 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
                       <ZoomIn size={16} className="md:w-5 md:h-5" />
                       Ver obra
                     </button>
-                    <button
-                      onClick={(e) => handleContactClick(e, obra)}
-                      className="w-full py-2 bg-[#FF0000] text-white text-sm md:text-base
-                        transition-colors duration-300 hover:bg-red-700"
-                    >
-                      Solicitar Información
-                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -195,47 +188,99 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
       )}
 
       {/* Modal de vista completa */}
-      <AnimatePresence>
-        {selectedObra && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
-            onClick={() => setSelectedObra(null)}
-          >
-            <button
-              onClick={() => setSelectedObra(null)}
-              className="absolute top-4 right-4 text-white p-2 rounded-full 
-                bg-black/50 hover:bg-[#FF0000] transition-colors"
-            >
-              <X size={24} />
-            </button>
-            
-            <div className="relative w-[90vw] h-[90vh]">
-              <Image
-                src={selectedObra.imageUrl}
-                alt={selectedObra.titulo}
-                fill
-                className="object-contain"
-                sizes="90vw"
-                quality={100}
-                priority
-              />
-            </div>
+<AnimatePresence>
+  {selectedObra && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center"
+    >
+      {/* Overlay con fondo oscuro */}
+      <div 
+        className="absolute inset-0 bg-black/95"
+        onClick={() => setSelectedObra(null)}
+      />
+      
+      {/* Contenedor principal del modal */}
+      <motion.div 
+        className="relative w-[95%] h-[90vh] max-w-[1800px] mx-auto bg-[#262626] rounded-lg overflow-hidden z-10"
+        initial={{ scale: 0.9, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.9, y: 20 }}
+      >
+        {/* Botón de cerrar */}
+        <button
+          onClick={() => setSelectedObra(null)}
+          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/50 hover:bg-[#FF0000] transition-colors"
+        >
+          <X className="w-6 h-6 text-white" />
+        </button>
 
-            <div className="absolute bottom-4 left-4 right-4 text-white text-center">
-              <p className="text-[#FF0000] text-xl font-light mb-2">
-                {selectedObra.artistaNombre}
-              </p>
-              <h3 className="text-2xl font-light mb-2">{selectedObra.titulo}</h3>
-              <p className="text-gray-300">
-                {selectedObra.medidas} - {selectedObra.tecnica}
-              </p>
+        {/* Grid con la imagen y la información */}
+        <div className="h-full grid grid-cols-1 lg:grid-cols-[2fr,1fr]">
+          {/* Contenedor de la imagen */}
+          <div className="relative h-[50vh] lg:h-full w-full bg-black">
+            <Image
+              src={selectedObra.imageUrl}
+              alt={selectedObra.titulo}
+              fill
+              className="object-contain"
+              sizes="(max-width: 1024px) 100vw, 66vw"
+              quality={100}
+              priority
+            />
+          </div>
+
+          {/* Panel de información */}
+          <div className="relative bg-[#262626] p-8 lg:p-12 overflow-y-auto">
+            <div className="space-y-8">
+              {/* Título y artista */}
+              <div className="space-y-4">
+                <p className="text-[#FF0000] text-xl font-light">
+                  {selectedObra.artistaNombre || selectedObra.artista}
+                </p>
+                <h2 className="text-3xl text-white font-light">
+                  {selectedObra.titulo}
+                </h2>
+              </div>
+
+              {/* Detalles técnicos */}
+              <div className="space-y-6 text-white/80">
+                <div>
+                  <h3 className="text-[#FF0000] text-sm mb-2">TÉCNICA</h3>
+                  <p className="font-light">{selectedObra.tecnica}</p>
+                </div>
+                <div>
+                  <h3 className="text-[#FF0000] text-sm mb-2">DIMENSIONES</h3>
+                  <p className="font-light">{selectedObra.medidas}</p>
+                </div>
+                {selectedObra.año && (
+                  <div>
+                    <h3 className="text-[#FF0000] text-sm mb-2">AÑO</h3>
+                    <p className="font-light">{selectedObra.año}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Botón de contacto */}
+              <button
+                onClick={() => {
+                  setShowContactModal(true);
+                  setContactObra(selectedObra);
+                }}
+                className="w-full py-4 bg-[#FF0000] text-white font-light
+                  hover:bg-red-700 transition-colors duration-300"
+              >
+                Solicitar Información
+              </button>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
       {/* Modal de contacto */}
       {contactObra && (

@@ -101,8 +101,32 @@ export default function Home() {
       imagen: "/images/obras/alonso/alonso1.jpg",
       artista: "JAIME SÁNCHEZ ALONSO ",
       titulo: "La Montaña Rusa",
-      dimensiones: "189 cm x 105 cm",
+      medidas: "189 cm x 105 cm",
       tecnica: "Pintura en técnica mixta sobre tela",
+    },
+    {
+      id: 10,
+      imagen: "/images/obras/ciria/ciria5.jpg",
+      artista: "CIRIA ",
+      titulo: "Musa y Venus (Rebelión)",
+      medidas: "250 x 250 cm",
+      tecnica: "Técnica mixta, óleo y grafito sobre lienzo",
+    },
+    {
+      id: 11,
+      imagen: "/images/obras/obra43.jpg",
+      artista: "PEDRO PASQUÍN",
+      titulo: "El Patio",
+      medidas: "100 x 100 cm",
+      tecnica: "Acrílico sobre Lienzo",
+    },
+    {
+      id: 12,
+      imagen: "/images/obras/oyonarte/obra9.jpg",
+      artista: "MANOLO OYONARTE",
+      titulo: "Realidades sin Nombre.Z13",
+      medidas: "200 x 200 cm",
+      tecnica: "Técnica mixta sobre lienzo",
     },
   ];
 
@@ -123,8 +147,9 @@ export default function Home() {
       subtitle: "Más allá de la galería tradicional",
     },
   ];
+  const [selectedObra, setSelectedObra] = useState(null);
   const [currentObrasIndex, setCurrentObrasIndex] = useState(0);
-  const obrasPerPage = 3;
+  const obrasPerPage = 4;
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prevIndex) =>
@@ -175,7 +200,7 @@ export default function Home() {
           <motion.div
             initial="hidden"
             animate="visible"
-            className="text-center space-y-12"
+            className="text-center space-y-20"
           >
             {/* Logo Container */}
             <motion.div
@@ -190,22 +215,29 @@ export default function Home() {
                   },
                 },
               }}
-              className="relative w-[500px] md:w-[600px] lg:w-[700px] mx-auto"
+              className="relative w-[280px] sm:w-[400px] md:w-[500px] lg:w-[600px] xl:w-[700px] mx-auto px-4 sm:px-0"
             >
-              <div className="relative aspect-[3/1]">
-                <Image
-                  src="/images/logo/logoxinkuart.png"
-                  alt="XinkuArt Logo"
-                  fill
-                  priority
-                  className="object-contain"
-                />
+              <div className="relative w-full aspect-[3/1]">
+                <div className="relative h-full w-full">
+                  <Image
+                    src="/images/logo/logoxinkuart.png"
+                    alt="XinkuArt Logo"
+                    fill
+                    priority
+                    sizes="(max-width: 640px) 280px, 
+               (max-width: 768px) 400px, 
+               (max-width: 1024px) 500px, 
+               (max-width: 1280px) 600px, 
+               700px"
+                    className="object-contain"
+                  />
+                </div>
                 <motion.div
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 1.5, delay: 1.2 }}
                   className="absolute -bottom-4 left-0 right-0 h-[1px] bg-white/20
-                  transform origin-left"
+        transform origin-left"
                 />
               </div>
             </motion.div>
@@ -280,7 +312,8 @@ export default function Home() {
                 promoción internacional.
                 <br />
                 <br />
-                En Xinkuart nos dedicamos integramente a la promoción de artistas consolidados y emergentes
+                En Xinkuart nos dedicamos integramente a la promoción de
+                artistas consolidados y emergentes
               </motion.p>
             </div>
 
@@ -367,7 +400,7 @@ export default function Home() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <span className="relative z-10 flex items-center gap-2 font-light">
-                    Explorar Exposiciones
+                    Explorar Más Exposiciones
                     <motion.svg
                       className="w-5 h-5"
                       initial={{ x: 0 }}
@@ -491,7 +524,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {obrasDestacadas
               .slice(currentObrasIndex, currentObrasIndex + obrasPerPage)
               .map((obra) => (

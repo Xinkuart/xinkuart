@@ -12,6 +12,7 @@ interface ExposicionData {
 const CiriaPage = () => {
   const [activeTab, setActiveTab] = useState('obras');
   const [hoveredImage, setHoveredImage] = useState<number | null>(null);
+  const [selectedObra, setSelectedObra] = useState<null | any>(null);
 
   const tabItems = [
     { id: 'obras', label: 'Obras del Artista', icon: <Grid size={10} /> },
@@ -333,7 +334,7 @@ const CiriaPage = () => {
 
         {/* Contenido de las pestañas */}
         <AnimatePresence mode="wait">
-          {activeTab === 'obras' && (
+        {activeTab === "obras" && (
             <motion.div
               key="obras"
               initial={{ opacity: 0, y: 20 }}
@@ -345,37 +346,173 @@ const CiriaPage = () => {
                 {obras.map((obra) => (
                   <motion.div
                     key={obra.id}
-                    className="group relative rounded-xl overflow-hidden shadow-lg"
-                    onHoverStart={() => setHoveredImage(obra.id)}
-                    onHoverEnd={() => setHoveredImage(null)}
-                    whileHover={{ y: -5 }}
+                    className="group relative aspect-[3/4] rounded-lg overflow-hidden"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
                   >
-                    <div className="aspect-square relative">
+                    {/* Imagen de la obra */}
+                    <div className="relative h-full w-full">
                       <Image
                         src={obra.imagen}
                         alt={obra.titulo}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className={`
-                        absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent
-                        transition-opacity duration-300
-                        ${hoveredImage === obra.id ? 'opacity-100' : 'opacity-0'}
-                      `}>
-                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                          <h3 className="text-xl font-light mb-2">{obra.titulo}</h3>
-                          <p className="text-sm font-light opacity-90">{obra.tecnica}</p>
-                          <p className="text-sm font-light opacity-90">{obra.dimensiones}</p>
-                          <p className="text-sm font-light opacity-90">{obra.año}</p>
+                      {/* Overlay con degradado */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        {/* Título y detalles */}
+                        <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                          <h3 className="text-2xl text-white font-light mb-2">
+                            {obra.titulo}
+                          </h3>
+                          <p className="text-white/80 text-sm font-light">
+                            {obra.tecnica}
+                          </p>
+                        </div>
+
+                        {/* Botón Ver Obra mejorado */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                          <button
+                            onClick={() => setSelectedObra(obra)}
+                            className="relative overflow-hidden group bg-white/10 backdrop-blur-sm border border-white/20 
+                    px-8 py-3 text-white font-light hover:border-white transition-all duration-300 
+                    opacity-0 group-hover:opacity-100"
+                          >
+                            <span className="relative z-10 flex items-center gap-2">
+                              Ver Obra
+                              <svg
+                                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={1.5}
+                                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                />
+                              </svg>
+                            </span>
+                            <div
+                              className="absolute inset-0 bg-[#FF0000] transform -translate-x-full 
+                      group-hover:translate-x-0 transition-transform duration-300"
+                            />
+                          </button>
                         </div>
                       </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
+
+              {/* Modal de obra */}
+              {selectedObra && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95">
+                  <div className="relative w-full h-full flex flex-col lg:flex-row">
+                    {/* Botón cerrar mejorado */}
+                    <button
+                      onClick={() => setSelectedObra(null)}
+                      className="absolute top-6 right-6 z-50 w-12 h-12 bg-white/10 backdrop-blur-sm 
+              border border-white/20 text-white hover:bg-[#FF0000] hover:border-[#FF0000] 
+              transition-all duration-300 flex items-center justify-center rounded-full"
+                    >
+                      ✕
+                    </button>
+
+                    {/* Contenedor de la imagen */}
+                    <div className="flex-1 relative h-full lg:h-screen p-4 lg:p-12">
+                      <div className="relative h-full w-full">
+                        <Image
+                          src={selectedObra.imagen}
+                          alt={selectedObra.titulo}
+                          fill
+                          className="object-contain"
+                          priority
+                          quality={100}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Panel de información mejorado */}
+                    <div className="w-full lg:w-[400px] bg-[#1a1a1a] p-8 lg:p-12 overflow-y-auto">
+                      <div className="space-y-8">
+                        {/* Autor */}
+                        <div className="space-y-1">
+                          <p className="text-[#FF0000] text-lg font-light">
+                            WILLIAM GABER 
+                          </p>
+                          <div className="w-12 h-0.5 bg-[#FF0000]" />
+                        </div>
+
+                        {/* Título */}
+                        <h2 className="text-3xl text-white font-light leading-tight">
+                          {selectedObra.titulo}
+                        </h2>
+
+                        {/* Detalles */}
+                        <div className="space-y-6 pt-4">
+                          <div>
+                            <h3 className="text-sm text-[#FF0000] mb-2 tracking-wider">
+                              TÉCNICA
+                            </h3>
+                            <p className="text-white/90 font-light">
+                              {selectedObra.tecnica}
+                            </p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-sm text-[#FF0000] mb-2 tracking-wider">
+                              DIMENSIONES
+                            </h3>
+                            <p className="text-white/90 font-light">
+                              {selectedObra.dimensiones}
+                            </p>
+                          </div>
+
+                          {selectedObra.año && (
+                            <div>
+                              <h3 className="text-sm text-[#FF0000] mb-2 tracking-wider">
+                                AÑO
+                              </h3>
+                              <p className="text-white/90 font-light">
+                                {selectedObra.año}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Botón de contacto mejorado */}
+                        <div className="pt-8">
+                          <Link href="/contacto">
+                            <button className="relative w-full overflow-hidden group">
+                              <div
+                                className="relative bg-[#FF0000] px-8 py-4 transition-transform duration-300 
+                      group-hover:-translate-y-[200%]"
+                              >
+                                <span className="text-white font-light">
+                                  Solicitar Información
+                                </span>
+                              </div>
+                              <div
+                                className="absolute inset-0 bg-white transition-transform duration-300 
+                      translate-y-[100%] group-hover:translate-y-0"
+                              >
+                                <span className="absolute inset-0 flex items-center justify-center text-black font-light">
+                                  Contactar
+                                </span>
+                              </div>
+                            </button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </motion.div>
           )}
-
 {activeTab === 'bio' && (
   <motion.div
     key="bio"
