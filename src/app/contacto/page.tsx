@@ -80,7 +80,7 @@ export default function ContactPage() {
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-2xl text-white font-light">Email</h3>
-                  <a href="mailto:info@xinkuart.com" 
+                  <a href="mailto:xinkuart@gmail.com" 
                     className="text-xl text-white/70 hover:text-[#FF0000] transition-colors duration-300">
                     xinkuart@gmail.com
                   </a>
