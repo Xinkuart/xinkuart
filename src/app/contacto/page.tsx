@@ -82,7 +82,7 @@ export default function ContactPage() {
                   <h3 className="text-2xl text-white font-light">Email</h3>
                   <a href="mailto:info@xinkuart.com" 
                     className="text-xl text-white/70 hover:text-[#FF0000] transition-colors duration-300">
-                    info@xinkuart.com
+                    xinkuart@gmail.com
                   </a>
                 </div>
               </motion.div>

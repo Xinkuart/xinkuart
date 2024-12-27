@@ -119,7 +119,7 @@ export default function ContactModal({ isOpen, onClose, obra }: ContactModalProp
                       </div>
                       <div>
                         <p className="text-xs sm:text-sm text-gray-500">Email</p>
-                        <p className="text-base sm:text-lg text-gray-800 break-all">info@xinkuart.com</p>
+                        <p className="text-base sm:text-lg text-gray-800 break-all">xinkuart@gmail.com</p>
                       </div>
                     </div>
                   </div>
