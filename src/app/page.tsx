@@ -150,6 +150,16 @@ export default function Home() {
   const [selectedObra, setSelectedObra] = useState(null);
   const [currentObrasIndex, setCurrentObrasIndex] = useState(0);
   const obrasPerPage = 4;
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 5);
+  }, 5000); // Cambia cada 5 segundos
+
+  return () => clearInterval(interval);
+}, []);
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prevIndex) =>
@@ -280,62 +290,122 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
-      {/* Sección de Bienvenida Mejorada */}
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative py-16 sm:py-24 overflow-hidden bg-[#262626]">
+  <motion.div
+    className="max-w-6xl mx-auto px-4 sm:px-6"
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+  >
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="relative">
         <motion.div
-          className="max-w-6xl mx-auto px-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          className="absolute -left-4 top-0 w-1 h-32 bg-gradient-to-b from-[#FF0000] to-transparent"
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        />
+        
+        <motion.h2
+          className="text-5xl md:text-7xl font-light text-white mb-8 leading-tight"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-              <motion.h2
-                className="text-5xl md:text-6xl font-light text-white mb-8 leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                Bienvenidos a
-                <span className="text-[#FF0000] block mt-2">XinkuArt</span>
-              </motion.h2>
+          Bienvenidos a
+          <motion.span 
+            className="text-[#FF0000] block mt-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            XinkuArt
+          </motion.span>
+        </motion.h2>
 
-              <motion.p
-                className="text-xl text-white/80 font-light leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
-                XinkuArt está compuesto por artistas seleccionados con unas
-                trayectorias consolidadas y que empiezan a tener una gran
-                promoción internacional.
-                <br />
-                <br />
-                En Xinkuart nos dedicamos integramente a la promoción de
-                artistas consolidados y emergentes
-              </motion.p>
-            </div>
+        <motion.div
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          <p className="text-xl text-white/80 font-light leading-relaxed">
+            XinkuArt está compuesto por artistas seleccionados con unas
+            trayectorias consolidadas y que empiezan a tener una gran
+            promoción internacional.
+          </p>
+          
+          <p className="text-xl text-white/80 font-light leading-relaxed">
+            En Xinkuart nos dedicamos integramente a la promoción de
+            artistas consolidados y emergentes
+          </p>
 
-            <div className="relative">
+          <motion.div 
+            className="w-20 h-0.5 bg-[#FF0000]/50"
+            initial={{ width: 0 }}
+            whileInView={{ width: 80 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+          />
+        </motion.div>
+      </div>
+      {/* Slider de imágenes mejorado */}
+      <div className="relative">
+        <motion.div
+          className="aspect-square relative rounded-xl overflow-hidden"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ 
+                duration: 0.8,
+                ease: [0.4, 0, 0.2, 1]
+              }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={[
+                  "/images/obras/ciria/ciria6.jpg",
+                  "/images/obras/oyonarte/obra4.jpg",
+                  "/images/obras/gaber/obra31.jpg",
+                  "/images/obras/obra21.jpg",
+                  "/images/obras/ayela/obra15.jpg"
+                ][currentImageIndex]}
+                alt="Arte contemporáneo"
+                fill
+                className="object-cover transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Indicadores minimalistas */}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3">
+            {[0, 1, 2, 3, 4].map((index) => (
               <motion.div
-                className="aspect-square relative rounded-lg overflow-hidden"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-              >
-                <Image
-                  src="/images/obras/ciria/ciria1.jpg"
-                  alt="Arte contemporáneo"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              </motion.div>
-            </div>
+                key={index}
+                className={`h-1 rounded-full transition-all duration-500 ${
+                  currentImageIndex === index 
+                    ? 'w-8 bg-[#FF0000]' 
+                    : 'w-2 bg-white/50'
+                }`}
+              />
+            ))}
           </div>
         </motion.div>
-      </section>
+      </div>
+    </div>
+  </motion.div>
+</section>
       {/* Sección Exposiciones Virtuales */}
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 bg-[#1a1a1a]" />
