@@ -7,6 +7,15 @@ import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import { Raleway } from "next/font/google";
 
+interface Noticia {
+  id: number;
+  titulo: string;
+  imagen: string;
+  fecha: string;
+  categoria: string;
+  extracto: string;
+}
+
 const raleway = Raleway({
   subsets: ["latin"],
   weight: ["200", "300", "400"],
@@ -146,6 +155,33 @@ export default function Home() {
       title: "Experiencias Artísticas",
       subtitle: "Más allá de la galería tradicional",
     },
+  ];
+  
+  const noticias: Noticia[] = [
+    {
+      id: 1,
+      titulo: "Manolo Oyonarte presenta 'Nenúfares y Twombly'",
+      imagen: "/images/obras/oyonarte/oyonarte1.jpg",
+      fecha: "26 Enero, 2025",
+      categoria: "Exposiciones",
+      extracto: "Nueva exposición en el museo La Neomudéjar, un diálogo entre naturaleza y arte contemporáneo."
+    },
+    {
+      id: 2,
+      titulo: "'Las Venas del Dragón' de José Manuel Ciria",
+      imagen: "/images/obras/ciria/librociria.jpg",
+      fecha: "11 Noviembre, 2024",
+      categoria: "Literatura",
+      extracto: "Presentación del nuevo libro en Casa de Vacas, una obra que explora el proceso creativo del artista."
+    },
+    {
+      id: 3,
+      titulo: "Ciria en la Sala Vaquero Poblador",
+      imagen: "/images/obras/ciria/expociria1.jpg",
+      fecha: "6 Septiembre, 2024",
+      categoria: "Exposiciones",
+      extracto: "Exposición en Badajoz que muestra la última colección del artista."
+    }
   ];
   const [selectedObra, setSelectedObra] = useState(null);
   const [currentObrasIndex, setCurrentObrasIndex] = useState(0);
@@ -692,9 +728,126 @@ useEffect(() => {
           </motion.div>
         </div>
       </section>
+<section className="relative py-24 bg-[#1a1a1a] overflow-hidden">
+      {/* Decorative elements mejorados */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#FF0000]/5 rounded-full filter blur-3xl opacity-20" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#FF0000]/5 rounded-full filter blur-3xl opacity-20" />
 
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header con mejor contraste */}
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            <h2 className="text-4xl md:text-5xl font-light text-white">
+              Últimas <span className="text-[#FF0000]">Noticias</span>
+            </h2>
+            <p className="text-xl text-white/70 max-w-3xl mx-auto font-light">
+              Mantente al día con las últimas novedades y eventos de nuestros artistas
+            </p>
+            <div className="w-20 h-1 bg-[#FF0000]/20 mx-auto" />
+          </motion.div>
+        </div>
+
+        {/* Grid con tarjetas mejoradas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {noticias.map((noticia: Noticia, index: number) => (
+            <motion.div
+              key={noticia.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <Link href="/actualidad" className="group block">
+                <article className="bg-[#262626] rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 border border-white/5">
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image
+                      src={noticia.imagen}
+                      alt={noticia.titulo}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#262626] via-black/50 to-transparent" />
+                    
+                    <div className="absolute bottom-4 left-4">
+                      <span className="px-3 py-1 text-sm bg-[#FF0000] text-white rounded-full font-light">
+                        {noticia.categoria}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6 bg-gradient-to-b from-[#262626] to-[#1e1e1e]">
+                    <div className="flex items-center text-sm text-gray-400 mb-3">
+                      {noticia.fecha}
+                    </div>
+
+                    <h3 className="text-xl font-light text-white mb-2 group-hover:text-[#FF0000] transition-colors">
+                      {noticia.titulo}
+                    </h3>
+
+                    <p className="text-gray-400 mb-4 line-clamp-2 font-light">
+                      {noticia.extracto}
+                    </p>
+
+                    <div className="flex items-center text-[#FF0000] font-light group-hover:translate-x-2 transition-transform">
+                      Ver Noticia
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Botón mejorado */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <Link href="/actualidad">
+            <motion.button
+              className="group relative px-8 py-4 bg-[#FF0000] text-white overflow-hidden shadow-lg shadow-[#FF0000]/10"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="relative z-10 flex items-center gap-2 font-light">
+                Ver Todas las Noticias
+                <motion.svg
+                  className="w-5 h-5"
+                  initial={{ x: 0 }}
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </motion.svg>
+              </span>
+              <motion.div
+                className="absolute bottom-0 left-0 h-[2px] w-full bg-white"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
+          </Link>
+        </motion.div>
+      </div>
+    </section>
       {/* Sección de Servicios */}
-      <section className="bg-[#1a1a1a] py-24">
+      <section className="bg-[#262626] py-24">
         <div className="max-w-6xl mx-auto px-6">
           {/* Encabezado de Servicios */}
           <motion.div
@@ -718,7 +871,7 @@ useEffect(() => {
               transition={{ duration: 0.5 }}
               className="group relative overflow-hidden"
             >
-              <div className="bg-[#262626] p-8 h-full transition-all duration-300 group-hover:bg-[#2a2a2a]">
+              <div className="bg-[#1a1a1a] p-8 h-full transition-all duration-300 group-hover:bg-[#2a2a2a]">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-[#FF0000] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <svg
@@ -754,7 +907,7 @@ useEffect(() => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="group relative overflow-hidden"
             >
-              <div className="bg-[#262626] p-8 h-full transition-all duration-300 group-hover:bg-[#2a2a2a]">
+              <div className="bg-[#1a1a1a] p-8 h-full transition-all duration-300 group-hover:bg-[#2a2a2a]">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-[#FF0000] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <svg
@@ -790,7 +943,7 @@ useEffect(() => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="group relative overflow-hidden"
             >
-              <div className="bg-[#262626] p-8 h-full transition-all duration-300 group-hover:bg-[#2a2a2a]">
+              <div className="bg-[#1a1a1a] p-8 h-full transition-all duration-300 group-hover:bg-[#2a2a2a]">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-[#FF0000] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <svg
