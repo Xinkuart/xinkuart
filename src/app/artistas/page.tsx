@@ -19,6 +19,7 @@ interface MotionDivProps extends MotionProps {
 
 export default function ArtistasPage() {
   const [hoveredArtist, setHoveredArtist] = useState<string | null>(null);
+  const [selectedObra, setSelectedObra] = useState<null | any>(null);
   
   const artists: Artist[] = [
     { name: 'Jose Manuel Ciria', imageUrl: '/images/featured/artwork1.jpg', slug: 'ciria' },

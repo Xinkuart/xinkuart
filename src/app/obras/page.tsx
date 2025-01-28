@@ -819,9 +819,9 @@ export default function ObrasPage() {
 
 
       {/* Grid de obras */}
-      <section className="max-w-[2000px] mx-auto px-4 pb-20">
-        <ObraGrid obras={obrasAMostrar} />
-      </section>
+      <section className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pb-20"> {/* Reducido de 2000px a 1600px */}
+  <ObraGrid obras={obrasAMostrar} />
+</section>
     </div>
   );
 }

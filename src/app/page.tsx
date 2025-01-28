@@ -607,127 +607,118 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* Sección Obras Destacadas */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-[#262626]" />
+  <div className="absolute inset-0 bg-[#262626]" />
 
-        {/* Decorative elements */}
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#FF0000]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/2 w-96 h-96 bg-[#FF0000]/5 rounded-full blur-3xl" />
+  {/* Decorative elements */}
+  <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#FF0000]/5 rounded-full blur-3xl" />
+  <div className="absolute bottom-0 right-1/2 w-96 h-96 bg-[#FF0000]/5 rounded-full blur-3xl" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center max-w-3xl mx-auto mb-16"
+    >
+      <h2 className="text-4xl md:text-5xl font-light text-white mb-6">
+        Obras <span className="text-[#FF0000]">Destacadas</span>
+      </h2>
+      <p className="text-xl text-white/70 font-light">
+        Explora nuestra selección de obras más representativas
+      </p>
+    </motion.div>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {obrasDestacadas
+        .slice(currentObrasIndex, currentObrasIndex + obrasPerPage)
+        .map((obra) => (
           <motion.div
+            key={obra.id}
+            className="group relative"
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-16"
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ y: -5 }}
           >
-            <h2 className="text-4xl md:text-5xl font-light text-white mb-6">
-              Obras <span className="text-[#FF0000]">Destacadas</span>
-            </h2>
-            <p className="text-xl text-white/70 font-light">
-              Explora nuestra selección de obras más representativas
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {obrasDestacadas
-              .slice(currentObrasIndex, currentObrasIndex + obrasPerPage)
-              .map((obra) => (
-                <motion.div
-                  key={obra.id}
-                  className="group relative"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="relative aspect-[3/4] rounded-lg overflow-hidden">
-                    <Image
-                      src={obra.imagen}
-                      alt={obra.titulo}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-
-                    <div className="absolute inset-x-0 bottom-0 p-6">
-                      <div className="space-y-3">
-                        <div className="space-y-1">
-                          <p className="text-[#FF0000] font-light text-sm tracking-wider">
-                            {obra.artista}
-                          </p>
-                          <h3
-                            className="text-2xl text-white font-light transition-transform duration-300 
-                group-hover:translate-x-2"
-                          >
-                            {obra.titulo}
-                          </h3>
-                        </div>
-
-                        <div className="space-y-2">
-                          <p className="text-white/90 text-sm font-light">
-                            {obra.tecnica}
-                          </p>
-                          <p className="text-white/70 text-sm font-light">
-                            {obra.medidas}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+            <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-[#1a1a1a]">
+              <Image
+                src={obra.imagen}
+                alt={obra.titulo}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              />
+              
+              <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                <div className="space-y-3">
+                  <div className="space-y-1">
+                    <p className="text-[#FF0000] font-light text-sm tracking-wider">
+                      {obra.artista}
+                    </p>
+                    <h3 className="text-xl text-white font-light line-clamp-2">
+                      {obra.titulo}
+                    </h3>
                   </div>
 
-                  <div
-                    className="absolute inset-0 rounded-lg ring-1 ring-white/10 
-        group-hover:ring-[#FF0000]/20 transition-all duration-300"
-                  />
-                </motion.div>
-              ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mt-16"
-          >
-            <Link href="/obras">
-              <motion.button
-                className="group relative px-8 py-4 bg-[#FF0000] text-white overflow-hidden"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="relative z-10 flex items-center gap-2 font-light">
-                  Ver Todas las Obras
-                  <motion.svg
-                    className="w-5 h-5"
-                    initial={{ x: 0 }}
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </motion.svg>
-                </span>
-                <motion.div
-                  className="absolute bottom-0 left-0 h-[2px] w-full bg-white"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
-            </Link>
+                  <div className="space-y-1.5">
+                    <p className="text-white/90 text-sm font-light line-clamp-1">
+                      {obra.tecnica}
+                    </p>
+                    <p className="text-white/70 text-sm font-light">
+                      {obra.medidas}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
-        </div>
-      </section>
+        ))}
+    </div>
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center mt-16"
+    >
+      <Link href="/obras">
+        <motion.button
+          className="group relative px-8 py-4 bg-[#FF0000] text-white overflow-hidden"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <span className="relative z-10 flex items-center gap-2 font-light">
+            Ver Todas las Obras
+            <motion.svg
+              className="w-5 h-5"
+              initial={{ x: 0 }}
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </motion.svg>
+          </span>
+          <motion.div
+            className="absolute bottom-0 left-0 h-[2px] w-full bg-white"
+            initial={{ scaleX: 0 }}
+            whileHover={{ scaleX: 1 }}
+            transition={{ duration: 0.3 }}
+          />
+        </motion.button>
+      </Link>
+    </motion.div>
+  </div>
+</section>
 <section className="relative py-24 bg-[#1a1a1a] overflow-hidden">
       {/* Decorative elements mejorados */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#FF0000]/5 rounded-full filter blur-3xl opacity-20" />

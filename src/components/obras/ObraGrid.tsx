@@ -30,7 +30,7 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
   const [clickedObraId, setClickedObraId] = useState<string | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const ITEMS_PER_PAGE = 20; // 4x5 grid
+  const ITEMS_PER_PAGE = 15; // 4x5 grid
   const totalPages = Math.ceil(obras.length / ITEMS_PER_PAGE);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6"
+         className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-12"
         >
           {getCurrentPageObras().map((obra, index) => {
             const isClicked = clickedObraId === obra.id;
@@ -99,44 +99,44 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
                 />
                 
                 {/* Overlay con nombre del artista y detalles */}
-                <div className={`absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80
-                  transition-all duration-500 flex flex-col justify-between p-3 md:p-6
-                  ${isClicked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                  
-                  <div className={`text-white text-center transition-all duration-500 ease-out
-                    ${isClicked ? 'scale-100 translate-y-0' : 'group-hover:translate-y-0 translate-y-4'}`}>
-                    {/* Nombre del artista */}
-                    <p className={`text-white font-light mb-2 tracking-wider
-                      transition-all duration-300
-                      ${isClicked ? 'lg:text-xl' : 'text-sm md:text-base'}`}>
-                      {obra.artistaNombre}
-                    </p>
-                    <h3 className={`font-light mb-1 md:mb-2 tracking-wider leading-tight
-                      transition-all duration-300
-                      ${isClicked ? 'lg:text-3xl' : 'text-base md:text-xl'}`}>
-                      {obra.titulo}
-                    </h3>
-                    <div className={`space-y-0.5 md:space-y-1 transition-all duration-300
-                      ${isClicked ? 'lg:space-y-3' : ''}`}>
-                      <p className={`text-gray-200 font-light
-                        transition-all duration-300
-                        ${isClicked ? 'lg:text-xl' : 'text-xs md:text-sm'}`}>
-                        {obra.medidas}
-                      </p>
-                      <p className={`text-gray-300 font-light line-clamp-2
-                        transition-all duration-300
-                        ${isClicked ? 'lg:text-lg lg:line-clamp-none' : 'text-xs md:text-sm'}`}>
-                        {obra.tecnica}
-                      </p>
-                      {obra.año && (
-                        <p className={`text-gray-400 font-light
-                          transition-all duration-300
-                          ${isClicked ? 'lg:text-lg' : 'text-xs md:text-sm'}`}>
-                          {obra.año}
-                        </p>
-                      )}
-                    </div>
-                  </div>
+<div className={`absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80
+  transition-all duration-500 flex flex-col justify-between p-2 sm:p-3 md:p-6 // Ajustado el padding en móvil
+  ${isClicked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+  
+  <div className={`text-white text-center transition-all duration-500 ease-out
+    ${isClicked ? 'scale-100 translate-y-0' : 'group-hover:translate-y-0 translate-y-4'}`}>
+    {/* Nombre del artista */}
+    <p className={`text-white font-light mb-1 sm:mb-2 tracking-wider
+      transition-all duration-300 text-xs sm:text-sm md:text-base
+      ${isClicked ? 'lg:text-xl' : ''}`}>
+      {obra.artistaNombre}
+    </p>
+    <h3 className={`font-light mb-1 tracking-wider leading-tight
+      transition-all duration-300 text-sm sm:text-base md:text-xl
+      ${isClicked ? 'lg:text-3xl' : ''}`}>
+      {obra.titulo}
+    </h3>
+    <div className={`space-y-0.5 md:space-y-1 transition-all duration-300
+      ${isClicked ? 'lg:space-y-3' : ''}`}>
+      <p className={`text-gray-200 font-light text-xs sm:text-sm
+        transition-all duration-300
+        ${isClicked ? 'lg:text-xl' : ''}`}>
+        {obra.medidas}
+      </p>
+      <p className={`text-gray-300 font-light line-clamp-2 text-xs sm:text-sm
+        transition-all duration-300
+        ${isClicked ? 'lg:text-lg lg:line-clamp-none' : ''}`}>
+        {obra.tecnica}
+      </p>
+      {obra.año && (
+        <p className={`text-gray-400 font-light text-xs sm:text-sm
+          transition-all duration-300
+          ${isClicked ? 'lg:text-lg' : ''}`}>
+          {obra.año}
+        </p>
+      )}
+    </div>
+  </div>
 
                   <div className={`space-y-2 transition-all duration-500 ease-out
                     ${isClicked ? 'translate-y-0' : 'translate-y-4 group-hover:translate-y-0'}`}>
@@ -188,7 +188,7 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
       )}
 
       {/* Modal de vista completa */}
-<AnimatePresence>
+      <AnimatePresence>
   {selectedObra && (
     <motion.div
       initial={{ opacity: 0 }}
@@ -204,7 +204,7 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
       
       {/* Contenedor principal del modal */}
       <motion.div 
-        className="relative w-[95%] h-[90vh] max-w-[1800px] mx-auto bg-[#262626] rounded-lg overflow-hidden z-10"
+        className="relative w-[95%] h-[90vh] max-w-[1400px] mx-auto bg-[#262626] rounded-lg overflow-hidden z-10"
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
