@@ -1010,7 +1010,7 @@ const CiriaPage = () => {
           >
             La obra de Ciria está presente en numerosas instituciones y
             colecciones adicionales alrededor del mundo, incluyendo múltiples
-            ayuntamientos, fundaciones y colecciones privadas.
+            Empresas, Organismos y Colecciones Privadas.
           </motion.p>
         </div>
       </section>
