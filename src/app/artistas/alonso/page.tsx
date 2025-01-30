@@ -4,11 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Montserrat } from 'next/font/google';
+import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400'],
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400"],
 });
 interface ExposicionIndividual {
   year: string;
@@ -84,7 +84,6 @@ const exposicionesColectivas: ExposicionColectiva[] = [
       "Exposición Real Academia de Bellas Artes de San Fernando. Madrid.",
     ],
   },
-
 ];
 
 const exposicionesIndividuales: ExposicionIndividual[] = [
@@ -199,48 +198,30 @@ const CiriaPage = () => {
             </div>
 
             <div className="space-y-6">
-            <motion.h1
-  className={`relative text-7xl sm:text-8xl md:text-9xl text-white ${montserrat.className}`}
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
->
-  <div className="relative inline-block">
-    <div className="flex flex-col items-start">
-      <span className="font-light tracking-[0.15em] mt-2 relative">
-      Jaime Sánchez Alonso
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="absolute -bottom-2 right-0 w-3/4 h-[2px] bg-[#FF0000] transform origin-right"
-        />
-      </span>
-    </div>
-  </div>
-</motion.h1>
-<p className="text-xl sm:text-2xl md:text-3xl text-white/80 max-w-3xl mx-auto font-light italic leading-relaxed mt-6">
-  "El arte tiene más valor que la verdad por ser afirmador de la vida
-  del ser humano."
-</p>
+              <motion.h1
+                className={`relative text-7xl sm:text-8xl md:text-9xl text-white ${montserrat.className}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="relative inline-block">
+                  <div className="flex flex-col items-start">
+                    <span className="font-light tracking-[0.15em] mt-2 relative">
+                      Jaime Sánchez Alonso
+                      <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ delay: 0.6, duration: 0.8 }}
+                        className="absolute -bottom-2 right-0 w-3/4 h-[2px] bg-[#FF0000] transform origin-right"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </motion.h1>
+              <p className="text-xl sm:text-2xl md:text-3xl text-white/80 max-w-3xl mx-auto font-light italic leading-relaxed mt-6">
+                "El arte tiene más valor que la verdad por ser afirmador de la
+                vida del ser humano."
+              </p>
             </div>
-
-            {/* Obra Actual */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center"
-            >
-              <p className="text-white/60 text-sm tracking-[0.2em] uppercase mb-2">
-                Obra Actual
-              </p>
-              <p className="text-white text-xl font-light">
-                {heroImages[currentImageIndex].title}
-              </p>
-              <p className="text-white/80 text-sm">
-                {heroImages[currentImageIndex].year}
-              </p>
-            </motion.div>
           </motion.div>
         </div>
 

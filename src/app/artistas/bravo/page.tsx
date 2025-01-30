@@ -426,25 +426,7 @@ const CiriaPage = () => {
                 "Explorador con un pensamiento que oscila entre la reflexión y
                 la acción, en un aprendizaje continuado"
               </p>
-            </div>
-
-            {/* Obra Actual */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center"
-            >
-              <p className="text-white/60 text-sm tracking-[0.2em] uppercase mb-2">
-                Obra Actual
-              </p>
-              <p className="text-white text-xl font-light">
-                {heroImages[currentImageIndex].title}
-              </p>
-              <p className="text-white/80 text-sm">
-                {heroImages[currentImageIndex].year}
-              </p>
-            </motion.div>
+            </div>          
           </motion.div>
         </div>
 

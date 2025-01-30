@@ -75,11 +75,11 @@ export default function Home() {
   const obrasDestacadas = [
     {
       id: 1,
-      imagen: "/images/obras/obra46.jpg",
-      titulo: "Reflejos de la percepción",
+      imagen: "/images/obras/obra45.jpg",
+      titulo: "La Fachada",
       artista: "PEDRO PASQUÍN",
       tecnica: "Acrílico sobre lienzo",
-      medidas: "100 x 150 cm",
+      medidas: "100 x 100 cm",
     },
     {
       id: 2,
@@ -554,7 +554,7 @@ export default function Home() {
                         [
                           "/images/obras/ciria/ciria6.jpg",
                           "/images/obras/oyonarte/obra4.jpg",
-                          "/images/obras/gaber/obra31.jpg",
+                          "/images/obras/obra43.jpg",
                           "/images/obras/obra21.jpg",
                           "/images/obras/ayela/obra15.jpg",
                         ][currentImageIndex]
