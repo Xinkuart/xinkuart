@@ -185,6 +185,19 @@ const exposicionesColectivas: ExposicionColectiva[] = [
 ];
 
 const exposicionesIndividuales: ExposicionIndividual[] = [
+  
+  
+  {
+    year: "2023",
+    exhibitions: ["Xaman baten egunerokoa. Casa Okendo. San Sebastián",
+                  "Diario de un Chamán. Espacio Jovellanos 6. Madrid"
+    ],
+  },{
+    year: "2022",
+    exhibitions: ["Diario de un Chamán. MEIAC. Badajoz",
+                  "Diario de un Chamán. Institución Cultural 'El Brocense'. Cáceres"
+    ],
+  },
   {
     year: "2021",
     exhibitions: ["«Los papiros de Nut». Espacio de Arte y Acción. Cáceres"],

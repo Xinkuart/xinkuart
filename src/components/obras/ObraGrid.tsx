@@ -30,13 +30,11 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
   const [clickedObraId, setClickedObraId] = useState<string | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const ITEMS_PER_PAGE = 15; // 4x5 grid
+  const ITEMS_PER_PAGE = 15;
   const totalPages = Math.ceil(obras.length / ITEMS_PER_PAGE);
 
   useEffect(() => {
-    // Mezclar obras aleatoriamente al inicio
-    const shuffledObras = [...initialObras].sort(() => Math.random() - 0.5);
-    setObras(shuffledObras);
+    setObras(initialObras);
   }, [initialObras]);
 
   const getCurrentPageObras = () => {
@@ -46,24 +44,7 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
-    // Scroll al inicio
     gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  const handleObraClick = (obra: Obra) => {
-    if (window.innerWidth >= 1024) {
-      if (clickedObraId === obra.id) {
-        setClickedObraId(null);
-      } else {
-        setClickedObraId(obra.id);
-      }
-    }
-  };
-
-  const handleContactClick = (e: React.MouseEvent, obra: Obra) => {
-    e.stopPropagation();
-    setContactObra(obra);
-    setShowContactModal(true);
   };
 
   return (
@@ -75,7 +56,7 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.5 }}
-         className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-12"
+          className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8"
         >
           {getCurrentPageObras().map((obra, index) => {
             const isClicked = clickedObraId === obra.id;
@@ -87,7 +68,7 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
                 className="group relative aspect-square overflow-hidden cursor-pointer"
-                onClick={() => handleObraClick(obra)}
+                onClick={() => setSelectedObra(obra)}
               >
                 <Image
                   src={obra.imageUrl}
@@ -98,58 +79,38 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
                   sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 />
                 
-                {/* Overlay con nombre del artista y detalles */}
-<div className={`absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80
-  transition-all duration-500 flex flex-col justify-between p-2 sm:p-3 md:p-6 // Ajustado el padding en móvil
-  ${isClicked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-  
-  <div className={`text-white text-center transition-all duration-500 ease-out
-    ${isClicked ? 'scale-100 translate-y-0' : 'group-hover:translate-y-0 translate-y-4'}`}>
-    {/* Nombre del artista */}
-    <p className={`text-white font-light mb-1 sm:mb-2 tracking-wider
-      transition-all duration-300 text-xs sm:text-sm md:text-base
-      ${isClicked ? 'lg:text-xl' : ''}`}>
-      {obra.artistaNombre}
-    </p>
-    <h3 className={`font-light mb-1 tracking-wider leading-tight
-      transition-all duration-300 text-sm sm:text-base md:text-xl
-      ${isClicked ? 'lg:text-3xl' : ''}`}>
-      {obra.titulo}
-    </h3>
-    <div className={`space-y-0.5 md:space-y-1 transition-all duration-300
-      ${isClicked ? 'lg:space-y-3' : ''}`}>
-      <p className={`text-gray-200 font-light text-xs sm:text-sm
-        transition-all duration-300
-        ${isClicked ? 'lg:text-xl' : ''}`}>
-        {obra.medidas}
-      </p>
-      <p className={`text-gray-300 font-light line-clamp-2 text-xs sm:text-sm
-        transition-all duration-300
-        ${isClicked ? 'lg:text-lg lg:line-clamp-none' : ''}`}>
-        {obra.tecnica}
-      </p>
-      {obra.año && (
-        <p className={`text-gray-400 font-light text-xs sm:text-sm
-          transition-all duration-300
-          ${isClicked ? 'lg:text-lg' : ''}`}>
-          {obra.año}
-        </p>
-      )}
-    </div>
-  </div>
+                {/* Overlay optimizado para móvil */}
+                <div className={`absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80
+                  transition-all duration-500 flex flex-col justify-between p-3 sm:p-4 md:p-6
+                  opacity-0 group-hover:opacity-100`}>
+                  <div className="flex flex-col justify-between h-full">
+                    <div className="text-white text-center">
+                      <p className="text-white font-light mb-1 sm:mb-2 tracking-wider text-sm sm:text-base">
+                        {obra.artistaNombre}
+                      </p>
+                      <h3 className="font-light tracking-wider leading-tight text-base sm:text-lg md:text-xl mb-1 sm:mb-2 line-clamp-2">
+                        {obra.titulo}
+                      </h3>
+                      <div className="space-y-0.5 sm:space-y-1">
+                        <p className="text-gray-200 font-light text-xs sm:text-sm">
+                          {obra.medidas}
+                        </p>
+                        <p className="text-gray-300 font-light text-xs sm:text-sm line-clamp-2">
+                          {obra.tecnica}
+                        </p>
+                      </div>
+                    </div>
 
-                  <div className={`space-y-2 transition-all duration-500 ease-out
-                    ${isClicked ? 'translate-y-0' : 'translate-y-4 group-hover:translate-y-0'}`}>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedObra(obra);
                       }}
                       className="w-full py-2 bg-white/10 backdrop-blur-sm border border-white/20 
-                        text-white text-sm md:text-base flex items-center justify-center gap-2
-                        transition-all duration-300 hover:bg-white hover:text-black"
+                        text-white text-sm sm:text-base flex items-center justify-center gap-2
+                        transition-all duration-300 hover:bg-white hover:text-black mt-2 sm:mt-0"
                     >
-                      <ZoomIn size={16} className="md:w-5 md:h-5" />
+                      <ZoomIn size={16} className="sm:w-5 sm:h-5" />
                       Ver obra
                     </button>
                   </div>
@@ -166,7 +127,7 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
           <button
             onClick={() => handlePageChange((currentPage - 1 + totalPages) % totalPages)}
             className="flex items-center gap-2 px-6 py-3 bg-black text-white hover:bg-gray-800
-              transition-colors duration-300 text-sm md:text-base"
+              transition-colors duration-300 text-sm sm:text-base"
           >
             <ChevronLeft size={20} />
             Anterior
@@ -179,7 +140,7 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
           <button
             onClick={() => handlePageChange((currentPage + 1) % totalPages)}
             className="flex items-center gap-2 px-6 py-3 bg-black text-white hover:bg-gray-800
-              transition-colors duration-300 text-sm md:text-base"
+              transition-colors duration-300 text-sm sm:text-base"
           >
             Siguiente
             <ChevronRight size={20} />
@@ -187,102 +148,100 @@ const ObraGrid: React.FC<ObraGridProps> = ({ obras: initialObras }) => {
         </div>
       )}
 
-      {/* Modal de vista completa */}
+      {/* El resto del código del modal se mantiene igual */}
       <AnimatePresence>
-  {selectedObra && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center"
-    >
-      {/* Overlay con fondo oscuro */}
-      <div 
-        className="absolute inset-0 bg-black/95"
-        onClick={() => setSelectedObra(null)}
-      />
-      
-      {/* Contenedor principal del modal */}
-      <motion.div 
-        className="relative w-[95%] h-[90vh] max-w-[1400px] mx-auto bg-[#262626] rounded-lg overflow-hidden z-10"
-        initial={{ scale: 0.9, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
-      >
-        {/* Botón de cerrar */}
-        <button
-          onClick={() => setSelectedObra(null)}
-          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/50 hover:bg-[#FF0000] transition-colors"
-        >
-          <X className="w-6 h-6 text-white" />
-        </button>
-
-        {/* Grid con la imagen y la información */}
-        <div className="h-full grid grid-cols-1 lg:grid-cols-[2fr,1fr]">
-          {/* Contenedor de la imagen */}
-          <div className="relative h-[50vh] lg:h-full w-full bg-black">
-            <Image
-              src={selectedObra.imageUrl}
-              alt={selectedObra.titulo}
-              fill
-              className="object-contain"
-              sizes="(max-width: 1024px) 100vw, 66vw"
-              quality={100}
-              priority
+        {selectedObra && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center"
+          >
+            <div 
+              className="absolute inset-0 bg-black/95"
+              onClick={() => setSelectedObra(null)}
             />
-          </div>
-
-          {/* Panel de información */}
-          <div className="relative bg-[#262626] p-8 lg:p-12 overflow-y-auto">
-            <div className="space-y-8">
-              {/* Título y artista */}
-              <div className="space-y-4">
-                <p className="text-[#FF0000] text-xl font-light">
-                  {selectedObra.artistaNombre || selectedObra.artista}
-                </p>
-                <h2 className="text-3xl text-white font-light">
-                  {selectedObra.titulo}
-                </h2>
-              </div>
-
-              {/* Detalles técnicos */}
-              <div className="space-y-6 text-white/80">
-                <div>
-                  <h3 className="text-[#FF0000] text-sm mb-2">TÉCNICA</h3>
-                  <p className="font-light">{selectedObra.tecnica}</p>
-                </div>
-                <div>
-                  <h3 className="text-[#FF0000] text-sm mb-2">DIMENSIONES</h3>
-                  <p className="font-light">{selectedObra.medidas}</p>
-                </div>
-                {selectedObra.año && (
-                  <div>
-                    <h3 className="text-[#FF0000] text-sm mb-2">AÑO</h3>
-                    <p className="font-light">{selectedObra.año}</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Botón de contacto */}
+            
+            <motion.div 
+              className="relative w-[95%] h-[90vh] max-w-[1600px] mx-auto bg-[#1a1a1a] rounded-lg overflow-hidden z-10"
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+            >
               <button
-                onClick={() => {
-                  setShowContactModal(true);
-                  setContactObra(selectedObra);
-                }}
-                className="w-full py-4 bg-[#FF0000] text-white font-light
-                  hover:bg-red-700 transition-colors duration-300"
+                onClick={() => setSelectedObra(null)}
+                className="absolute top-6 right-6 z-50 p-2 rounded-full bg-black/50 hover:bg-[#FF0000] transition-colors"
               >
-                Solicitar Información
+                <X className="w-6 h-6 text-white" />
               </button>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
 
-      {/* Modal de contacto */}
+              <div className="h-full flex flex-col lg:flex-row">
+                <div className="relative w-full lg:w-3/4 h-[50vh] lg:h-full bg-black/50">
+                  <Image
+                    src={selectedObra.imageUrl}
+                    alt={selectedObra.titulo}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 1024px) 100vw, 75vw"
+                    quality={100}
+                    priority
+                  />
+                </div>
+
+                <div className="relative w-full lg:w-1/4 p-8 overflow-y-auto">
+                  <div className="space-y-10">
+                    <div className="border-l-2 border-[#FF0000] pl-6">
+                      <p className="text-[#FF0000] text-xl font-light mb-3">
+                        {selectedObra.artistaNombre}
+                      </p>
+                      <h2 className="text-3xl text-white font-light">
+                        {selectedObra.titulo}
+                      </h2>
+                    </div>
+
+                    <div className="space-y-8">
+                      <div>
+                        <h3 className="text-[#FF0000] text-sm tracking-wider mb-3">TÉCNICA</h3>
+                        <p className="text-white/80 font-light leading-relaxed">
+                          {selectedObra.tecnica}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-[#FF0000] text-sm tracking-wider mb-3">DIMENSIONES</h3>
+                        <p className="text-white/80 font-light">
+                          {selectedObra.medidas}
+                        </p>
+                      </div>
+                      
+                      {selectedObra.año && (
+                        <div>
+                          <h3 className="text-[#FF0000] text-sm tracking-wider mb-3">AÑO</h3>
+                          <p className="text-white/80 font-light">
+                            {selectedObra.año}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        setShowContactModal(true);
+                        setContactObra(selectedObra);
+                      }}
+                      className="w-full py-4 mt-8 bg-[#FF0000] text-white font-light
+                               hover:bg-red-700 transition-colors duration-300"
+                    >
+                      Solicitar Información
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {contactObra && (
         <ContactModal
           isOpen={showContactModal}

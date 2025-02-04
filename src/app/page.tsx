@@ -222,6 +222,21 @@ export default function Home() {
   const [currentObrasIndex, setCurrentObrasIndex] = useState(0);
   const obrasPerPage = 4;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = [
+    "/images/obras/ciria/ciria4.jpg",
+    "/images/obras/oyonarte/oyonarte3.jpg",
+    "/images/obras/ciria/ciria6.jpg",
+    "/images/obras/oyonarte/oyonarte4.jpg",
+    "/images/obras/ayela/obra15.jpg",
+  ];
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 6000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -258,14 +273,17 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#262626]">
       <section className="relative h-[100vh] w-full m-0 p-0">
+      <AnimatePresence initial={false} mode="wait">
         <motion.div
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 2.5, ease: [0.25, 0.1, 0.25, 1] }}
+          key={currentIndex}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
           className="absolute inset-0"
         >
           <Image
-            src="/images/obras/ciria/momento3.jpg"
+            src={images[currentIndex]}
             alt="XinkuArt Gallery"
             fill
             priority
@@ -275,91 +293,87 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
         </motion.div>
+      </AnimatePresence>
 
-        <div className="relative h-full flex flex-col items-center justify-center text-white">
+      <div className="relative h-full flex flex-col items-center justify-center text-white">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          className="text-center space-y-20"
+        >
+          {/* Logo Container */}
           <motion.div
-            initial="hidden"
-            animate="visible"
-            className="text-center space-y-20"
-          >
-            {/* Logo Container */}
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, scale: 0.95 },
-                visible: {
-                  opacity: 1,
-                  scale: 1,
-                  transition: {
-                    duration: 1.2,
-                    ease: [0.25, 0.1, 0.25, 1],
-                  },
+            variants={{
+              hidden: { opacity: 0, scale: 0.95 },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                transition: {
+                  duration: 1.2,
+                  ease: [0.25, 0.1, 0.25, 1],
                 },
-              }}
-              className="relative w-[280px] sm:w-[400px] md:w-[500px] lg:w-[600px] xl:w-[700px] mx-auto px-4 sm:px-0"
-            >
-              <div className="relative w-full aspect-[3/1]">
-                <div className="relative h-full w-full">
-                  <Image
-                    src="/images/logo/logoxinkuart.png"
-                    alt="XinkuArt Logo"
-                    fill
-                    priority
-                    sizes="(max-width: 640px) 280px, 
-               (max-width: 768px) 400px, 
-               (max-width: 1024px) 500px, 
-               (max-width: 1280px) 600px, 
-               700px"
-                    className="object-contain"
-                  />
-                </div>
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1.5, delay: 1.2 }}
-                  className="absolute -bottom-4 left-0 right-0 h-[1px] bg-white/20
-        transform origin-left"
+              },
+            }}
+            className="relative w-[280px] sm:w-[400px] md:w-[500px] lg:w-[600px] xl:w-[700px] mx-auto px-4 sm:px-0"
+          >
+            <div className="relative w-full aspect-[3/1]">
+              <div className="relative h-full w-full">
+                <Image
+                  src="/images/logo/logoxinkuart.png"
+                  alt="XinkuArt Logo"
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 280px, (max-width: 768px) 400px, (max-width: 1024px) 500px, (max-width: 1280px) 600px, 700px"
+                  className="object-contain"
                 />
               </div>
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.5 }}
-              className={`text-xl md:text-2xl font-light tracking-[0.25em] uppercase text-white/90 
-              ${raleway.className}`}
-            >
-              Espacio de Arte Contemporáneo
-            </motion.p>
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.5, delay: 1.2 }}
+                className="absolute -bottom-4 left-0 right-0 h-[1px] bg-white/20 transform origin-left"
+              />
+            </div>
           </motion.div>
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{
-              y: [0, 10, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-            className="flex flex-col items-center gap-2"
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+            className={`text-xl md:text-2xl font-light tracking-[0.25em] uppercase text-white/90 
+            ${raleway.className}`}
           >
-            <span className="block w-0.5 h-12 bg-white/50" />
-            <span
-              className={`text-white/70 text-sm tracking-[0.3em] uppercase ${raleway.className}`}
-            >
-              Scroll
-            </span>
-          </motion.div>
+            Espacio de Arte Contemporáneo
+          </motion.p>
         </motion.div>
-      </section>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2 }}
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+      >
+        <motion.div
+          animate={{
+            y: [0, 10, 0],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className="flex flex-col items-center gap-2"
+        >
+          <span className="block w-0.5 h-12 bg-white/50" />
+          <span
+            className={`text-white/70 text-sm tracking-[0.3em] uppercase ${raleway.className}`}
+          >
+            Scroll
+          </span>
+        </motion.div>
+      </motion.div>
+    </section>
       <section className="relative py-20 sm:py-32 overflow-hidden bg-[#262626]">
         {/* Elementos decorativos de fondo */}
         <div className="absolute inset-0">

@@ -68,7 +68,7 @@ const Footer = () => {
             <h3 className="text-white font-['Cinzel',serif] text-lg mb-6">Síguenos</h3>
             <div className="flex gap-4">
               {[
-                { Icon: Instagram, href: 'https://instagram.com/xinkuart' },
+                { Icon: Instagram, href: 'https://www.instagram.com/xinkuartgallery' },
               ].map(({ Icon, href }, index) => (
                 <a
                   key={index}
