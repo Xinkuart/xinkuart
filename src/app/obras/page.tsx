@@ -104,7 +104,7 @@ export default function ObrasPage() {
           {
             id: "ciria-10",
             titulo: "Inmensas discrepancias",
-            imageUrl: "/images/obras/ciria/ciria9.jpg",
+            imageUrl: "/images/obras/ciria/ciria10.jpg",
             medidas: "250 x 250 cm",
             tecnica: "Técnica mixta y óleo sobre lienzo",
             año: "2022"

@@ -223,17 +223,20 @@ export default function Home() {
   const obrasPerPage = 4;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [
-    "/images/obras/ciria/ciria4.jpg",
-    "/images/obras/oyonarte/oyonarte3.jpg",
-    "/images/obras/ciria/ciria6.jpg",
-    "/images/obras/oyonarte/oyonarte4.jpg",
+    "/images/obras/ciria/momento3.jpg",
+    "/images/obras/oyonarte/obra4.jpg",
+    "/images/obras/ciria/ciria5.jpg",
+    "/images/obras/oyonarte/obra9.jpg",
     "/images/obras/ayela/obra15.jpg",
+    "/images/obras/gaber/obra34.jpg",
+    "/images/obras/bravo/bravo9.jpg",
+    "/images/obras/obra20.jpg",
   ];
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 6000);
+    }, 4000);
 
     return () => clearInterval(intervalId);
   }, []);
