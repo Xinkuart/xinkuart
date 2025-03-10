@@ -2,7 +2,6 @@
 
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import ObraGrid from '@/components/obras/ObraGrid';
 
@@ -285,6 +284,182 @@ export default function ObrasPage() {
         nombre: "Aurelio Ayela",
         obras: [
           {
+            id: "ayela-11",
+            imageUrl: "/images/obras/ayela/obra20.jpg",
+            titulo: "Acéfalo Panadhesivo",
+            medidas: "200 x 160 cm",
+            tecnica: "Acrílico y spray/ papel sobre tela",
+            año: "2008"
+          },
+          {
+            id: "ayela-12",
+            imageUrl: "/images/obras/ayela/obra21.jpg",
+            titulo: "Flor del paraÍso nº2",
+            medidas: "150 x 200 cm",
+            tecnica: "Pastel, spray y collage/papel",
+            año: "2002"
+          },
+          {
+            id: "ayela-13",
+            imageUrl: "/images/obras/ayela/obra22.jpg",
+            titulo: "Linterna Verde",
+            medidas: "150 x 200 cm",
+            tecnica: "Acrílico sobre Lienzo",
+            año: "2002"
+          },
+          {
+            id: "ayela-14",
+            imageUrl: "/images/obras/ayela/obra23.jpg",
+            titulo: "The talker beyond understanding",
+            medidas: " 70 x 100 cm",
+            tecnica: "Rotulador/papel",
+            año: "2007"
+          },
+          {
+            id: "ayela-15",
+            imageUrl: "/images/obras/ayela/obra24.jpg",
+            titulo: "The young sleigh driver",
+            medidas: " 100 x 140 cm",
+            tecnica: "Acrílico/papel",
+            año: "2008"
+          },
+          {
+            id: "ayela-16",
+            imageUrl: "/images/obras/ayela/obra25.jpg",
+            titulo: "Segundo la cabeza, después lo primero",
+            medidas: " 70 x 100 cm",
+            tecnica: "Vinilo adhesivo/papel",
+            año: "2009"
+          },
+          {
+            id: "ayela-17",
+            imageUrl: "/images/obras/ayela/obra26.jpg",
+            titulo: "Prototótem",
+            medidas: " 70 x 100 cm",
+            tecnica: "Vinilo adhesivo/papel",
+            año: "2009"
+          },
+          {
+            id: "ayela-18",
+            imageUrl: "/images/obras/ayela/obra27.jpg",
+            titulo: "Total rescue",
+            medidas: " 114 x 130 cm",
+            tecnica: "Acrílico y rotulador/lienzo",
+            año: "2008"
+          },
+          {
+            id: "ayela-19",
+            imageUrl: "/images/obras/ayela/obra28.jpg",
+            titulo: "Rescue",
+            medidas: " 160 x 200 cm",
+            tecnica: "Acrílico y spray sobre lienzo",
+            año: "2008"
+          },
+          {
+            id: "ayela-20",
+            imageUrl: "/images/obras/ayela/obra29.jpg",
+            titulo: "Fisherman&#39;s Garrotte",
+            medidas: " 114 x 130 cm",
+            tecnica: "Acrílico y rotulador/lienzo",
+            año: "2008"
+          },
+          {
+            id: "ayela-21",
+            imageUrl: "/images/obras/ayela/obra30.jpg",
+            titulo: "Light dispersion",
+            medidas: " 200 x 266 cm",
+            tecnica: "Acrílico y rotulador/lienzo",
+            año: "2008"
+          },
+          {
+            id: "ayela-22",
+            imageUrl: "/images/obras/ayela/obra31.jpg",
+            titulo: "Triste Rey Billie",
+            medidas: " 70 x 100 cm",
+            tecnica: " Vinilo adhesivo y blondas/papel",
+            año: "2009"
+          },
+          {
+            id: "ayela-23",
+            imageUrl: "/images/obras/ayela/obra32.jpg",
+            titulo: "Babero carlanca",
+            medidas: "  200 x 150 cm",
+            tecnica: " Tinta y rotulador/papel de arroz",
+            año: "2008"
+          },
+          {
+            id: "ayela-24",
+            imageUrl: "/images/obras/ayela/obra33.jpg",
+            titulo: "Exactly like you",
+            medidas: "  130 x 270 cm",
+            tecnica: "  Ensamblaje, collage, esténcil e impresión digital/diversos soportes",
+            año: "2010"
+          },
+          {
+            id: "ayela-25",
+            imageUrl: "/images/obras/ayela/obra34.jpg",
+            titulo: "Vientre Probeta",
+            medidas: "91,5 x 61 cm",
+            tecnica: "Rotulador y acuarela sobre papel",
+            año: "2006"
+          },
+          {
+            id: "ayela-26",
+            imageUrl: "/images/obras/ayela/obra35.jpg",
+            titulo: "Flor del paraíso nº1",
+            medidas: "88 x 82 cm",
+            tecnica: "Pastel sobre papel cosido",
+            año: "2002"
+          },
+          {
+            id: "ayela-27",
+            imageUrl: "/images/obras/ayela/obra36.jpg",
+            titulo: "Bailarina pinocha",
+            medidas: " 33 x 23 cm",
+            tecnica: "Agujas de pino (pinocha) y tintas de plóter sobre papel",
+            año: "2017"
+          },
+          {
+            id: "ayela-28",
+            imageUrl: "/images/obras/ayela/obra37.jpg",
+            titulo: "The rise of Pibody",
+            medidas: "50 x 40 cm",
+            tecnica: "Rotulador y collage/papel",
+            año: "2011"
+          },
+          {
+            id: "ayela-29",
+            imageUrl: "/images/obras/ayela/obra38.jpg",
+            titulo: "Ni fe ni promesas",
+            medidas: "162 x 114 cm",
+            tecnica: "Acrílico sobre lienzo",
+            año: "2017"
+          },
+          {
+            id: "ayela-30",
+            imageUrl: "/images/obras/ayela/obra39.jpg",
+            titulo: "Patrón japonés The natural Way",
+            medidas: "80 x 55 cm",
+            tecnica: "Acrílico, rotulador y collage sobre papel",
+            año: "2011"
+          },
+          {
+            id: "ayela-31",
+            imageUrl: "/images/obras/ayela/obra40.jpg",
+            titulo: "Blood bubble landscape 1",
+            medidas: "61 x 91,5 cm",
+            tecnica: "Rotulador y pastel sobre papel",
+            año: "2006"
+          },
+          {
+            id: "ayela-32",
+            imageUrl: "/images/obras/ayela/obra41.jpg",
+            titulo: "Blood bubble landscape 2",
+            medidas: "61 x 91,5 cm",
+            tecnica: "Rotulador y pastel sobre papel",
+            año: "2006"
+          },
+          {
             id: "ayela-1",
             imageUrl: "/images/obras/ayela/obra10.jpg",
             titulo: "Undo Sistemas",
@@ -353,8 +528,9 @@ export default function ObrasPage() {
             titulo: "Soul Crafts.",
             medidas: "140 x 200 cm",
             tecnica: "Acrílico y cinta adhesiva sobre lienzo",
-            año: "2023"
+            
           },
+          
           
           // ... resto de obras
         ]
@@ -364,75 +540,248 @@ export default function ObrasPage() {
         nombre: "Hilario Bravo",
         obras: [
           {
+            id: "bravo-11",
+            imageUrl: "/images/obras/bravo/bravo11.jpg",
+            titulo: "Senda, I",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-12",
+            imageUrl: "/images/obras/bravo/bravo12.jpg",
+            titulo: "Ventana, V",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-13",
+            imageUrl: "/images/obras/bravo/bravo13.jpg",
+            titulo: "Tormenta I",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-14",
+            imageUrl: "/images/obras/bravo/bravo14.jpg",
+            titulo: "Tormenta II",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-15",
+            imageUrl: "/images/obras/bravo/bravo15.jpg",
+            titulo: "Tormenta III",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-16",
+            imageUrl: "/images/obras/bravo/bravo16.jpg",
+            titulo: "Tormenta V",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-17",
+            imageUrl: "/images/obras/bravo/bravo17.jpg",
+            titulo: "Halo V",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-18",
+            imageUrl: "/images/obras/bravo/bravo18.jpg",
+            titulo: "Tormenta Romántica",
+            medidas: "50 x 34,5",
+            tecnica: "Collage y aluminio sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-19",
+            imageUrl: "/images/obras/bravo/bravo19.jpg",
+            titulo: "Ventana VI",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-20",
+            imageUrl: "/images/obras/bravo/bravo20.jpg",
+            titulo: "Ventana VII",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-21",
+            imageUrl: "/images/obras/bravo/bravo21.jpg",
+            titulo: "Luvia I",
+            medidas: "100 x 70",
+            tecnica: "Técnica mixta sobre papel",
+            año: "2019"
+          },
+          {
+            id: "bravo-22",
+            imageUrl: "/images/obras/bravo/bravo22.jpg",
+            titulo: "Naufragio al sol",
+            medidas: "200 x 500",
+            tecnica: "Assemblage",
+            año: "2024"
+          },
+          {
+            id: "bravo-23",
+            imageUrl: "/images/obras/bravo/bravo23.jpg",
+            titulo: "La ventana de Malevich. Atardecer",
+            medidas: "250 x 164",
+            tecnica: "Óleo sobre madera y caña sobre collage de telas",
+          },
+          {
+            id: "bravo-24",
+            imageUrl: "/images/obras/bravo/bravo24.jpg",
+            titulo: "Rayuela roja",
+            medidas: "118 x 55",
+            tecnica: "Ramas, tela y plástico",
+          },
+          {
+            id: "bravo-25",
+            imageUrl: "/images/obras/bravo/bravo25.jpg",
+            titulo: "La ventana de Malevich. Hielo",
+            medidas: "224 x 115",
+            tecnica: "Madera y óleo sobre tela y plástico",
+          },
+          {
+            id: "bravo-26",
+            imageUrl: "/images/obras/bravo/bravo26.jpg",
+            titulo: "Rayuela azul",
+            medidas: "110 x 48",
+            tecnica: "Ramas, tela y plástico",
+          },
+          
+          {
             id: "bravo-1",
-            imageUrl: "/images/obras/bravo/bravo1.jpg",
-            titulo: "Tratado de Dunhuang",
-            medidas: "195 x 162 cm",
-            tecnica: "Óleo, lápiz y collage sobre tela",
-            año: "2021"
+            imageUrl: "/images/obras/bravo/bravo27.jpg",
+            titulo: "Axis mundi",
+            medidas: "270 x 130",
+            tecnica: "Ramas, cuerda, plumas y tela",
           },
           {
             id: "bravo-2",
-            imageUrl: "/images/obras/bravo/bravo2.jpg",
-            titulo: "Tratado de Oort",
-            medidas: "146 x 114 cm",
-            tecnica: "Óleo, carbón, pan de oro y collage sobre tela",
+            imageUrl: "/images/obras/bravo/bravo28.jpg",
+            titulo: "Escala. Candencias",
+            medidas: "Variable",
+            tecnica: "Cuerda, trapos, etc.",
           },
           {
             id: "bravo-3",
-            imageUrl: "/images/obras/bravo/bravo3.jpg",
-            titulo: "Tratado de las estrellas. 7",
-            medidas: "175 x 80 cm",
-            tecnica: "Collage sobre Tela",
+            imageUrl: "/images/obras/bravo/bravo29.jpg",
+            titulo: "Haiku: Camino",
+            medidas: "90 x 60 ",
+            tecnica: "Madera, plástico y telas",
           },
           {
             id: "bravo-4",
-            imageUrl: "/images/obras/bravo/bravo4.jpg",
-            titulo: "Tratado de las estrellas. 11",
-            medidas: "175 x 80 cm",
-            tecnica: "Collage sobre Tela", 
+            imageUrl: "/images/obras/bravo/bravo30.jpg",
+            titulo: "Haiku: Cielo azul",
+            medidas: "116 x 80",
+            tecnica: "Madera, plástico y telas", 
           },
           {
             id: "bravo-5",
-            imageUrl: "/images/obras/bravo/bravo5.jpg",
-            titulo: "Tratado de las estrellas. 18",
-            medidas: "175 x 80 cm",
-            tecnica: "Collage sobre Tela",
+            imageUrl: "/images/obras/bravo/bravo31.jpg",
+            titulo: "Haiku: Humo blanco",
+            medidas: "68 x 34,5 x 10,5",
+            tecnica: "Madera, cinco láminas de plástico e hilos",
           },
           {
             id: "bravo-6",
-            imageUrl: "/images/obras/bravo/bravo6.jpg",
-            titulo: "Tratado de las estrellas. 22",
-            medidas: "175 x 80 cm",
-            tecnica: "Collage sobre Tela",
+            imageUrl: "/images/obras/bravo/bravo32.jpg",
+            titulo: "Haiku: Humo negro",
+            medidas: "70 x 34,5 x 10,5",
+            tecnica: "Madera, tres láminas de plástico y estropajo",
           },
           {
             id: "bravo-7",
-            imageUrl: "/images/obras/bravo/bravo7.jpg",
-            titulo: "Tratado de las estrellas. 24",
-            medidas: "175 x 80 cm",
-            tecnica: "Collage sobre Tela", 
+            imageUrl: "/images/obras/bravo/bravo33.jpg",
+            titulo: "Haiku: La pira roja",
+            medidas: "195 x 122",
+            tecnica: "Madera, ramas, tela, paja y plástico", 
           },
           {
             id: "bravo-8",
-            imageUrl: "/images/obras/bravo/bravo8.jpg",
-            titulo: "Tratado de las estrellas. 26",
-            medidas: "175 x 80 cm",
-            tecnica: "Collage sobre Tela", 
+            imageUrl: "/images/obras/bravo/bravo34.jpg",
+            titulo: "Los juguetes de Malevich",
+            medidas: "139 x 93",
+            tecnica: "Rama, tela, cuerda y plástico", 
           },
           {
             id: "bravo-9",
-            imageUrl: "/images/obras/bravo/bravo9.jpg",
-            titulo: "Runas del comienzo",
-            medidas: "89 x 38 (cada panel)",
-            tecnica: "Carboncillo, pan de oro y collage sobre tela",
+            imageUrl: "/images/obras/bravo/bravo35.jpg",
+            titulo: "Nao Odisea",
+            medidas: "135 x 70",
+            tecnica: "Ramas, tela, madera, cristal, cuerda y gesso",
           },
           {
             id: "bravo-10",
-            imageUrl: "/images/obras/bravo/bravo10.jpg",
-            titulo: "Tríptico de Freya",
-            medidas: "89 x 38 (cada panel)",
-            tecnica: "Óleo, carboncillo, pan de oro y collage sobre tela", 
+            imageUrl: "/images/obras/bravo/bravo36.jpg",
+            titulo: "Rayuela de la memoria",
+            medidas: "205 x 115",
+            tecnica: "Ramas, tela, plástico e hilos", 
+          },
+          {
+            id: "bravo-27",
+            imageUrl: "/images/obras/bravo/bravo37.jpg",
+            titulo: "Recinto cantábrico",
+            medidas: "206 x 98",
+            tecnica: "Tela, plástico y óleo", 
+          },
+          {
+            id: "bravo-28",
+            imageUrl: "/images/obras/bravo/bravo38.jpg",
+            titulo: "Recinto de la niebla",
+            medidas: "202 x 122",
+            tecnica: "Madera, ramas, tela y plástico", 
+          },
+          {
+            id: "bravo-29",
+            imageUrl: "/images/obras/bravo/bravo39.jpg",
+            titulo: "Recinto de la noche",
+            medidas: "146 x 53",
+            tecnica: "Madera, cartón, tela, plástico, acrílico y óleo", 
+          },
+          {
+            id: "bravo-30",
+            imageUrl: "/images/obras/bravo/bravo44.jpg",
+            titulo: "Recinto de la tormenta",
+            medidas: "290 x 218",
+            tecnica: "Rama, óleo y acrílico sobre plástico, tela y madera", 
+          },
+          {
+            id: "bravo-31",
+            imageUrl: "/images/obras/bravo/bravo41.jpg",
+            titulo: "Recinto del fuego",
+            medidas: "300 x 200",
+            tecnica: "Tela, madera, cuerda, plástico, óleo y ceniza", 
+          },
+          {
+            id: "bravo-32",
+            imageUrl: "/images/obras/bravo/bravo42.jpg",
+            titulo: "Recinto. Gnosis",
+            medidas: "160 x 69",
+            tecnica: "Técnica mixta sobre tela, madera y cartón", 
+          },
+          {
+            id: "bravo-33",
+            imageUrl: "/images/obras/bravo/bravo43.jpg",
+            titulo: "Ventana suspendida",
+            medidas: "34 x 43 x 30",
+            tecnica: "Ramas, tela y alambre", 
           },
         
           
@@ -444,11 +793,186 @@ export default function ObrasPage() {
         nombre: "Eduardo Infante",
         obras: [
           {
-            id: "infante-1",
-            imageUrl: "/images/obras/obra20.jpg",
-            titulo: "The Romantic Warrior",
-            medidas: "50 x 60 cm",
+            id: "infante-11",
+            imageUrl: "/images/obras/infante/infante1.jpg",
+            titulo: "Invocación De Eones",
+            medidas: "200 x 160 cm",
+            tecnica: "Gesso, Enamel and oil on canvas",
+          },
+          {
+            id: "infante-12",
+            imageUrl: "/images/obras/infante/infante2.jpg",
+            titulo: "Flores Crudas",
+            medidas: "200 x 160 cm",
+            tecnica: "Gesso, Enamel and oil on canvas",
+          },
+          {
+            id: "infante-13",
+            imageUrl: "/images/obras/infante/infante3.jpg",
+            titulo: "SW",
+            medidas: "150 x 200 cm",
+            tecnica: "Gesso, Enamel and oil on canvas",
+          },
+          {
+            id: "infante-14",
+            imageUrl: "/images/obras/infante/infante4.jpg",
+            titulo: "Still Warrior",
+            medidas: "150 x 100",
+            tecnica: "Vinylic on canvas",
+          },
+          {
+            id: "infante-15",
+            imageUrl: "/images/obras/infante/infante5.jpg",
+            titulo: "Ocean of Night",
+            medidas: "140 x 110 cm",
+            tecnica: "Gesso, Enamel and oil on canvas",
+          },
+          {
+            id: "infante-16",
+            imageUrl: "/images/obras/infante/infante6.jpg",
+            titulo: "Italo Wings",
+            medidas: "150 x 165 cm",
+            tecnica: "Gesso, gouache, spray sobre papel",
+          },
+          {
+            id: "infante-17",
+            imageUrl: "/images/obras/infante/infante7.jpg",
+            titulo: " Adventure",
+            medidas: " 100 x 70 cm",
+            tecnica: "Gesso, pastel, gouache sobre papel",
+          },
+          {
+            id: "infante-18",
+            imageUrl: "/images/obras/infante/infante8.jpg",
+            titulo: "Sunnydale",
+            medidas: " 96 x 75 cm",
+            tecnica: "Gesso, Enamel and oil on canvas",
+          },
+          {
+            id: "infante-19",
+            imageUrl: "/images/obras/infante/infante9.jpg",
+            titulo: "Resize",
+            medidas: " 50 x 40 cm",
+            tecnica: "Gesso, Enamel , spray Paint and oil on canvas",
+          },
+          {
+            id: "infante-20",
+            imageUrl: "/images/obras/infante/infante10.jpg",
+            titulo: "Flores y Centellas",
+            medidas: "50 x 70 cm",
+            tecnica: "Ink and pastel on paper",
+          },
+          {
+            id: "infante-21",
+            imageUrl: "/images/obras/infante/infante11.jpg",
+            titulo: "Flores y Centellas II",
+            medidas: "50 x 70 cm",
+            tecnica: "Ink and pastel on paper",
+          },
+          {
+            id: "infante-22",
+            imageUrl: "/images/obras/infante/infante12.jpg",
+            titulo: "Flores y Centellas III",
+            medidas: "50 x 70 cm",
+            tecnica: "Ink and pastel on paper",
+          },
+          {
+            id: "infante-23",
+            imageUrl: "/images/obras/infante/infante13.jpg",
+            titulo: "Latveria",
+            medidas: "70 x 100 cm",
+            tecnica: "Gesso, pastel, gouache sobre papel",
+          },
+          {
+            id: "infante-24",
+            imageUrl: "/images/obras/infante/infante14.jpg",
+            titulo: "La Primera Rima",
+            medidas: "50 x 50 cm",
             tecnica: "Acrílico sobre lienzo",
+          },
+          {
+            id: "infante-25",
+            imageUrl: "/images/obras/infante/infante15.jpg",
+            titulo: "Lo siguiente es oro",
+            medidas: "50 x 50 cm",
+            tecnica: "Acrílico sobre lienzo",
+          },
+          {
+            id: "infante-26",
+            imageUrl: "/images/obras/infante/infante16.jpg",
+            titulo: "Los Siglos",
+            medidas: "30 x 40 cm",
+            tecnica: "Tinta, spray y pastel sobre lienzo",
+          },
+          {
+            id: "infante-27",
+            imageUrl: "/images/obras/infante/infante17.jpg",
+            titulo: " The Romantic Warrior",
+            medidas: "50 x 40 cm",
+            tecnica: "Acrílico sobre lienzo",
+          },
+          {
+            id: "infante-28",
+            imageUrl: "/images/obras/infante/infante18.jpg",
+            titulo: " Cuatro acordes y la verdad",
+            medidas: "45 x 38 cm",
+            tecnica: "Tinta, spray y pastel sobre lienzo",
+          },
+          {
+            id: "infante-29",
+            imageUrl: "/images/obras/infante/infante19.jpg",
+            titulo: "Pulsar",
+            medidas: " 30 x 24",
+            tecnica: "Tinta, spray y pastel sobre lienzo",
+          },
+          {
+            id: "infante-30",
+            imageUrl: "/images/obras/infante/infante20.jpg",
+            titulo: "Hölderlin",
+            medidas: " 22 x 29 cm",
+            tecnica: "Acrílico sobre lienzo",
+          },
+          {
+            id: "infante-31",
+            imageUrl: "/images/obras/infante/infante21.jpg",
+            titulo: "Mission",
+            medidas: "40 x 30 cm",
+            tecnica: "Tinta, spray y pastel sobre lienzo",
+          },
+          {
+            id: "infante-32",
+            imageUrl: "/images/obras/infante/infante22.jpg",
+            titulo: "Los Abismos De Yupi",
+            medidas: "30 x 24 cm",
+            tecnica: "Gesso y acrílico sobre lienzo",
+          },
+          {
+            id: "infante-33",
+            imageUrl: "/images/obras/infante/infante23.jpg",
+            titulo: " Judas Priest",
+            medidas: "30 x 24 cm",
+            tecnica: "Acrílico sobre lienzo",
+          },
+          {
+            id: "infante-34",
+            imageUrl: "/images/obras/infante/infante24.jpg",
+            titulo: "Song",
+            medidas: "30 x 24 cm",
+            tecnica: "Gesso y acrílico sobre lienzo",
+          },
+          {
+            id: "infante-35",
+            imageUrl: "/images/obras/infante/infante25.jpg",
+            titulo: "Mayo en Junio",
+            medidas: "24 x 17 cm",
+            tecnica: "Acrílico sobre lienzo",
+          },
+          {
+            id: "infante-36",
+            imageUrl: "/images/obras/infante/infante26.jpg",
+            titulo: "Pink Dead Redemption",
+            medidas: "70 x 100 cm",
+            tecnica: "Pastel on paper",
           },
           {
             id: "infante-2",

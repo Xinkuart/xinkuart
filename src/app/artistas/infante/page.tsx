@@ -315,9 +315,9 @@ const CiriaPage = () => {
   </div>
 </motion.h1>
               <p className="text-2xl md:text-3xl text-white/80 max-w-3xl mx-auto font-light italic leading-relaxed">
-                "Al final, la letra y la música son cosas distintas que si
+                Al final, la letra y la música son cosas distintas que si
                 confluyen de manera feliz pueden dar lugar a una nueva, simple y
-                gloriosa canción."
+                gloriosa canción.
               </p>
             </div>
           </motion.div>
@@ -375,8 +375,8 @@ const CiriaPage = () => {
           className="bg-gray-50 p-8 rounded-lg border-l-2 border-[#FF0000]"
         >
           <p className="text-xl text-gray-700 font-light leading-relaxed italic">
-            "Se podría decir que la canción es mi unidad de medida pictórica. Para mí, 
-            una pintura se compone de información plástica descomprimida..."
+            Se podría decir que la canción es mi unidad de medida pictórica. Para mí, 
+            una pintura se compone de información plástica descomprimida...
           </p>
         </motion.div>
 
@@ -428,7 +428,7 @@ const CiriaPage = () => {
       >
         <div className="relative h-[800px] rounded-lg overflow-hidden">
           <Image
-            src="/images/obras/obra20.jpg"
+            src="/images/obras/infante/infante26.jpg"
             alt="William Gaber"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -481,10 +481,10 @@ const CiriaPage = () => {
                 medidas: "50 x 40 cm",
               },
               {
-                imagen: "/images/obras/obra20.jpg",
-                titulo: "The Romantic Warrior",
-                tecnica: "Acrílico sobre lienzo",
-                medidas: "50 x 60 cm",
+                imagen: "/images/obras/infante/infante3.jpg",
+                titulo: "SW",
+                tecnica: "Gesso, Enamel and oil on canvas",
+                medidas: "150 x 200 cm",
               },
               {
                 imagen: "/images/obras/obra21.jpg",

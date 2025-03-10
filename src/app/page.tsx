@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import useEmblaCarousel from "embla-carousel-react";
 import { Raleway } from "next/font/google";
 
 interface Noticia {
@@ -54,24 +53,8 @@ const raleway = Raleway({
 });
 
 export default function Home() {
-  const [emblaRef] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const titleAnimation = {
-    hidden: {
-      opacity: 0,
-      y: 30,
-      letterSpacing: "0.6em",
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      letterSpacing: "0.3em",
-      transition: {
-        duration: 1.4,
-        ease: [0.25, 0.1, 0.25, 1],
-      },
-    },
-  };
+  
   const obrasDestacadas = [
     {
       id: 1,
@@ -171,24 +154,6 @@ export default function Home() {
     },
   ];
 
-  const slides = [
-    {
-      url: "/images/obras/ciria/ciria3.jpg",
-      title: "Explorando el Arte Contemporáneo",
-      subtitle: "Descubre nuestra colección única",
-    },
-    {
-      url: "/images/obras/obra24.jpg",
-      title: "Artistas Emergentes",
-      subtitle: "El futuro del arte español",
-    },
-    {
-      url: "/images/obras/obra22.jpg",
-      title: "Experiencias Artísticas",
-      subtitle: "Más allá de la galería tradicional",
-    },
-  ];
-
   const noticias: Noticia[] = [
     {
       id: 1,
@@ -218,7 +183,6 @@ export default function Home() {
         "Exposición en Badajoz que muestra la última colección del artista.",
     },
   ];
-  const [selectedObra, setSelectedObra] = useState(null);
   const [currentObrasIndex, setCurrentObrasIndex] = useState(0);
   const obrasPerPage = 4;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -230,7 +194,7 @@ export default function Home() {
     "/images/obras/ayela/obra15.jpg",
     "/images/obras/gaber/obra34.jpg",
     "/images/obras/bravo/bravo9.jpg",
-    "/images/obras/obra20.jpg",
+    "/images/obras/infante/infante7.jpg",
   ];
 
   useEffect(() => {
@@ -248,18 +212,6 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, []);
-
-  const handleNext = useCallback(() => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === slides.length - 1 ? 0 : prevIndex + 1
-    );
-  }, [slides.length]);
-
-  const handlePrev = useCallback(() => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
-    );
-  }, [slides.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {

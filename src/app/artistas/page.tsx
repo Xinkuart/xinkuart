@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, MotionProps } from 'framer-motion'; // Añadimos MotionProps
+import { motion,  } from 'framer-motion'; // Añadimos MotionProps
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -12,14 +12,11 @@ interface Artist {
 }
 
 // Definimos las interfaces para los props con motion
-interface MotionDivProps extends MotionProps {
-  className?: string;
-  children: React.ReactNode;
-}
+
 
 export default function ArtistasPage() {
   const [hoveredArtist, setHoveredArtist] = useState<string | null>(null);
-  const [selectedObra, setSelectedObra] = useState<null | any>(null);
+ 
   
   const artists: Artist[] = [
     { name: 'Jose Manuel Ciria', imageUrl: '/images/featured/artwork1.jpg', slug: 'ciria' },

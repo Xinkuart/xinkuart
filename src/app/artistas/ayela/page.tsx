@@ -299,7 +299,7 @@ const CiriaPage = () => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  },);
 
   return (
     <main className="min-h-screen bg-[#262626]">
@@ -365,9 +365,9 @@ const CiriaPage = () => {
   </div>
 </motion.h1>
               <p className="text-2xl md:text-3xl text-white/80 max-w-3xl mx-auto font-light italic leading-relaxed">
-                "Queriendo extraer experiencia desde lo concreto y significado
+                Queriendo extraer experiencia desde lo concreto y significado
                 desde la experiencia, la obra se definirá desde lo procesual
-                como exploración abierta del entorno y de los medios."
+                como exploración abierta del entorno y de los medios.
               </p>
             </div>
           </motion.div>
@@ -496,22 +496,22 @@ const CiriaPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {[
               {
-                imagen: "/images/obras/ayela/obra10.jpg",
-                titulo: "Undo Sistemas",
-                tecnica: "Acrílico y rotulador sobre tabla",
-                medidas: "242 x 247 cm",
+                imagen: "/images/obras/ayela/obra20.jpg",
+                titulo: "Acéfalo Panadhesivo",
+                tecnica: "Acrílico y spray/ papel sobre tela",
+                medidas: "200 x 160 cm",
               },
               {
-                imagen: "/images/obras/ayela/obra16.jpg",
-                titulo: "Gran pelea.",
-                tecnica: "Técnica mixta en Papel sobre dibond",
-                medidas: "207 x 148 cm",
+                imagen: "/images/obras/ayela/obra21.jpg",
+                titulo: "Flor del paraÍso nº2",
+                tecnica: "Pastel, spray y collage/papel",
+                medidas: "150 x 200 cm",
               },
               {
-                imagen: "/images/obras/ayela/obra19.jpg",
-                titulo: "Soul Crafts",
-                tecnica: "Acrílico y cinta adhesiva sobre lienzo",
-                medidas: "140 x 200 cm",
+                imagen: "/images/obras/ayela/obra22.jpg",
+                titulo: "Linterna Verde",
+                tecnica: "Acrílico sobre Lienzo",
+                medidas: "150 x 200 cm",
               },
             ].map((obra, index) => (
               <motion.div
