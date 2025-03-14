@@ -1239,77 +1239,77 @@ export default function ObrasPage() {
     },
     {
       id: "alonso",
-      nombre: "Jaime Sánchez Alonso",
+      nombre: "Zinnia Clavo",
       obras: [
         {
           id: "alonso-1",
-          imageUrl: "/images/obras/alonso/alonso1.jpg",
-          titulo: "La Montaña Rusa",
-          medidas: "189 cm x 105 cm",
-          tecnica: "Pintura en técnica mixta sobre tela",
+          imageUrl: "/images/obras/zinnia/obra1.jpg",
+          titulo: "BLANCO SINUOSO",
+          medidas: "183 cm x 123 cm",
+          tecnica: "Acrílico sobre tabla",
         },
         {
           id: "alonso-2",
-          imageUrl: "/images/obras/alonso/alonso2.jpg",
-          titulo: "Procesión",
-          medidas: "250 cm x 200 cm",
-          tecnica: "Pintura en técnica mixta sobre tela",
+          imageUrl: "/images/obras/zinnia/obra2.jpg",
+          titulo: "NEGRO DECIDIDO",
+          medidas: "183 cm x 123 cm",
+          tecnica: "Acrílico sobre tabla",
         },
         {
           id: "alonso-3",
-          imageUrl: "/images/obras/alonso/alonso3.jpg",
-          titulo: "Tetris",
-          medidas: "150  cm x 150 cm",
-          tecnica: "Pintura en técnica mixta sobre tela ",
+          imageUrl: "/images/obras/zinnia/obra3.jpg",
+          titulo: "NUEVO NEGRO",
+          medidas: "123  cm x 191 cm",
+          tecnica: "Acrílico sobre tabla Tríptico",
         },
         {
           id: "alonso-4",
-          imageUrl: "/images/obras/alonso/alonso4.jpg",
-          titulo: "Tres figuras",
-          medidas: " 200 cm x 200 cm",
-          tecnica: "Acrílico sobre lienzo",
+          imageUrl: "/images/obras/zinnia/obra4.jpg",
+          titulo: "LINEA APASIONADA",
+          medidas: " 123 cm x 183 cm",
+          tecnica: "Acrílico sobre tabla",
         },
         {
           id: "alonso-5",
-          imageUrl: "/images/obras/alonso/alonso5.jpg",
-          titulo: "Así habló Zaratustra",
-          medidas: "250 x 200 cm ",
-          tecnica: "Obra en técnica mixta sobre tela.",
+          imageUrl: "/images/obras/zinnia/obra5.jpg",
+          titulo: "ECO",
+          medidas: "122 x 191 cm ",
+          tecnica: "Acrílico sobre tabla Díptico",
         },
         {
           id: "alonso-6",
-          imageUrl: "/images/obras/alonso/alonso6.jpg",
-          titulo: "El Cristo",
-          medidas: "250 x 200 cm ",
-          tecnica: "Obra en técnica mixta sobre tela.",
+          imageUrl: "/images/obras/zinnia/obra6.jpg",
+          titulo: "PINGÜI",
+          medidas: "123 x 183 cm ",
+          tecnica: "Acrílico sobre tabla",
         },
         {
           id: "alonso-7",
-          imageUrl: "/images/obras/alonso/alonso7.jpg",
-          titulo: "Equilibrio",
-          medidas: "250 x 200 cm ",
-          tecnica: "Obra en técnica mixta sobre tela.",
+          imageUrl: "/images/obras/zinnia/obra7.jpg",
+          titulo: "VUÉLAME",
+          medidas: "122 x 196 cm ",
+          tecnica: "Acrílico sobre tabla Díptico",
         },
         {
           id: "alonso-8",
-          imageUrl: "/images/obras/alonso/alonso8.jpg",
-          titulo: "Hierbas 11",
-          medidas: "120 x 120 cm ",
-          tecnica: "Pintura- técnica mixta sobre madera",
+          imageUrl: "/images/obras/zinnia/obra8.jpg",
+          titulo: "DENTRO DEL AIRE",
+          medidas: "183 x 123 cm ",
+          tecnica: "Acrílico sobre tabla",
         },
         {
           id: "alonso-9",
-          imageUrl: "/images/obras/alonso/alonso9.jpg",
-          titulo: "Hierbas 3",
-          medidas: "120 x 120 cm ",
-          tecnica: "Pintura- técnica mixta sobre madera",
+          imageUrl: "/images/obras/zinnia/obra9.jpg",
+          titulo: "LÍNEAS SENTIMENTALES",
+          medidas: "183 x 122 cm ",
+          tecnica: "Acrílico sobre tabla",
         },
         {
           id: "alonso-10",
-          imageUrl: "/images/obras/alonso/alonso10.jpg",
-          titulo: "Hierbas 4",
-          medidas: "120 x 120 cm ",
-          tecnica: "Pintura- técnica mixta sobre madera",
+          imageUrl: "/images/obras/zinnia/obra10.jpg",
+          titulo: "EL INDÓMITO",
+          medidas: "123 x 183 cm ",
+          tecnica: "Acrílico sobre tabla",
         },
         // ... resto de obras
       ],
@@ -1680,10 +1680,10 @@ export default function ObrasPage() {
 
                   <button
                     onClick={() =>
-                      setArtistaSeleccionado("Jaime Sánchez Alonso")
+                      setArtistaSeleccionado("Zinnia Clavo")
                     }
                     className={`px-4 py-2 text-sm rounded-full transition-colors ${
-                      artistaSeleccionado === "Jaime Sánchez Alonso"
+                      artistaSeleccionado === "Zinnia Clavo"
                         ? "bg-[#FF0000] text-white"
                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                     }`}

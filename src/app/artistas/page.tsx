@@ -26,7 +26,7 @@ export default function ArtistasPage() {
     { name: 'Eduardo Infante', imageUrl: '/images/featured/artwork5.jpg', slug: 'infante' },
     { name: 'William Gaber', imageUrl: '/images/featured/artwork6.jpg', slug: 'gaber' },
     { name: 'Pedro Pasquín', imageUrl: '/images/featured/artwork7.jpg', slug: 'pasquin' },
-    { name: 'Jaime Sánchez Alonso', imageUrl: '/images/featured/artwork8.jpg', slug: 'alonso' },
+    { name: 'Zinnia Clavo', imageUrl: '/images/featured/artwork10.jpg', slug: 'zinnia' },
     { name: 'José María Lamo de Espinosa', imageUrl: '/images/featured/artwork9.jpg', slug: 'lamo' }
   ];
 

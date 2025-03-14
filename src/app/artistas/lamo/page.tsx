@@ -10,14 +10,7 @@ const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400'],
 });
-interface ExposicionIndividual {
-  year: string;
-  exhibitions: string[];
-}
-interface ExposicionColectiva {
-  year: string;
-  exhibitions: string[];
-}
+
 
 // Luego continúa con tus constantes
 
@@ -112,7 +105,7 @@ const CiriaPage = () => {
   </div>
 </motion.h1>
               <p className="text-2xl md:text-3xl text-white/80 max-w-3xl mx-auto font-light italic leading-relaxed">
-                "El mundo es como es y yo veo lo que veo. Todos lo percibimos de forma diferente."
+                El mundo es como es y yo veo lo que veo. Todos lo percibimos de forma diferente.
               </p>
             </div>
           </motion.div>

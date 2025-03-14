@@ -465,8 +465,8 @@ const CiriaPage = () => {
   </div>
 </motion.h1>
               <p className="text-2xl md:text-3xl text-white/80 max-w-3xl mx-auto font-light italic leading-relaxed">
-                "El anhelo de atrapar ese lugar y no otro. Hacer pinturas, que
-                antes de otra cosa, me produzcan "dolor" de estomago."
+                El anhelo de atrapar ese lugar y no otro. Hacer pinturas, que
+                antes de otra cosa, me produzcan dolor de estomago.
               </p>
             </div>          
           </motion.div>
@@ -603,7 +603,7 @@ const CiriaPage = () => {
               <div className="space-y-4">
                 <p className="text-lg text-gray-700 font-light leading-relaxed">
                   En 2013, su trabajo fue objeto de un documental titulado
-                  'Ciria, Pronounced Thiria', presentado en el MoMA de Nueva
+                  Ciria, Pronounced Thiria, presentado en el MoMA de Nueva
                   York y en Berlín, consolidando su posición como uno de los
                   artistas españoles más influyentes de su generación.
                 </p>
