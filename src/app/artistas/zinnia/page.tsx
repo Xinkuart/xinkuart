@@ -23,17 +23,17 @@ const ZinniaPage = () => {
 
   const heroImages = [
     {
-      url: "/images/obras/zinnia/obra3.jpg",
+      url: "/images/obras/zinnia/obra3z.jpg",
       title: "Abstracción en negro",
       year: "2020",
     },
     {
-      url: "/images/obras/zinnia/obra4.jpg",
+      url: "/images/obras/zinnia/obra4z.jpg",
       title: "Líneas inquietas",
       year: "2019",
     },
     {
-      url: "/images/obras/zinnia/obra7.jpg",
+      url: "/images/obras/zinnia/obra7z.jpg",
       title: "Buscando ritmos",
       year: "2021",
     },
