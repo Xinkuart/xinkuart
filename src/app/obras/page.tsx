@@ -1719,6 +1719,13 @@ export default function ObrasPage() {
       nombre: "Pedro Pasquín",
       obras: [
         {
+          id: "pasquin-9",
+          imageUrl: "/images/obras/obra51.jpg",
+          titulo: "Umbrales",
+          medidas: "200 x 200 cm",
+          tecnica: "Acrílico sobre lienzo",
+        },
+        {
           id: "pasquin-1",
           imageUrl: "/images/obras/obra47.jpg",
           titulo: "Walkers in New York II",

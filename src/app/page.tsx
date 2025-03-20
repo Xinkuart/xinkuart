@@ -89,11 +89,11 @@ export default function Home() {
     },
     {
       id: 9,
-      imagen: "/images/obras/alonso/alonso1.jpg",
-      artista: "JAIME SÁNCHEZ ALONSO ",
-      titulo: "La Montaña Rusa",
-      medidas: "189 cm x 105 cm",
-      tecnica: "Pintura en técnica mixta sobre tela",
+      imagen: "/images/obras/zinnia/obra7z.jpg",
+      artista: "ZINNIA CLAVO",
+      titulo: "Vuélame",
+      medidas: "122 cm x 196 cm",
+      tecnica: "Acrílico sobre tabla",
     },
     {
       id: 10,
@@ -350,7 +350,7 @@ export default function Home() {
     </div>
   </motion.div>
 </section>
-{/* Sección de Últimas Novedades Simplificada */}
+{/* Sección de Últimas Novedades con Diseño Responsive Mejorado */}
 <section className="relative py-20 bg-[#1a1a1a] overflow-hidden">
   {/* Elementos decorativos de fondo */}
   <div className="absolute inset-0">
@@ -375,223 +375,193 @@ export default function Home() {
       <div className="w-24 h-1 bg-[#FF0000]/20 mx-auto mt-6" />
     </motion.div>
 
-    {/* Grid de novedades - 2 columnas */}
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      {/* Columna izquierda - 2 novedades grandes en vertical */}
-      <div className="lg:col-span-2 space-y-6">
-        {/* Novedad 1 - Grande superior */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="group"
-        >
-          <div className="relative rounded-xl overflow-hidden">
-            <div className="aspect-[16/9] relative">
-              <Image
-                src="/images/obras/ciria/expociria1.jpg"
-                alt="Nueva exposición virtual"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-            </div>
-            
-            <div className="absolute bottom-0 left-0 p-6 w-full">
-              <div className="flex items-center space-x-2 mb-3">
-                <span className="px-3 py-1 bg-[#FF0000] text-white text-sm rounded-full">
-                  Exposición
-                </span>
-                <span className="text-white/70 text-sm">28 Febrero, 2025</span>
-              </div>
-              <h3 className="text-2xl text-white font-light mb-3 group-hover:text-[#FF0000] transition-colors">
-                Nueva Exposición Virtual: Mundos Abstractos
-              </h3>
-              <p className="text-white/80 mb-4 line-clamp-2">
-                Explorando el arte abstracto contemporáneo a través de una experiencia inmersiva 3D. Una colaboración con artistas internacionales.
-              </p>
-              <Link href="/exposiciones" className="inline-flex items-center text-[#FF0000] group">
-                <span className="font-light">Explorar Exposición</span>
-                <svg 
-                  className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M14 5l7 7m0 0l-7 7m7-7H3" 
-                  />
-                </svg>
-              </Link>
-            </div>
+    {/* Contenedor principal - Responsivo */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Novedad 1 - Ocupará toda la anchura en móvil, mitad en tablet, 2/3 en desktop */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="group md:col-span-2"
+      >
+        <div className="relative rounded-xl overflow-hidden">
+          <div className="aspect-[16/9] relative">
+            <Image
+              src="/images/obras/zinnia/obra45z.jpg"
+              alt="Nueva exposición virtual"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           </div>
-        </motion.div>
+          
+          <div className="absolute bottom-0 left-0 p-6 w-full">
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <span className="px-3 py-1 bg-[#FF0000] text-white text-sm rounded-full">
+                Exposición Virtual Zinnia Clavo
+              </span>
+              <span className="text-white/70 text-sm">20 Marzo, 2025</span>
+            </div>
+            <h3 className="text-2xl text-white font-light mb-3 group-hover:text-[#FF0000] transition-colors">
+              Nueva Exposición Virtual: Linea Apasionada
+            </h3>
+            <p className="text-white/80 mb-4 line-clamp-2">
+              Explorando el arte abstracto contemporáneo a través de una experiencia inmersiva 3D. Una colaboración con artistas internacionales.
+            </p>
+            <Link href="/exposiciones" className="inline-flex items-center text-[#FF0000] group/link">
+              <span className="font-light">Explorar Exposición</span>
+              <svg 
+                className="w-5 h-5 ml-2 transition-transform duration-300 group-hover/link:translate-x-1" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M14 5l7 7m0 0l-7 7m7-7H3" 
+                />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </motion.div>
 
-        {/* Novedad 2 - Grande inferior */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="group"
-        >
-          <div className="relative rounded-xl overflow-hidden">
-            <div className="aspect-[16/9] relative">
-              <Image
-                src="/images/obras/oyonarte/oyonarte1.jpg"
-                alt="Manolo Oyonarte"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-            </div>
-            
-            <div className="absolute bottom-0 left-0 p-6 w-full">
-              <div className="flex items-center space-x-2 mb-3">
-                <span className="px-3 py-1 bg-blue-500 text-white text-sm rounded-full">
-                  Evento
-                </span>
-                <span className="text-white/70 text-sm">15 Febrero, 2025</span>
-              </div>
-              <h3 className="text-2xl text-white font-light mb-3 group-hover:text-[#FF0000] transition-colors">
-                Manolo Oyonarte presenta Nenúfares y Twombly
-              </h3>
-              <p className="text-white/80 mb-4 line-clamp-2">
-                Una nueva perspectiva sobre la naturaleza y el arte abstracto en el museo La Neomudéjar.
-              </p>
-              <Link href="/eventos" className="inline-flex items-center text-[#FF0000] group">
-                <span className="font-light">Ver Detalles</span>
-                <svg 
-                  className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M14 5l7 7m0 0l-7 7m7-7H3" 
-                  />
-                </svg>
-              </Link>
+      {/* Novedad 2 - Ocupará toda la anchura en móvil, mitad en tablet, 1/3 en desktop */}
+      <motion.div 
+        initial={{ opacity: 0, x: 20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+        className="group bg-[#262626] rounded-xl overflow-hidden h-full"
+      >
+        <div className="flex flex-col h-full">
+          <div className="relative aspect-[16/9]">
+            <Image
+              src="/images/obras/ciria/librociria.jpg"
+              alt="Libro de Ciria"
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute top-0 right-0 m-4">
+              <span className="px-3 py-1 bg-purple-500 text-white text-xs rounded-full">
+                Publicación
+              </span>
             </div>
           </div>
-        </motion.div>
-      </div>
+          
+          <div className="p-4 flex-grow">
+            <time className="text-xs text-white/60">5 Febrero, 2025</time>
+            <h3 className="text-lg text-white font-light mt-2 mb-2 group-hover:text-[#FF0000] transition-colors">
+              Las Venas del Dragón de José Manuel Ciria
+            </h3>
+            <p className="text-white/70 text-sm line-clamp-2 mb-3">
+              Presentación del nuevo libro en Casa de Vacas que explora el proceso creativo del artista.
+            </p>
+            <Link href="/actualidad" className="text-[#FF0000] text-sm flex items-center group/link">
+              <span>Leer más</span>
+              <svg className="w-4 h-4 ml-1 transition-transform duration-300 group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </motion.div>
 
-      {/* Columna derecha - 2 novedades pequeñas */}
-      <div className="space-y-6">
-        {/* Novedad 3 - Pequeña superior */}
-        <motion.div 
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="group bg-[#262626] rounded-xl overflow-hidden h-[calc(50%-12px)]"
-        >
-          <div className="flex flex-col h-full">
-            <div className="relative aspect-[16/9]">
-              <Image
-                src="/images/obras/ciria/librociria.jpg"
-                alt="Libro de Ciria"
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute top-0 right-0 m-4">
-                <span className="px-3 py-1 bg-purple-500 text-white text-xs rounded-full">
-                  Publicación
-                </span>
-              </div>
+      {/* Novedad 3 - Ocupará toda la anchura en móvil, mitad en tablet, 2/3 en desktop */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 }}
+        className="group md:col-span-2"
+      >
+        <div className="relative rounded-xl overflow-hidden">
+          <div className="aspect-[16/9] relative">
+            <Image
+              src="/images/obras/oyonarte/oyonarte5.jpg"
+              alt="Manolo Oyonarte"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          </div>
+          
+          <div className="absolute bottom-0 left-0 p-6 w-full">
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <span className="px-3 py-1 bg-blue-500 text-white text-sm rounded-full">
+                Exposición virtual Manolo Oyonarte
+              </span>
+              <span className="text-white/70 text-sm">15 Febrero, 2025</span>
             </div>
-            
-            <div className="p-4 flex-grow">
-              <time className="text-xs text-white/60">5 Febrero, 2025</time>
-              <h3 className="text-lg text-white font-light mt-2 mb-2 group-hover:text-[#FF0000] transition-colors">
-                Las Venas del Dragón de José Manuel Ciria
-              </h3>
-              <p className="text-white/70 text-sm line-clamp-2 mb-3">
-                Presentación del nuevo libro en Casa de Vacas que explora el proceso creativo del artista.
-              </p>
-              <Link href="/actualidad" className="text-[#FF0000] text-sm flex items-center">
-                <span>Leer más</span>
-                <svg className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
+            <h3 className="text-2xl text-white font-light mb-3 group-hover:text-[#FF0000] transition-colors">
+              Manolo Oyonarte presenta Metáfora de la Libertad
+            </h3>
+            <p className="text-white/80 mb-4 line-clamp-2">
+              Explorando el arte abstracto contemporáneo a través de una experiencia inmersiva 3D. Una colaboración con artistas internacionales.
+            </p>
+            <Link href="/exposiciones" className="inline-flex items-center text-[#FF0000] group/link">
+              <span className="font-light">Ver Exposición</span>
+              <svg 
+                className="w-5 h-5 ml-2 transition-transform duration-300 group-hover/link:translate-x-1" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M14 5l7 7m0 0l-7 7m7-7H3" 
+                />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Novedad 4 - Ocupará toda la anchura en móvil, mitad en tablet, 1/3 en desktop */}
+      <motion.div 
+        initial={{ opacity: 0, x: 20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3 }}
+        className="group bg-[#262626] rounded-xl overflow-hidden h-full"
+      >
+        <div className="flex flex-col h-full">
+          <div className="relative aspect-[16/9]">
+            <Image
+              src="/images/obras/oyonarte/oyonarte1.jpg"
+              alt="William Gaber obra"
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute top-0 right-0 m-4">
+              <span className="px-3 py-1 bg-[#FF0000] text-white text-xs rounded-full">
+                Evento
+              </span>
             </div>
           </div>
-        </motion.div>
-        
-        {/* Novedad 4 - Pequeña inferior */}
-        <motion.div 
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="group bg-[#262626] rounded-xl overflow-hidden h-[calc(50%-12px)]"
-        >
-          <div className="flex flex-col h-full">
-            <div className="relative aspect-[16/9]">
-              <Image
-                src="/images/obras/gaber/obra32.jpg"
-                alt="William Gaber obra"
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute top-0 right-0 m-4">
-                <span className="px-3 py-1 bg-[#FF0000] text-white text-xs rounded-full">
-                  Exposición
-                </span>
-              </div>
-            </div>
-            
-            <div className="p-4 flex-grow">
-              <time className="text-xs text-white/60">20 Enero, 2025</time>
-              <h3 className="text-lg text-white font-light mt-2 mb-2 group-hover:text-[#FF0000] transition-colors">
-                William Gaber presenta Colindancias
-              </h3>
-              <p className="text-white/70 text-sm line-clamp-2 mb-3">
-                Nueva exposición virtual que muestra la última colección de obras del reconocido artista.
-              </p>
-              <Link href="/exposiciones" className="text-[#FF0000] text-sm flex items-center">
-                <span>Explorar</span>
-                <svg className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
-            </div>
+          
+          <div className="p-4 flex-grow">
+            <time className="text-xs text-white/60">20 Enero, 2025</time>
+            <h3 className="text-lg text-white font-light mt-2 mb-2 group-hover:text-[#FF0000] transition-colors">
+              Manolo Oyonarte presenta Nenúfares y Twombly
+            </h3>
+            <p className="text-white/70 text-sm line-clamp-2 mb-3">
+              Una nueva perspectiva sobre la naturaleza y el arte abstracto en el museo La Neomudéjar.
+            </p>
+            <Link href="/actualidad" className="text-[#FF0000] text-sm flex items-center group/link">
+              <span>Explorar</span>
+              <svg className="w-4 h-4 ml-1 transition-transform duration-300 group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </div>
-
-    {/* Botón para ver más novedades */}
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.4 }}
-      className="text-center mt-12"
-    >
-      <Link href="/actualidad">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-8 py-4 bg-[#FF0000] text-white rounded-md hover:bg-[#FF0000]/90 transition-colors"
-        >
-          <span className="flex items-center font-light">
-            Ver Todas las Novedades
-            <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </span>
-        </motion.button>
-      </Link>
-    </motion.div>
   </div>
 </section>
 {/* Sección de Bienvenida Modernizada con Slider Original */}
