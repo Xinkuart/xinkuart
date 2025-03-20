@@ -1720,7 +1720,7 @@ export default function ObrasPage() {
       obras: [
         {
           id: "pasquin-9",
-          imageUrl: "/images/obras/obra51.jpg",
+          imageUrl: "/images/obras/obra52.jpg",
           titulo: "Umbrales",
           medidas: "200 x 200 cm",
           tecnica: "Acrílico sobre lienzo",
