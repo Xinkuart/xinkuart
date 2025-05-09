@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Play, Calendar, Clock, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 type NoticiaProps = {
   titulo: string;
@@ -56,94 +57,114 @@ const NoticiaDetalleModal = ({ isOpen, onClose, noticia }: {
   isOpen: boolean; 
   onClose: () => void; 
   noticia: NoticiaProps;
-}) => (
-  <AnimatePresence>
-    {isOpen && (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-40 flex items-start justify-center bg-black/80 p-4 overflow-y-auto"
-        style={{ paddingTop: '2rem', paddingBottom: '2rem' }}
-        onClick={onClose}
-      >
+}) => {
+  // Función para verificar si es la nota de prensa de Roberto Espacios
+  const esNotaRoberto = noticia.descripcion.includes("Roberto Espacios");
+  
+  // Eliminar la mención de Roberto Espacios de la descripción para mostrarla mejor formateada después
+  const descripcionSinFirma = esNotaRoberto 
+    ? noticia.descripcion.replace(". Nota de prensa por Roberto Espacios.", "") 
+    : noticia.descripcion;
+  
+  return (
+    <AnimatePresence>
+      {isOpen && (
         <motion.div
-          initial={{ scale: 0.95, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.95, opacity: 0 }}
-          className="relative w-full max-w-4xl bg-white rounded-xl overflow-hidden my-8 mx-auto"
-          style={{ 
-            marginTop: '4rem',
-            marginBottom: '4rem',
-            maxHeight: 'calc(100vh - 8rem)',
-            overflowY: 'auto'
-          }}
-          onClick={(e) => e.stopPropagation()}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-40 flex items-start justify-center bg-black/80 p-4 overflow-y-auto"
+          style={{ paddingTop: '2rem', paddingBottom: '2rem' }}
+          onClick={onClose}
         >
-          <div className="sticky top-0 right-0 w-full flex justify-end p-4 bg-gradient-to-b from-black/50 to-transparent z-10">
-            <button
-              onClick={onClose}
-              className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-          </div>
-
-          <div className="relative aspect-video">
-            <Image
-              src={noticia.imagen}
-              alt={noticia.titulo}
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            
-            <div className="absolute bottom-0 left-0 p-8 w-full">
-              <div className="flex items-center gap-4 mb-4">
-                {noticia.categoria && (
-                  <span className="px-3 py-1 text-sm text-red-600 bg-white rounded-full font-serif">
-                    {noticia.categoria}
-                  </span>
-                )}
-                <span className="text-sm text-white/90 font-serif">{noticia.fecha}</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-serif text-white mb-2">
-                {noticia.titulo}
-              </h2>
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.95, opacity: 0 }}
+            className="relative w-full max-w-4xl bg-white rounded-xl overflow-hidden my-8 mx-auto"
+            style={{ 
+              marginTop: '4rem',
+              marginBottom: '4rem',
+              maxHeight: 'calc(100vh - 8rem)',
+              overflowY: 'auto'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 right-0 w-full flex justify-end p-4 bg-gradient-to-b from-black/50 to-transparent z-10">
+              <button
+                onClick={onClose}
+                className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
             </div>
-          </div>
 
-          <div className="p-8">
-            <div className="prose prose-lg max-w-none">
-              <div className="font-serif text-xl text-gray-600 leading-relaxed space-y-6">
-                {noticia.descripcion.split('. ').map((parrafo, index) => (
-                  <p key={index}>{parrafo}.</p>
-                ))}
-              </div>
+            <div className="relative aspect-video">
+              <Image
+                src={noticia.imagen}
+                alt={noticia.titulo}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               
-              {noticia.esVideo && (
-                <div className="mt-8 border-t border-gray-200 pt-8">
-                  <h3 className="text-xl font-serif text-gray-900 mb-4">
-                    Contenido multimedia relacionado
-                  </h3>
-                  <div className="relative aspect-video rounded-lg overflow-hidden">
-                    <video
-                      className="w-full"
-                      controls
-                      src={noticia.videoPath}
-                    >
-                      Tu navegador no soporta el elemento de video.
-                    </video>
-                  </div>
+              <div className="absolute bottom-0 left-0 p-8 w-full">
+                <div className="flex items-center gap-4 mb-4">
+                  {noticia.categoria && (
+                    <span className="px-3 py-1 text-sm text-red-600 bg-white rounded-full font-serif">
+                      {noticia.categoria}
+                    </span>
+                  )}
+                  <span className="text-sm text-white/90 font-serif">{noticia.fecha}</span>
                 </div>
-              )}
+                <h2 className="text-3xl md:text-4xl font-serif text-white mb-2">
+                  {noticia.titulo}
+                </h2>
+              </div>
             </div>
-          </div>
+
+            <div className="p-8">
+              <div className="prose prose-lg max-w-none">
+                <div className="font-serif text-xl text-gray-600 leading-relaxed space-y-6">
+                  {descripcionSinFirma.split('. ').map((parrafo, index) => (
+                    <p key={index}>{parrafo}.</p>
+                  ))}
+                </div>
+                
+                {/* Firma si es la nota de Roberto Espacios */}
+                {esNotaRoberto && (
+                  <div className="mt-8 pt-4 border-t border-gray-200">
+                    <p className="text-right italic text-gray-500 font-serif">
+                      Nota de prensa por <span className="font-medium">Roberto Espacios</span>
+                    </p>
+                  </div>
+                )}
+                
+                {noticia.esVideo && (
+                  <div className="mt-8 border-t border-gray-200 pt-8">
+                    <h3 className="text-xl font-serif text-gray-900 mb-4">
+                      Contenido multimedia relacionado
+                    </h3>
+                    <div className="relative aspect-video rounded-lg overflow-hidden">
+                      <video
+                        className="w-full"
+                        controls
+                        src={noticia.videoPath}
+                      >
+                        Tu navegador no soporta el elemento de video.
+                      </video>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-);
+      )}
+    </AnimatePresence>
+  );
+};
+
 const NoticiaArticle = ({ noticia, index }: { noticia: NoticiaProps; index: number }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isDetalleOpen, setIsDetalleOpen] = useState(false);
@@ -243,6 +264,15 @@ const NoticiaArticle = ({ noticia, index }: { noticia: NoticiaProps; index: numb
 
 const ActualidadPage = () => {
   const noticias = [
+    {
+      titulo: "Oyonarte, Alicia y los espejos llega a Casa de Vacas",
+      imagen: "/images/obras/oyonarte/oyonarte31.jpg",
+      descripcion: "El Centro Cultural Casa de Vacas del parque del Retiro de Madrid se viste de gala para acoger, del 29 de abril al 26 de mayo, la exposición 'Oyonarte, Alicia y los espejos', una muestra del artista Manolo Oyonarte que busca dar un paso más allá del de Alicia a través del espejo. Una treintena de obras de expresionismo abstracto que no intentan comunicar nada, ni hacer reflexionar sobre ningún aspecto de la vida. 'No hay que entenderlas, las formas, líneas y colores que las estructuran solo buscan mostrar la evidencia de lo que son en realidad, desvelar su auténtica apariencia', explica el artista. El recorrido se inicia a la vez que lo hace un bucle musical, una composición del músico, compositor y productor español, Luis Carlos Esteban, concebida como una obra total junto a las obras que se contemplan, respetando los tiempos musicales que permiten disfrutar plenamente de ella. Nota de prensa por Roberto Espacios.",
+      fecha: "28 Abril, 2025",
+      categoria: "Exposición",
+      tiempoLectura: "7 min lectura",
+      esVideo: false
+    },
     {
       titulo: "Manolo Oyonarte presenta 'Nenúfares y Twombly' en La Neomudéjar",
       imagen: "/images/obras/oyonarte/oyonarte1.jpg",

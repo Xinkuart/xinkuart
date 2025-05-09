@@ -274,6 +274,33 @@ export default function ObrasPage() {
       nombre: "Manolo Oyonarte",
       obras: [
         {
+          id: "oyonarte-29",
+          titulo: "Evidencia imposible E10F",
+          imageUrl: "/images/obras/oyonarte/obra30.jpg",
+          medidas: "60 x 60 cm",
+          tecnica: "Técnica Mixta sobre lienzo",
+        },
+        {
+          id: "oyonarte-28",
+          titulo: "Evidencia imposible E4J",
+          imageUrl: "/images/obras/oyonarte/obra29.jpg",
+          medidas: "60 x 60 cm",
+          tecnica: "Técnica Mixta sobre lienzo",
+        },
+        {
+          id: "oyonarte-27",
+          titulo: "Actions and erosions E1G",
+          imageUrl: "/images/obras/oyonarte/obra28.jpg",
+          tecnica: "Técnica Mixta sobre lienzo",
+        },
+        {
+          id: "oyonarte-26",
+          titulo: "Nenufares y Twombly. Diptico",
+          imageUrl: "/images/obras/oyonarte/obra27.jpg",
+          medidas: "160 x 315 cm",
+          tecnica: "Técnica Mixta sobre lienzo",
+        },
+        {
           id: "oyonarte-9",
           titulo: "Alice´s antimirror. E3J",
           imageUrl: "/images/obras/oyonarte/obra10.jpg",

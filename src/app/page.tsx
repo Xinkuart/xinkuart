@@ -124,12 +124,12 @@ export default function Home() {
   const noticias: Noticia[] = [
     {
       id: 1,
-      titulo: "Manolo Oyonarte presenta 'Nenúfares y Twombly'",
-      imagen: "/images/obras/oyonarte/oyonarte1.jpg",
-      fecha: "26 Enero, 2025",
+      titulo: "Oyonarte, Alicia y los espejos llega a Casa de Vacas'",
+      imagen: "/images/obras/oyonarte/oyonarte31.jpg",
+      fecha: "09 Mayo, 2025",
       categoria: "Exposiciones",
       extracto:
-        "Nueva exposición en el museo La Neomudéjar, un diálogo entre naturaleza y arte contemporáneo.",
+        "El Centro Cultural Casa de Vacas del parque del Retiro de Madrid se viste de gala para acoger, del 30 de abril al 25 de mayo, la exposición 'Oyonarte, Alicia y los espejos'",
     },
     {
       id: 2,
@@ -532,7 +532,7 @@ export default function Home() {
         <div className="flex flex-col h-full">
           <div className="relative aspect-[16/9]">
             <Image
-              src="/images/obras/oyonarte/oyonarte1.jpg"
+              src="/images/obras/oyonarte/oyonarte31.jpg"
               alt="William Gaber obra"
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -545,12 +545,12 @@ export default function Home() {
           </div>
           
           <div className="p-4 flex-grow">
-            <time className="text-xs text-white/60">20 Enero, 2025</time>
+            <time className="text-xs text-white/60">09 Mayo, 2025</time>
             <h3 className="text-lg text-white font-light mt-2 mb-2 group-hover:text-[#FF0000] transition-colors">
-              Manolo Oyonarte presenta Nenúfares y Twombly
+            Oyonarte, Alicia y los espejos llega a Casa de Vacas
             </h3>
             <p className="text-white/70 text-sm line-clamp-2 mb-3">
-              Una nueva perspectiva sobre la naturaleza y el arte abstracto en el museo La Neomudéjar.
+            Casa de Vacas del parque del Retiro de Madrid se viste de gala para acoger, del 29 de abril al 26 de mayo, la exposición 'Oyonarte, Alicia y los espejos'
             </p>
             <Link href="/actualidad" className="text-[#FF0000] text-sm flex items-center group/link">
               <span>Explorar</span>
