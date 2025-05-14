@@ -6,7 +6,7 @@ import { Instagram, Facebook, Twitter, Mail, MapPin, Phone } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className="bg-[#121212] text-[#a0a0a0] py-12">
+    <footer className="bg-black text-[#a0a0a0] py-12">
       <div className="max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Logo y Descripción */}
