@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Play, Calendar, Clock, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import { X, Play, Clock, ArrowRight } from 'lucide-react';
+
 
 type NoticiaProps = {
   titulo: string;
@@ -266,8 +266,8 @@ const ActualidadPage = () => {
   const noticias = [
     {
       titulo: "Oyonarte, Alicia y los espejos llega a Casa de Vacas",
-      imagen: "/images/obras/oyonarte/oyonarte31.jpg",
-      descripcion: "El Centro Cultural Casa de Vacas del parque del Retiro de Madrid se viste de gala para acoger, del 29 de abril al 26 de mayo, la exposición 'Oyonarte, Alicia y los espejos', una muestra del artista Manolo Oyonarte que busca dar un paso más allá del de Alicia a través del espejo. Una treintena de obras de expresionismo abstracto que no intentan comunicar nada, ni hacer reflexionar sobre ningún aspecto de la vida. 'No hay que entenderlas, las formas, líneas y colores que las estructuran solo buscan mostrar la evidencia de lo que son en realidad, desvelar su auténtica apariencia', explica el artista. El recorrido se inicia a la vez que lo hace un bucle musical, una composición del músico, compositor y productor español, Luis Carlos Esteban, concebida como una obra total junto a las obras que se contemplan, respetando los tiempos musicales que permiten disfrutar plenamente de ella. Nota de prensa por Roberto Espacios.",
+      imagen: "/images/obras/oyonarte/oyonarte31  .jpg",
+      descripcion: "El Centro Cultural Casa de Vacas del parque del Retiro de Madrid se viste de gala para acoger, del 30 de abril al 25 de mayo, la exposición 'Oyonarte, Alicia y los espejos', una muestra del artista Manolo Oyonarte que busca dar un paso más allá del de Alicia a través del espejo. Una treintena de obras de expresionismo abstracto que no intentan comunicar nada, ni hacer reflexionar sobre ningún aspecto de la vida. 'No hay que entenderlas, las formas, líneas y colores que las estructuran solo buscan mostrar la evidencia de lo que son en realidad, desvelar su auténtica apariencia', explica el artista. El recorrido se inicia a la vez que lo hace un bucle musical, una composición del músico, compositor y productor español, Luis Carlos Esteban, concebida como una obra total junto a las obras que se contemplan, respetando los tiempos musicales que permiten disfrutar plenamente de ella. Nota de prensa por Roberto Espacios.",
       fecha: "28 Abril, 2025",
       categoria: "Exposición",
       tiempoLectura: "7 min lectura",

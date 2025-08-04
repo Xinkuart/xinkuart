@@ -1,6 +1,6 @@
 "use client";
 
-import { motion,  } from 'framer-motion'; // Añadimos MotionProps
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -11,12 +11,8 @@ interface Artist {
   slug: string;
 }
 
-// Definimos las interfaces para los props con motion
-
-
 export default function ArtistasPage() {
   const [hoveredArtist, setHoveredArtist] = useState<string | null>(null);
- 
   
   const artists: Artist[] = [
     { name: 'Jose Manuel Ciria', imageUrl: '/images/featured/artwork1.jpg', slug: 'ciria' },
@@ -27,6 +23,7 @@ export default function ArtistasPage() {
     { name: 'William Gaber', imageUrl: '/images/featured/artwork6.jpg', slug: 'gaber' },
     { name: 'Pedro Pasquín', imageUrl: '/images/featured/artwork7.jpg', slug: 'pasquin' },
     { name: 'Zinnia Clavo', imageUrl: '/images/featured/artwork10.jpg', slug: 'zinnia' },
+    { name: 'Jesús del Peso', imageUrl: '/images/featured/artwork11.jpg', slug: 'delpeso' },
     { name: 'José María Lamo de Espinosa', imageUrl: '/images/featured/artwork9.jpg', slug: 'lamo' }
   ];
 
@@ -50,27 +47,32 @@ export default function ArtistasPage() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         {/* Desktop Layout */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-6">
-        <div className="space-y-6">
+          {/* COLUMNA 1 */}
+          <div className="space-y-6">
             <div className="grid grid-cols-2 gap-6">
-            <ArtistCard artist={artists[3]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[3].slug} />
-            <ArtistCard artist={artists[2]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[2].slug} />
+              <ArtistCard artist={artists[3]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[3].slug} />
+              <ArtistCard artist={artists[2]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[2].slug} />
             </div>
             <ArtistCard artist={artists[1]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[1].slug} isLarge />
             <ArtistCard artist={artists[8]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[8].slug} isLarge />
-        </div>
+          </div>
 
-        <div className="space-y-6">
+          {/* COLUMNA 2 */}
+          <div className="space-y-6">
             <ArtistCard artist={artists[0]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[0].slug} isLarge />
             <ArtistCard artist={artists[5]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[5].slug} isLarge />
-        </div>
+            {/* Nueva fila 3 - José María Lamo de Espinosa */}
+            <ArtistCard artist={artists[9]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[9].slug} isLarge />
+          </div>
 
-        <div className="space-y-6">
+          {/* COLUMNA 3 */}
+          <div className="space-y-6">
             <div className="grid grid-cols-2 gap-6">    
-            <ArtistCard artist={artists[4]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[4].slug} />
-            <ArtistCard artist={artists[6]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[6].slug} />
+              <ArtistCard artist={artists[4]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[4].slug} />
+              <ArtistCard artist={artists[6]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[6].slug} />
             </div>
             <ArtistCard artist={artists[7]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[7].slug} isLarge />
-        </div>
+          </div>
         </div>
 
         {/* Mobile/Tablet Layout */}
@@ -95,6 +97,7 @@ export default function ArtistasPage() {
     </div>
   );
 }
+
 interface ArtistCardProps {
   artist: Artist;
   onHover: (slug: string | null) => void;

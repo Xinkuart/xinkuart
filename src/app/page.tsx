@@ -1,22 +1,14 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, {} from "react";
 import {
   motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useSpring,
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  ArrowLeft,
-  Eye,
   Calendar,
-  Plus,
-  ChevronDown,
 } from "lucide-react";
 import { Raleway } from "next/font/google";
 
@@ -25,18 +17,6 @@ const raleway = Raleway({
   subsets: ["latin"],
   weight: ["200", "300", "400"],
 });
-
-// Tipo para las obras destacadas
-type FeaturedArtwork = {
-  id: number;
-  title: string;
-  artist: string;
-  image: string;
-  category?: string;
-  year: string;
-  dimensions?: string;
-};
-
 // Tipo para las exposiciones
 type Exhibition = {
   id: number;
@@ -59,66 +39,6 @@ type NewsItem = {
 
 // Componente principal de la página de inicio
 export default function HomePage() {
-  // Referencias y estados
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const [currentArtwork, setCurrentArtwork] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const [isExploring, setIsExploring] = useState(false);
-
-  // Valores derivados del scroll para efectos de parallax
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 50]);
-
-  const springY = useSpring(y, { stiffness: 100, damping: 30 });
-  const springOpacity = useSpring(opacity, { stiffness: 100, damping: 30 });
-  const springScale = useSpring(scale, { stiffness: 100, damping: 30 });
-
-  // Obras destacadas para el carrusel principal
-  const featuredArtworks: FeaturedArtwork[] = [
-    {
-      id: 1,
-      title: "Pequeñas Decisiones",
-      artist: "José Manuel Ciria",
-      image: "/images/obras/ciria/ciria21.jpg",
-      category: "Pintura Abstracta",
-      year: "2023",
-      dimensions: "250 x 250 cm",
-    },
-    {
-      id: 2,
-      title: "Alice´s antimirror. E1J",
-      artist: "Manolo Oyonarte",
-      image: "/images/obras/oyonarte/obra11.jpg",
-      category: "Pintura Abstracta",
-      year: "2024",
-      dimensions: "120 x 120 cm",
-    },
-    {
-      id: 3,
-      title: "LINEA APASIONADA",
-      artist: "Zinnia Clavo",
-      image: "/images/obras/zinnia/obra4z.jpg",
-      category: "Pintura Abstracta",
-      year: "2022",
-      dimensions: "123 x 183 cm",
-    },
-    {
-      id: 4,
-      title: "Acéfalo Panadhesivo",
-      artist: "Aurelio Ayela",
-      image: "/images/obras/ayela/obra20.jpg",
-      category: "Pintura Abstracta",
-      year: "2008",
-      dimensions: "200 x 160 cm",
-    },
-  ];
-
   // Exposiciones actuales y próximas
   const exhibitions: Exhibition[] = [
     {
@@ -146,108 +66,6 @@ export default function HomePage() {
       isVirtual: true,
     },
   ];
-  const GaleriaObra = ({
-    id,
-    title,
-    artist,
-    image,
-    technique,
-    dimensions,
-    year,
-    index,
-    aspectRatio,
-  }: {
-    id: number;
-    title: string;
-    artist: string;
-    image: string;
-    technique: string;
-    dimensions: string;
-    year: string;
-    index: number;
-    aspectRatio: string;
-  }) => {
-    return (
-      <motion.div
-        key={id}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.1, duration: 0.5 }}
-        whileHover={{ y: -8 }}
-        className="group cursor-pointer relative"
-      >
-        {/* Marco de obra con overlay y efecto hover */}
-        <div
-          className={`overflow-hidden relative ${aspectRatio} rounded-sm shadow-lg border border-white/5`}
-        >
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover transition-all duration-700 group-hover:scale-110"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-
-          {/* Overlay con gradiente elegante */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-          {/* Información de la obra (aparece al hover) */}
-          <div className="absolute inset-0 p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileHover={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="transform group-hover:translate-y-0 transition-transform duration-300"
-            >
-              <h4 className="text-xl text-white font-light mb-1">{title}</h4>
-              <p className="text-red-600 text-sm tracking-wide font-medium mb-2">
-                {artist}
-              </p>
-              <div className="flex flex-col space-y-1 text-white/70 text-sm">
-                <p>{technique}</p>
-                <p>{dimensions}</p>
-                <p>{year}</p>
-              </div>
-
-              {/* Botón ver obra */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="mt-4 flex items-center gap-1 text-white/90 text-sm font-light group/btn"
-              >
-                <span>Ver detalles</span>
-                <motion.span
-                  initial={{ x: 0 }}
-                  whileHover={{ x: 5 }}
-                  className="group-hover/btn:text-red-600 transition-colors"
-                >
-                  <ArrowRight size={14} />
-                </motion.span>
-              </motion.button>
-            </motion.div>
-          </div>
-
-          {/* Línea decorativa roja al hover */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileHover={{ scaleX: 1 }}
-            transition={{ duration: 0.3 }}
-            className="absolute bottom-0 left-0 right-0 h-[2px] bg-red-600 origin-left z-10"
-          />
-        </div>
-
-        {/* Nombre del artista visible siempre */}
-        <div className="mt-3 mb-4">
-          <p className="text-white/80 font-light text-xs tracking-wider">
-            {artist}
-          </p>
-          <h5 className="text-white font-light truncate">{title}</h5>
-        </div>
-      </motion.div>
-    );
-  };
-
   // Noticias de actualidad
   const newsItems: NewsItem[] = [
     {
@@ -279,67 +97,6 @@ export default function HomePage() {
       category: "Exposiciones",
     },
   ];
-
-  // Cambiar la obra actual en el carrusel
-  const changeArtwork = (newIndex: number) => {
-    setDirection(newIndex > currentArtwork ? 1 : -1);
-    setCurrentArtwork(newIndex);
-  };
-
-  // Avanzar al siguiente artwork
-  const nextArtwork = () => {
-    setDirection(1);
-    setCurrentArtwork((prev) => (prev + 1) % featuredArtworks.length);
-  };
-
-  // Retroceder al artwork anterior
-  const prevArtwork = () => {
-    setDirection(-1);
-    setCurrentArtwork(
-      (prev) => (prev - 1 + featuredArtworks.length) % featuredArtworks.length
-    );
-  };
-
-  // Carrusel automático
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isExploring) {
-        nextArtwork();
-      }
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, [isExploring]);
-
-  // Variantes para animaciones
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 0.95,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.5 },
-        scale: { duration: 0.5 },
-      },
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 0.95,
-      transition: {
-        x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.5 },
-        scale: { duration: 0.5 },
-      },
-    }),
-  };
-
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
@@ -727,7 +484,7 @@ export default function HomePage() {
               <div className="relative group cursor-pointer">
                 <div className="overflow-hidden relative aspect-[16/9] rounded-sm shadow-lg border border-white/5">
                   <Image
-                    src="/images/obras/zinnia/obra4z.jpg"
+                    src="/images/obras/lamo/lamo6.jpg"
                     alt="Pequeñas Decisiones - José Manuel Ciria"
                     fill
                     priority={true}
@@ -743,8 +500,8 @@ export default function HomePage() {
                   <div className="absolute inset-0 p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
                     <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       <div className="flex flex-col space-y-1 text-white/70 text-sm">
-                        <p>Acrílico sobre Tabla</p>
-                        <p>123 x 183 cm</p>
+                        <p>Fotografía</p>
+                        <p>100 x 70 cm</p>
                         <p>2022</p>
                       </div>
                     </div>
@@ -757,10 +514,10 @@ export default function HomePage() {
                 {/* Nombre del artista visible siempre */}
                 <div className="mt-3 mb-4">
                   <p className="text-white/80 font-light text-xs tracking-wider">
-                    Zinnia Clavo
+                    José María Lamo de Espinosa
                   </p>
                   <h5 className="text-white font-light truncate">
-                    LINEA APASIONADA
+                    LA PIRÁMIDE DE MADRID
                   </h5>
                 </div>
               </div>
@@ -770,7 +527,7 @@ export default function HomePage() {
                 <div className="relative group cursor-pointer">
                   <div className="overflow-hidden relative aspect-square rounded-sm shadow-lg border border-white/5">
                     <Image
-                      src="/images/obras/oyonarte/obra11.jpg"
+                      src="/images/obras/delpeso/delpeso12.jpg"
                       alt="Alice´s antimirror. E1J - Manolo Oyonarte"
                       fill
                       priority={true}
@@ -786,9 +543,9 @@ export default function HomePage() {
                     <div className="absolute inset-0 p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
                       <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                         <div className="flex flex-col space-y-1 text-white/70 text-xs">
-                          <p>Técnica mixta sobre lienzo</p>
-                          <p>120 x 120 cm</p>
-                          <p>2024</p>
+                          <p>Acrílico sobre lienzo</p>
+                          <p>70 x 70 cm</p>
+                          <p></p>
                         </div>
                       </div>
                     </div>
@@ -800,10 +557,10 @@ export default function HomePage() {
                   {/* Nombre del artista visible siempre */}
                   <div className="mt-3 mb-4">
                     <p className="text-white/80 font-light text-xs tracking-wider">
-                      Manolo Oyonarte
+                      Jesús del Peso
                     </p>
                     <h5 className="text-white font-light truncate">
-                      ALICE´S ANTIMIRROR. E1J
+                      Apertura de cubo I
                     </h5>
                   </div>
                 </div>
@@ -811,7 +568,7 @@ export default function HomePage() {
                 <div className="relative group cursor-pointer">
                   <div className="overflow-hidden relative aspect-square rounded-sm shadow-lg border border-white/5">
                     <Image
-                      src="/images/obras/infante/infante3.jpg"
+                      src="/images/obras/bravo/bravo11.jpg"
                       alt="LINEA APASIONADA - Zinnia Clavo"
                       fill
                       priority={true}
@@ -827,9 +584,9 @@ export default function HomePage() {
                     <div className="absolute inset-0 p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
                       <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                         <div className="flex flex-col space-y-1 text-white/70 text-xs">
-                          <p>Gesso, Enamel and oil on canvas</p>
-                          <p>150 x 200 cm</p>
-                          <p>2022</p>
+                          <p>Técnica mixta sobre papel</p>
+                          <p>100 x 70 cm</p>
+                          <p>2019</p>
                         </div>
                       </div>
                     </div>
@@ -841,9 +598,9 @@ export default function HomePage() {
                   {/* Nombre del artista visible siempre */}
                   <div className="mt-3 mb-4">
                     <p className="text-white/80 font-light text-xs tracking-wider">
-                      Eduardo Infante
+                      Hilario Bravo
                     </p>
-                    <h5 className="text-white font-light truncate">SW</h5>
+                    <h5 className="text-white font-light truncate">Senda, I</h5>
                   </div>
                 </div>
               </div>
@@ -856,7 +613,7 @@ export default function HomePage() {
                 <div className="relative group cursor-pointer">
                   <div className="overflow-hidden relative aspect-square rounded-sm shadow-lg border border-white/5">
                     <Image
-                      src="/images/obras/ciria/ciria8.jpg"
+                      src="/images/obras/ciria/ciria22.jpg"
                       alt="Acéfalo Panadhesivo - Aurelio Ayela"
                       fill
                       priority={true}
@@ -889,7 +646,7 @@ export default function HomePage() {
                       CIRIA
                     </p>
                     <h5 className="text-white font-light truncate">
-                      EL DESEO ETERNO
+                      CAMAMESA
                     </h5>
                   </div>
                 </div>
@@ -897,7 +654,7 @@ export default function HomePage() {
                 <div className="relative group cursor-pointer">
                   <div className="overflow-hidden relative aspect-square rounded-sm shadow-lg border border-white/5">
                     <Image
-                      src="/images/obras/gaber/obra37.jpg"
+                      src="/images/obras/gaber/obra41.jpg"
                       alt="Tratado de las estrellas. 7 - Hilario Bravo"
                       fill
                       priority={true}
@@ -913,8 +670,8 @@ export default function HomePage() {
                     <div className="absolute inset-0 p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
                       <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                         <div className="flex flex-col space-y-1 text-white/70 text-xs">
-                          <p>Óleo sobre tela</p>
-                          <p>190 x 15 cm</p>
+                          <p>Óleo sobre lienzo</p>
+                          <p>180 x 130 cm</p>
                           <p>2023</p>
                         </div>
                       </div>
@@ -930,7 +687,7 @@ export default function HomePage() {
                       William Gaber
                     </p>
                     <h5 className="text-white font-light truncate">
-                      MONUMENTO #P01
+                    MONUMENTO #P1
                     </h5>
                   </div>
                 </div>
@@ -940,7 +697,7 @@ export default function HomePage() {
               <div className="relative group cursor-pointer">
                 <div className="overflow-hidden relative aspect-[16/9] rounded-sm shadow-lg border border-white/5">
                   <Image
-                    src="/images/obras/ayela/obra22.jpg"
+                    src="/images/obras/oyonarte/obra10.jpg"
                     alt="Cortado sobre la página de un cómic - José Manuel Ciria"
                     fill
                     priority={true}
@@ -956,8 +713,8 @@ export default function HomePage() {
                   <div className="absolute inset-0 p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
                     <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       <div className="flex flex-col space-y-1 text-white/70 text-sm">
-                        <p>Acrílico sobre Lienzo</p>
-                        <p>150 x 200 cm</p>
+                        <p>Técnica Mixta sobre lienzo</p>
+                        <p>110 x 150 cm</p>
                       </div>
                     </div>
                   </div>
@@ -969,10 +726,10 @@ export default function HomePage() {
                 {/* Nombre del artista visible siempre */}
                 <div className="mt-3 mb-4">
                   <p className="text-white/80 font-light text-xs tracking-wider">
-                    Aurelio Ayela
+                    Manolo Oyonarte
                   </p>
                   <h5 className="text-white font-light truncate">
-                    LINTERNA VERDE
+                  Alice´s antimirror. E3J
                   </h5>
                 </div>
               </div>
@@ -1059,7 +816,7 @@ export default function HomePage() {
             .fill(0)
             .map((_, arrayIndex) => (
               <React.Fragment key={`artist-row-1-${arrayIndex}`}>
-                <Link href="/artistas/pasquin">
+                <Link href="/artistas/delpeso">
                   <motion.span 
                     className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
                     whileHover={{ 
@@ -1068,7 +825,7 @@ export default function HomePage() {
                       transition: { duration: 0.2 }
                     }}
                   >
-                    Pedro Pasquín
+                    Jesús del Peso
                     <motion.div 
                       initial={{ scaleX: 0 }}
                       whileHover={{ scaleX: 1 }}
@@ -1236,6 +993,24 @@ export default function HomePage() {
                     }}
                   >
                     Zinnia Clavo
+                    <motion.div 
+                      initial={{ scaleX: 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                    />
+                  </motion.span>
+                </Link>
+                <Link href="/artistas/pasquin">
+                  <motion.span 
+                    className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
+                    whileHover={{ 
+                      color: "rgba(255, 255, 255, 0.95)",
+                      y: -2,
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    Pedro Pasquín
                     <motion.div 
                       initial={{ scaleX: 0 }}
                       whileHover={{ scaleX: 1 }}
