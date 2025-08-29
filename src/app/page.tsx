@@ -59,17 +59,27 @@ export default function HomePage() {
     },
     {
       id: 3,
-      title: "Bloques de Construcción",
-      artist: "William Gaber",
-      dates: "ABRIL 2024",
-      image: "/images/obras/gaber/gaber1.jpg",
+      title: "Fragmentos del Espacio",
+      artist: "Jesús del Peso",
+      dates: "AGOSTO 2025",
+      image: "/images/obras/delpeso/delpeso26.jpg",
       isVirtual: true,
     },
   ];
   // Noticias de actualidad
   const newsItems: NewsItem[] = [
     {
-      id: 1,
+      id: 3,
+      title: "Jesús del Peso representa a España en Hispanic Heritage Month",
+      description:
+        "Jesús del Peso ha sido seleccionado para representar a España en el prestigioso evento del Hispanic Heritage Month que se celebrará el próximo 16 de septiembre de 2025 en Miami.",
+      date: "15 Agosto 2025",
+      image: "/images/obras/delpeso/delpeso27.jpg",
+      category: "Exposiciones",
+    },
+    {
+      
+      id: 1,  
       title: "Manolo Oyonarte presenta 'Nenúfares y Twombly' en La Neomudéjar",
       description:
         "El reconocido artista Manolo Oyonarte inaugura su última exposición 'Nenúfares y Twombly' en el emblemático museo La Neomudéjar.",
@@ -87,15 +97,7 @@ export default function HomePage() {
       image: "/images/obras/ciria/librociria.jpg",
       category: "Presentación",
     },
-    {
-      id: 3,
-      title: "Ciria lleva su obra a la Sala Vaquero Poblador de Badajoz",
-      description:
-        "La Sala de Exposiciones Vaquero Poblador en Badajoz acoge una impresionante muestra del trabajo de José Manuel Ciria, uno de los artistas más influyentes del arte contemporáneo español.",
-      date: "06 Septiembre 2024",
-      image: "/images/obras/ciria/expociria1.jpg",
-      category: "Exposiciones",
-    },
+    
   ];
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -406,7 +408,7 @@ export default function HomePage() {
         <Link href="/obras">
           <button className="group relative bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-sm overflow-hidden transition-all duration-300 shadow-lg hover:shadow-red-600/30">
             <span className="relative z-10 flex items-center gap-3 text-lg font-light tracking-wider">
-              Explorar colección
+              Explorar Obras
               <motion.span
                 animate={{ x: [0, 5, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}

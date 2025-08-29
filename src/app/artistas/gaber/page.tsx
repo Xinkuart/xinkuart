@@ -1,658 +1,272 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Montserrat } from 'next/font/google';
+'use client'
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400'],
-});
-interface ExposicionIndividual {
-  year: string;
-  exhibitions: string[];
-}
-interface ExposicionColectiva {
-  year: string;
-  exhibitions: string[];
+import React from "react"
+import { motion } from "framer-motion"
+import Image from "next/image"
+import Link from "next/link"
+import { Download, FileText } from "lucide-react"
+
+type Artwork = {
+  id: string
+  title: string
+  year: string
+  technique: string
+  dimensions: string
+  image: string
 }
 
-// Luego continúa con tus constantes
-const exposicionesColectivas: ExposicionColectiva[] = [
-  {
-    year: "Febrero 2024 ",
-    exhibitions: ["“ Reflejos Ocultos ” Maison Celeste. CDMX"],
-  },
-  {
-    year: " Junio 2023",
-    exhibitions: [
-      " The summer exhibition ” Galería Lux Perpetua. Mérida, Yucatán",
-    ],
-  },
-  {
-    year: "Febrero 2022",
-    exhibitions: ["“ Carajillo ” Nave Oporto, Madrid, España"],
-  },
-  {
-    year: " Junio 2020",
-    exhibitions: [
-      " Corriente Alterna / Corriente Continua ” Galería Nueva, Madrid, España",
-    ],
-  },
-  {
-    year: "Diciembre 2019",
-    exhibitions: [
-      "PEN Projects, Miami, Florida",
-      "Aqua Art Miami, Rubber Stamp Art Projects, Miami, Florida.",
-      "Espacio Mannach, Ciudad de México.",
-    ],
-  },
-  {
-    year: "Octubre 2018 ",
-    exhibitions: [
-      "Galería Pandea Cartesiano, Puebla, México.",
-      "Museo Vostell MalparAda, MalparAda de Cáceres, España.",
-    ],
-  },
-  {
-    year: "Agosto 2017",
-    exhibitions: ["Royal College of Art, Londres, Inglaterra."],
-  },
-];
+export default function GaberPage() {
+  // Datos del artista
+  const artist = {
+    name: "WILLIAM GABER",
+    slug: "gaber",
+    image: "/images/featured/artwork6.jpg",
+    bio: `William Gaber ha desarrollado su vocación de manera autodidacta, estudiando bajo la tutela de diferentes maestros en México y participando en ayudantías en talleres de artistas reconocidos. Su formación más reciente incluye los prestigiosos Talleres del Museo del Prado en Madrid y el Royal College of Art de Londres.
 
-const exposicionesIndividuales: ExposicionIndividual[] = [
-  {
-    year: "Diciembre 2023 ",
-    exhibitions: [
-      "«Monumento» Gran Museo del Mundo Maya, Mérida, México.",
-      "William Gaber, Kuna Galería, San Miguel de Allende, México",
-    ],
-  },
-  {
-    year: " Septiembre 2023",
-    exhibitions: ["«Monumento» Galería Alfredo Ginocchio, CDMX."],
-  },
-  {
-    year: "Octubre 2022",
-    exhibitions: ["«Lo que dejamos pasar» CC Olimpo, Mérida, México"],
-  },
-  {
-    year: "Septiembre 2022",
-    exhibitions: [" «Lo que dejamos pasar» Embajada de México en España, ICME"],
-  },
-  {
-    year: "Agosto 2021",
-    exhibitions: [
-      "¿Qué estará haciendo Houdini? ” Centro de Arte Casa de Indias, Cádiz, España",
-    ],
-  },
-  {
-    year: "Septiembre 2019",
-    exhibitions: [
-      "“ Sacred Places ” Centro de Arte Casa de Indias, Cádiz, España",
-    ],
-  },
-  {
-    year: "Enero 2019",
-    exhibitions: [
-      "“ En la mirada del observador ” Fundación Pons, Madrid, España",
-    ],
-  },
-  {
-    year: "Septiembre 2016",
-    exhibitions: [
-      "“ La Maqueta Humana ” Galería Casa Gotxicoa, Monterrey México.",
-    ],
-  },
-  // ... resto de las exposiciones
-];
+    El trabajo de William Gaber se caracteriza por la exploración de diversos medios artísticos, incluyendo pintura, dibujo y escultura. Esta diversidad no es casual, sino que forma parte integral de su identidad como artista contemporáneo y observador agudo de la realidad.
+    
+    Su obra ha sido expuesta internacionalmente en espacios como el Royal College of Art de Londres, el Gran Museo del Mundo Maya en Mérida, la Galería Alfredo Ginocchio en Ciudad de México, y el Centro de Arte Casa de Indias en Cádiz, entre otros prestigiosos venues en México, España, Estados Unidos e Inglaterra.
 
-const CiriaPage = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    Gaber ha obtenido reconocimientos como la Beca de Producción Artística de la Secretaría de Cultura de México (2023), Mención Honorífica en el Premio Nacional de Pintura (2022), y la Beca de Residencia Artística del Royal College of Art de Londres (2021). Su obra forma parte de importantes colecciones públicas y privadas en México, España y Estados Unidos.`,
+    imageCredit: "Imagen cortesía del artista"
+  }
 
-  const heroImages = [
+  // Obras seleccionadas del artista
+  const selectedWorks: Artwork[] = [
     {
-      url: "/images/obras/gaber/obra40.jpg",
-      title: "Monumento #P13",
-      year: "2023",
+      id: 'gaber-1',
+      title: 'Miraba mi reflejo desde el agua',
+      year: '2024',
+      technique: 'Óleo sobre Tela',
+      dimensions: '130 x 180 cm',
+      image: '/images/obras/gaber/obra64.jpg'
     },
     {
-      url: "/images/obras/gaber/obra39.jpg",
-      title: "Monumento #P16",
-      year: "2023",
+      id: 'gaber-2',
+      title: 'Un agujero que conecta el agua con el cielo',
+      year: '2024',
+      technique: 'Óleo sobre Tela',
+      dimensions: '150 x 150 cm',
+      image: '/images/obras/gaber/obra63.jpg'
     },
     {
-      url: "/images/obras/gaber/obra38.jpg",
-      title: "Monumento #P07",
-      year: "2023",
+      id: 'gaber-3',
+      title: 'Siempre quise un espacio III',
+      year: '2024',
+      technique: 'Óleo sobre Tela',
+      dimensions: '130 x 180 cm',
+      image: '/images/obras/gaber/obra62.jpg'
     },
-  ];
+    {
+      id: 'gaber-4',
+      title: 'Monumento #P13',
+      year: '2023',
+      technique: 'Óleo sobre tela',
+      dimensions: '150 x 200 cm',
+      image: '/images/obras/gaber/obra40.jpg'
+    },
+    {
+      id: 'gaber-5',
+      title: 'Whole Nº3',
+      year: '2021',
+      technique: 'Acrílico sobre lino',
+      dimensions: '150 x 150 cm',
+      image: '/images/obras/gaber/obra35.jpg'
+    },
+    {
+      id: 'gaber-6',
+      title: 'Colindancias III',
+      year: '2023',
+      technique: 'Óleo sobre tela',
+      dimensions: '150 x 200 cm',
+      image: '/images/obras/gaber/obra32.jpg'
+    }
+  ]
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
+  // Función para abrir PDFs en nueva ventana
+  const handlePDFOpen = (pdfPath: string) => {
+    window.open(pdfPath, '_blank')
+  }
 
   return (
-    <main className="min-h-screen bg-[#262626]">
-      {/* Hero Section Dinámico */}
-      <section className="relative h-screen w-full overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentImageIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={heroImages[currentImageIndex].url}
-              alt={heroImages[currentImageIndex].title}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
-          </motion.div>
-        </AnimatePresence>
-
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+    <main className="bg-white min-h-screen pt-20">
+      {/* Artist Header Section */}
+      <section className="px-6 lg:px-16 pt-16 pb-16">
+        <div className="max-w-7xl mx-auto">
+          {/* Título */}
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center space-y-24 px-4" // Aumentado de space-y-12 a space-y-24
+            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 tracking-wide mb-12"
           >
-            {/* Logo con margen aumentado */}
-            <div className="relative w-[280px] sm:w-[400px] md:w-[500px] mx-auto mb-12">
-              {" "}
-              {/* Añadido mb-12 */}
-              <Image
-                src="/images/logo/logoxinkuart.png"
-                alt="XinkuArt Logo"
-                width={500}
-                height={167}
-                className="object-contain"
-              />
-            </div>
+            {artist.name}
+          </motion.h1>
 
-            <div className="space-y-6">
-            <motion.h1
-  className={`relative text-7xl sm:text-8xl md:text-9xl text-white ${montserrat.className}`}
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
->
-  <div className="relative inline-block">
-    <div className="flex flex-col items-start">
-      <span className="font-light tracking-[0.15em] mt-2 relative">
-      William Gaber
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="absolute -bottom-2 right-0 w-3/4 h-[2px] bg-[#FF0000] transform origin-right"
-        />
-      </span>
-    </div>
-  </div>
-</motion.h1>
-              <p className="text-2xl md:text-3xl text-white/80 max-w-3xl mx-auto font-light italic leading-relaxed">
-                "El trabajo de William Gaber explora diferentes medios como la
-                pintura, el dibujo, y la escultura."
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Indicadores de Imagen */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3">
-          {heroImages.map((_, index) => (
-            <motion.button
-              key={index}
-              onClick={() => setCurrentImageIndex(index)}
-              className={`h-1 rounded-full transition-all duration-500 ${
-                currentImageIndex === index ? "w-8 bg-white" : "w-2 bg-white/50"
-              }`}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* Introducción Biográfica */}
-      {/* Introducción Biográfica */}
-      <section className="relative py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start"
-          >
-            {/* Columna de Texto */}
-            <div className="space-y-12">
-              {/* Encabezado */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="space-y-4"
-              >
-                <h2 className="text-4xl md:text-5xl font-light text-gray-900">
-                  BIOGRAFÍA
-                </h2>
-                <div className="w-20 h-0.5 bg-[#FF0000]" />
-              </motion.div>
-
-              {/* Contenido Biográfico */}
-              <div className="space-y-8">
-                {/* Formación */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="prose prose-lg max-w-none"
-                >
-                  <h3 className="text-2xl font-light text-gray-800 mb-4">
-                    Formación Artística
-                  </h3>
-                  <p className="text-lg text-gray-700 font-light leading-relaxed">
-                    Gaber ha desarrollado su vocación de manera autodidacta,
-                    estudiando bajo la tutela de diferentes maestros en México y
-                    participando en ayudantías en talleres de artistas
-                    reconocidos. Su formación más reciente incluye los
-                    prestigiosos Talleres del Museo del Prado en Madrid y el
-                    Royal College of Art de Londres.
-                  </p>
-                </motion.div>
-
-                {/* Práctica Artística */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="prose prose-lg max-w-none"
-                >
-                  <h3 className="text-2xl font-light text-gray-800 mb-4">
-                    Práctica Artística
-                  </h3>
-                  <p className="text-lg text-gray-700 font-light leading-relaxed">
-                    El trabajo de William Gaber se caracteriza por la
-                    exploración de diversos medios artísticos, incluyendo
-                    pintura, dibujo y escultura. Esta diversidad no es casual,
-                    sino que forma parte integral de su identidad como artista
-                    contemporáneo y observador agudo de la realidad.
-                  </p>
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Columna de Imagen */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            
+            {/* Artist Info */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="lg:sticky lg:top-32 h-full" // Modificado para mejor control del espacio
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
             >
-              <div className="relative h-[calc(100vh-200px)] md:h-[600px] rounded-lg overflow-hidden shadow-2xl">
+              <div className="space-y-4 text-gray-900 leading-relaxed">
+                {artist.bio.split('\n\n').map((paragraph, index) => (
+                  <p key={index} className="text-base md:text-lg font-light">
+                    {paragraph.trim()}
+                  </p>
+                ))}
+              </div>
+
+              {/* PDF Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="flex flex-col sm:flex-row gap-4 pt-6 mb-8"
+              >
+                {/* Botón Exposiciones */}
+                <motion.button
+                  onClick={() => handlePDFOpen('/exposiciones/exposgaber.pdf')}
+                  className="group relative flex items-center gap-3 px-6 py-3 bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-800 hover:border-gray-800 transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <FileText className="w-5 h-5 group-hover:text-white transition-colors duration-300" />
+                  <span className="font-medium text-sm uppercase tracking-wide group-hover:text-white transition-colors duration-300">
+                    Ver Exposiciones
+                  </span>
+                  <div className="w-2 h-2 bg-current rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+                </motion.button>
+
+                {/* Botón Portfolio */}
+                <motion.button
+                  onClick={() => handlePDFOpen('/exposiciones/portfoliogaber.pdf')}
+                  className="group relative flex items-center gap-3 px-6 py-3 bg-gray-900 text-white hover:bg-gray-800 transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Download className="w-5 h-5" />
+                  <span className="font-medium text-sm uppercase tracking-wide">
+                    Descargar Portfolio
+                  </span>
+                  <div className="w-2 h-2 bg-white rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+                </motion.button>
+              </motion.div>
+            </motion.div>
+
+            {/* Artist Image - alineada con la biografía */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="aspect-[4/4] relative overflow-hidden shadow-lg">
                 <Image
-                  src="/images/obras/gaber/obra37.jpg"
-                  alt="William Gaber"
+                  src={artist.image}
+                  alt={artist.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               </div>
+              <p className="text-xs text-gray-500 mt-2 italic">
+                {artist.imageCredit}
+              </p>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Obras Destacadas */}
-      <section className="relative py-32 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Encabezado */}
+      {/* Selected Works Section */}
+      <section className="px-6 lg:px-16 py-16 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            transition={{ duration: 0.6 }}
+            className="mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-              Obras <span className="text-[#FF0000]">Destacadas</span>
+            <h2 className="text-2xl md:text-3xl font-light text-gray-900 tracking-wide">
+              OBRAS SELECCIONADAS
             </h2>
-            <div className="w-20 h-0.5 bg-[#FF0000] mx-auto" />
           </motion.div>
 
-          {/* Grid de Obras */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {[
-              {
-                imagen: "/images/obras/gaber/obra32.jpg",
-                titulo: "Colindancias III",
-                tecnica: "Óleo sobre tela",
-                medidas: "150 x 200 cm",
-              },
-              {
-                imagen: "/images/obras/gaber/obra35.jpg",
-                titulo: "Whole Nº3",
-                tecnica: "Acrílico sobre lino",
-                medidas: "150 x 150 cm",
-              },
-              {
-                imagen: "/images/obras/gaber/obra34.jpg",
-                titulo: "Whole Nº2",
-                tecnica: "Acrílico sobre lino",
-                medidas: "160 x 220 cm",
-              },
-            ].map((obra, index) => (
+          {/* Works Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {selectedWorks.map((artwork, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
+                key={artwork.id}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="group relative"
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group"
               >
-                {/* Marco de la Obra */}
-                <div className="relative aspect-square bg-white p-4 shadow-lg rounded-sm">
-                  {/* Contenedor de la Imagen con efecto de marco */}
-                  <div className="relative w-full h-full overflow-hidden">
-                    <Image
-                      src={obra.imagen}
-                      alt={obra.titulo}
-                      fill
-                      className="object-cover transition-all duration-700 group-hover:scale-110"
-                    />
-
-                    {/* Overlay con degradado */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-
-                    {/* Información de la Obra */}
-                    <div className="absolute inset-x-0 bottom-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                      <div className="space-y-3">
-                        <motion.h3
-                          className="text-2xl font-light text-white"
-                          initial={{ opacity: 0 }}
-                          whileInView={{ opacity: 1 }}
-                        >
-                          {obra.titulo}
-                        </motion.h3>
-                        <div className="h-px w-12 bg-[#FF0000]" />
-                        <p className="text-white/90 font-light">
-                          {obra.tecnica}
-                        </p>
-                        <p className="text-white/80 font-light text-sm">
-                          {obra.medidas}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Borde decorativo */}
-                  <div className="absolute inset-0 border border-gray-100 group-hover:border-[#FF0000]/20 transition-colors duration-300" />
+                {/* Artwork Image */}
+                <div className="aspect-square relative overflow-hidden bg-gray-100 mb-4">
+                  <Image
+                    src={artwork.image}
+                    alt={artwork.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                 </div>
 
-                {/* Sombra inferior */}
-                <div className="absolute inset-x-4 bottom-0 h-8 bg-gradient-to-t from-black/5 to-transparent -z-10" />
+                {/* Artwork Info */}
+                <div className="space-y-2">
+                  <p className="text-sm text-gray-900">
+                    {artist.name}, <span className="italic">{artwork.title}</span>, {artwork.year}
+                  </p>
+                  <div className="text-xs text-gray-500 space-y-1">
+                    <p>{artwork.technique}</p>
+                    <p>{artwork.dimensions}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Botón Ver Más */}
+          {/* View All Works Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mt-20"
+            className="text-center mt-12"
           >
-            <Link href="/obras">
-              <motion.button
-                className="group relative inline-flex items-center px-8 py-4 bg-[#FF0000] text-white overflow-hidden"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="relative z-10 flex items-center gap-2 font-light">
-                  Ver Todas las Obras
-                  <svg
-                    className="w-5 h-5 transform transition-transform group-hover:translate-x-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </span>
-                <div className="absolute bottom-0 left-0 h-[2px] w-full bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-              </motion.button>
+            <Link 
+              href="/obras?artist=gaber" 
+              className="inline-flex items-center px-8 py-3 border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300"
+            >
+              <span className="text-sm uppercase tracking-wider font-medium">Ver Todas las Obras</span>
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Línea de Tiempo de Exposiciones */}
-      {/* Sección de Exposiciones */}
-      <section className="relative py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
+      {/* Navigation Back */}
+      <section className="px-6 lg:px-16 py-8 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          <Link 
+            href="/artistas" 
+            className="inline-flex items-center text-gray-600 hover:text-red-600 transition-colors duration-300"
           >
-            <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-              COLECCIÓN DE EXPOSICIONES
-            </h2>
-            <div className="w-20 h-0.5 bg-[#FF0000] mx-auto" />
-          </motion.div>
-
-          {/* Exposiciones Individuales */}
-          <div className="mb-20">
-            <motion.h3
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl font-light text-gray-900 mb-12"
-            >
-              Exposiciones Individuales
-            </motion.h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-              {/* Primera Columna */}
-              <div className="space-y-12">
-                {exposicionesIndividuales
-                  .slice(0, Math.ceil(exposicionesIndividuales.length / 2))
-                  .map((yearGroup, index) => (
-                    <motion.div
-                      key={yearGroup.year}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="relative"
-                    >
-                      <div className="flex items-center mb-4">
-                        <h4 className="text-4xl font-light text-gray-900">
-                          {yearGroup.year}
-                        </h4>
-                        <div className="ml-4 h-px flex-grow bg-gradient-to-r from-[#FF0000]/20 to-transparent" />
-                      </div>
-                      <div className="space-y-3">
-                        {yearGroup.exhibitions.map((exhibition, i) => (
-                          <motion.div
-                            key={i}
-                            className="bg-gray-50 p-4 rounded-lg hover:shadow-md transition-all duration-300"
-                          >
-                            <p className="text-gray-700 font-light">
-                              {exhibition}
-                            </p>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
-              </div>
-
-              {/* Segunda Columna */}
-              <div className="space-y-12">
-                {exposicionesIndividuales
-                  .slice(Math.ceil(exposicionesIndividuales.length / 2))
-                  .map((yearGroup, index) => (
-                    <motion.div
-                      key={yearGroup.year}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="relative"
-                    >
-                      <div className="flex items-center mb-4">
-                        <h4 className="text-4xl font-light text-gray-900">
-                          {yearGroup.year}
-                        </h4>
-                        <div className="ml-4 h-px flex-grow bg-gradient-to-r from-[#FF0000]/20 to-transparent" />
-                      </div>
-                      <div className="space-y-3">
-                        {yearGroup.exhibitions.map((exhibition, i) => (
-                          <motion.div
-                            key={i}
-                            className="bg-gray-50 p-4 rounded-lg hover:shadow-md transition-all duration-300"
-                          >
-                            <p className="text-gray-700 font-light">
-                              {exhibition}
-                            </p>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Exposiciones Colectivas */}
-          <div>
-            <motion.h3
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl font-light text-gray-900 mb-12"
-            >
-              Exposiciones Colectivas
-            </motion.h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-              {/* Primera Columna */}
-              <div className="space-y-12">
-                {exposicionesColectivas
-                  .slice(0, Math.ceil(exposicionesColectivas.length / 2))
-                  .map((yearGroup, index) => (
-                    <motion.div
-                      key={yearGroup.year}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="relative"
-                    >
-                      <div className="flex items-center mb-4">
-                        <h4 className="text-4xl font-light text-gray-900">
-                          {yearGroup.year}
-                        </h4>
-                        <div className="ml-4 h-px flex-grow bg-gradient-to-r from-[#FF0000]/20 to-transparent" />
-                      </div>
-                      <div className="space-y-3">
-                        {yearGroup.exhibitions.map((exhibition, i) => (
-                          <motion.div
-                            key={i}
-                            className="bg-gray-50 p-4 rounded-lg hover:shadow-md transition-all duration-300"
-                          >
-                            <p className="text-gray-700 font-light">
-                              {exhibition}
-                            </p>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
-              </div>
-
-              {/* Segunda Columna */}
-              <div className="space-y-12">
-                {exposicionesColectivas
-                  .slice(Math.ceil(exposicionesColectivas.length / 2))
-                  .map((yearGroup, index) => (
-                    <motion.div
-                      key={yearGroup.year}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="relative"
-                    >
-                      <div className="flex items-center mb-4">
-                        <h4 className="text-4xl font-light text-gray-900">
-                          {yearGroup.year}
-                        </h4>
-                        <div className="ml-4 h-px flex-grow bg-gradient-to-r from-[#FF0000]/20 to-transparent" />
-                      </div>
-                      <div className="space-y-3">
-                        {yearGroup.exhibitions.map((exhibition, i) => (
-                          <motion.div
-                            key={i}
-                            className="bg-gray-50 p-4 rounded-lg hover:shadow-md transition-all duration-300"
-                          >
-                            <p className="text-gray-700 font-light">
-                              {exhibition}
-                            </p>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Botón de Contacto */}
-      <section className="relative py-20 bg-[#1a1a1a]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Link href="/contacto">
-            <motion.button
-              className="group relative px-8 py-4 bg-[#FF0000] text-white overflow-hidden"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className="relative z-10 flex items-center gap-2 font-light">
-                Solicitar Información
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
-              </span>
-              <motion.div
-                className="absolute bottom-0 left-0 h-[2px] w-full bg-white"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span className="text-sm uppercase tracking-wider font-medium">Volver a Artistas</span>
           </Link>
         </div>
       </section>
     </main>
-  );
-};
-
-export default CiriaPage;
+  )
+}

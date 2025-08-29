@@ -265,8 +265,17 @@ const NoticiaArticle = ({ noticia, index }: { noticia: NoticiaProps; index: numb
 const ActualidadPage = () => {
   const noticias = [
     {
+      titulo: "Jesús del Peso representa a España en Hispanic Heritage Month",
+      imagen: "/images/obras/delpeso/delpeso27.jpg",
+      descripcion: "El artista español Jesús del Peso ha sido seleccionado para representar a España en el prestigioso evento del Hispanic Heritage Month que se celebrará el próximo 16 de septiembre de 2025 en Miami. El evento tendrá lugar en el Lobby del Stephen P. Clark Center y forma parte de una iniciativa que busca destacar la contribución de los artistas hispanos al panorama cultural contemporáneo. Del Peso presentará una selección de sus obras más emblemáticas, incluyendo piezas de su reconocida serie 'Vibración Espacial' y 'Geometrías Abiertas'. Esta participación consolida su proyección internacional y refuerza los vínculos culturales entre España y la comunidad hispana en Estados Unidos.",
+      fecha: "15 Agosto, 2025",
+      categoria: "Eventos Internacionales",
+      tiempoLectura: "5 min lectura",
+      esVideo: false
+    },
+    {
       titulo: "Oyonarte, Alicia y los espejos llega a Casa de Vacas",
-      imagen: "/images/obras/oyonarte/oyonarte31  .jpg",
+      imagen: "/images/obras/oyonarte/oyonarte31.jpg",
       descripcion: "El Centro Cultural Casa de Vacas del parque del Retiro de Madrid se viste de gala para acoger, del 30 de abril al 25 de mayo, la exposición 'Oyonarte, Alicia y los espejos', una muestra del artista Manolo Oyonarte que busca dar un paso más allá del de Alicia a través del espejo. Una treintena de obras de expresionismo abstracto que no intentan comunicar nada, ni hacer reflexionar sobre ningún aspecto de la vida. 'No hay que entenderlas, las formas, líneas y colores que las estructuran solo buscan mostrar la evidencia de lo que son en realidad, desvelar su auténtica apariencia', explica el artista. El recorrido se inicia a la vez que lo hace un bucle musical, una composición del músico, compositor y productor español, Luis Carlos Esteban, concebida como una obra total junto a las obras que se contemplan, respetando los tiempos musicales que permiten disfrutar plenamente de ella. Nota de prensa por Roberto Espacios.",
       fecha: "28 Abril, 2025",
       categoria: "Exposición",

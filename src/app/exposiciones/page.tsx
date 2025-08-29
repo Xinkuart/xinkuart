@@ -7,7 +7,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { X, Eye, ChevronRight, ArrowRight, Maximize2 } from "lucide-react";
+import { X, Eye, ChevronRight, Maximize2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -71,6 +71,18 @@ const exposiciones: Exposicion[] = [
       "https://d7mntklkfre1v.cloudfront.net/virtual-exhibitions/?i=15277",
     imagenPreview: "/images/obras/gaber/gaber1.jpg",
     numeroObras: 34,
+  },
+  {
+    id: "10",
+    artista: "Jesús del Peso",
+    titulo: "Fragmentos del Espacio",
+    descripcion:
+      "Jesús del Peso nos invita a una exploración íntima de la geometría como lenguaje poético, donde cada obra funciona como un fragmento de una realidad espacial más amplia que trasciende los límites físicos del lienzo.",
+    fecha: "AGOSTO 2025",
+    urlIframe:
+      "https://d7mntklkfre1v.cloudfront.net/virtual-exhibitions/?i=21538",
+    imagenPreview: "/images/obras/delpeso/delpeso26.jpg",
+    numeroObras: 27,
   },
   {
     id: "6",
@@ -139,7 +151,6 @@ export default function ExposicionesPage() {
   const [selectedExpo, setSelectedExpo] = useState<Exposicion | null>(null);
   const [, setIsFullscreen] = useState(false);
   const [hoveredExpo, setHoveredExpo] = useState<string | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -178,13 +189,6 @@ export default function ExposicionesPage() {
     };
   }, []);
 
-  // Función para avanzar al siguiente testimonio destacado
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % 4); // Limitar a las primeras 4 exposiciones
-    }, 1000); // Tiempo aumentado a 10 segundos
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className="min-h-screen bg-[#0f0f0f]">
