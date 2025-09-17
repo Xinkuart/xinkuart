@@ -265,6 +265,24 @@ const NoticiaArticle = ({ noticia, index }: { noticia: NoticiaProps; index: numb
 const ActualidadPage = () => {
   const noticias = [
     {
+      titulo: "Manolo Oyonarte presenta 'Oyonarte, Alicia y los Espejos' en Casa de Vacas",
+      imagen: "/images/obras/oyonarte/oyonarte32.jpg",
+      descripcion: "Casa de Vacas del parque del Retiro de Madrid se convierte en el escenario de la presentación del nuevo libro 'Oyonarte, Alicia y los Espejos' de Manolo Oyonarte, que tendrá lugar el 16 de septiembre a las 19:00 horas. El evento contará con las intervenciones del propio artista, junto al músico Luis Carlos Esteban, Hernando Orellana Pizarro (Director de la Fundación Obra Pla de los Pizarro), Silvero Morac (Crítico de arte), Enrique Maestú (Crítico de arte) y Marina Ortega Merino (Diseñadora gráfica). Esta obra literaria representa una exploración profunda del universo creativo de Oyonarte, donde el artista reflexiona sobre los límites entre realidad y percepción, estableciendo paralelismos con la obra de Lewis Carroll. La presentación promete ser un encuentro multidisciplinar que combinará literatura, arte visual y música en un diálogo enriquecedor sobre los procesos creativos contemporáneos.",
+      fecha: "16 Septiembre, 2025",
+      categoria: "Literatura",
+      tiempoLectura: "4 min lectura",
+      esVideo: false
+    },
+    {
+      titulo: "Hilario Bravo y Moob Art Club presentan 'Haiku al cero' en Madrid",
+      imagen: "/images/obras/bravo/expohilario.jpg",
+      descripcion: "La sede de Moob Art Club en Madrid acoge la exposición 'Haiku al cero' del artista extremeño Hilario Bravo. Esta muestra constituye un hito dentro de la trayectoria del artista cacereño, quien se aproxima a la forma breve del haiku japonés como estructura de pensamiento y percepción. Bravo traduce la poética del haiku al terreno plástico a través de ensamblajes que combinan materiales heterogéneos: madera, plástico, telas, cuerdas, flores, humo y esparto. La colaboración con Moob Art Club ha permitido crear un diálogo único entre la tradición oriental del haiku y la arqueología simbólica occidental, presentando las obras en un espacio que potencia su carácter contemplativo. Cada pieza se configura como un microcosmos autónomo, capaz de contener un universo de resonancias espirituales y existenciales. La exposición propone al espectador un espacio de contemplación radicalmente necesario, ofreciendo la pausa y la mirada lenta frente al vértigo de lo inmediato.",
+      fecha: "12 Septiembre, 2025",
+      categoria: "Exposiciones",
+      tiempoLectura: "6 min lectura",
+      esVideo: false
+    },
+    {
       titulo: "Jesús del Peso representa a España en Hispanic Heritage Month",
       imagen: "/images/obras/delpeso/delpeso27.jpg",
       descripcion: "El artista español Jesús del Peso ha sido seleccionado para representar a España en el prestigioso evento del Hispanic Heritage Month que se celebrará el próximo 16 de septiembre de 2025 en Miami. El evento tendrá lugar en el Lobby del Stephen P. Clark Center y forma parte de una iniciativa que busca destacar la contribución de los artistas hispanos al panorama cultural contemporáneo. Del Peso presentará una selección de sus obras más emblemáticas, incluyendo piezas de su reconocida serie 'Vibración Espacial' y 'Geometrías Abiertas'. Esta participación consolida su proyección internacional y refuerza los vínculos culturales entre España y la comunidad hispana en Estados Unidos.",

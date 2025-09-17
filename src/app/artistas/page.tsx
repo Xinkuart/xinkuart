@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Artist {
   name: string;
@@ -13,20 +14,24 @@ interface Artist {
 
 export default function ArtistasPage() {
   const [hoveredArtist, setHoveredArtist] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'represented' | 'list'>('represented');
+  const [viewMode, setViewMode] = useState<'list' | 'represented'>('represented');
+  const [currentColumnIndex, setCurrentColumnIndex] = useState(0);
   
-  // Memoizar el array de artistas para evitar recreación en cada render
   const artists = React.useMemo<Artist[]>(() => [
-    { name: 'Jose Manuel Ciria', imageUrl: '/images/featured/artwork1.jpg', slug: 'ciria' },
+    { name: 'Jose Manuel Ciria', imageUrl: '/images/featured/artwork1.jpg', slug: 'ciria' },    
     { name: 'Manolo Oyonarte', imageUrl: '/images/featured/artwork2.jpg', slug: 'oyonarte' },
-    { name: 'Aurelio Ayela', imageUrl: '/images/featured/artwork3.jpg', slug: 'ayela' },
-    { name: 'Hilario Bravo', imageUrl: '/images/featured/artwork4.jpg', slug: 'bravo' },
-    { name: 'Eduardo Infante', imageUrl: '/images/featured/artwork5.jpg', slug: 'infante' },
+    { name: 'Jesús del Peso', imageUrl: '/images/featured/artwork11.jpg', slug: 'delpeso' },  
     { name: 'William Gaber', imageUrl: '/images/featured/artwork6.jpg', slug: 'gaber' },
-    { name: 'Pedro Pasquín', imageUrl: '/images/featured/artwork7.jpg', slug: 'pasquin' },
+    { name: 'Rivelino Murrieta', imageUrl: '/images/featured/artwork12.jpg', slug: 'murrieta' },
     { name: 'Zinnia Clavo', imageUrl: '/images/featured/artwork10.jpg', slug: 'zinnia' },
-    { name: 'Jesús del Peso', imageUrl: '/images/featured/artwork11.jpg', slug: 'delpeso' },
-    { name: 'Lamo de Espinosa', imageUrl: '/images/featured/artwork9.jpg', slug: 'lamo' }
+    { name: 'Lamo de Espinosa', imageUrl: '/images/featured/artwork9.jpg', slug: 'lamo' },
+    { name: 'Hilario Bravo', imageUrl: '/images/featured/artwork4.jpg', slug: 'bravo' },  
+    { name: 'Aurelio Ayela', imageUrl: '/images/featured/artwork3.jpg', slug: 'ayela' },
+    { name: 'Eduardo Infante', imageUrl: '/images/featured/artwork5.jpg', slug: 'infante' },
+    { name: 'Pedro Pasquín', imageUrl: '/images/featured/artwork7.jpg', slug: 'pasquin' },
+    
+    
+    
   ], []);
 
   // Ordenar artistas alfabéticamente para la vista de lista
@@ -46,6 +51,45 @@ export default function ArtistasPage() {
     }
     return groups;
   }, [sortedArtists]);
+
+  // Crear columnas para la vista represented - 5 columnas con 2 artistas cada una
+  const createColumns = () => {
+    const columns = [];
+    const artistsPerColumn = 2;
+    
+    for (let i = 0; i < Math.ceil(artists.length / artistsPerColumn); i++) {
+      const startIndex = i * artistsPerColumn;
+      const columnArtists = artists.slice(startIndex, startIndex + artistsPerColumn);
+      
+      // Determinar el tipo de columna basado en si es par o impar
+      const columnType = (i % 2 === 0) ? 'odd' : 'even'; // 0,2,4 = odd | 1,3 = even
+      
+      columns.push({
+        type: columnType,
+        artists: columnArtists,
+        index: i
+      });
+    }
+    
+    return columns;
+  };
+
+  const columns = createColumns();
+  const maxVisibleColumns = 3; // Máximo 3 columnas visibles
+  const maxColumnIndex = Math.max(0, columns.length - maxVisibleColumns);
+
+  const nextColumn = () => {
+    setCurrentColumnIndex(prev => Math.min(prev + 1, maxColumnIndex));
+  };
+
+  const prevColumn = () => {
+    setCurrentColumnIndex(prev => Math.max(prev - 1, 0));
+  };
+
+  // Obtener las columnas visibles
+  const getVisibleColumns = () => {
+    return columns.slice(currentColumnIndex, currentColumnIndex + maxVisibleColumns);
+  };
 
   return (
     <div className="min-h-screen bg-white pt-20 pb-20">
@@ -67,17 +111,7 @@ export default function ArtistasPage() {
       {/* Navigation Buttons */}
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <div className="flex justify-center gap-8">
-        <button
-            onClick={() => setViewMode('represented')}
-            className={`text-sm tracking-[0.2em] uppercase transition-all duration-300 ${
-              viewMode === 'represented'
-                ? 'text-black border-b border-black pb-1'
-                : 'text-gray-400 hover:text-gray-600'
-            }`}
-          >
-            LIST
-          </button>
-        <button
+          <button
             onClick={() => setViewMode('list')}
             className={`text-sm tracking-[0.2em] uppercase transition-all duration-300 ${
               viewMode === 'list'
@@ -87,85 +121,37 @@ export default function ArtistasPage() {
           >
             REPRESENTED
           </button>
-          
-          
+          <button
+            onClick={() => setViewMode('represented')}
+            className={`text-sm tracking-[0.2em] uppercase transition-all duration-300 ${
+              viewMode === 'represented'
+                ? 'text-black border-b border-black pb-1'
+                : 'text-gray-400 hover:text-gray-600'
+            }`}
+          >
+            LIST
+          </button>
         </div>
       </div>
 
       {/* Content based on view mode */}
-      {viewMode === 'list' ? (
+      {viewMode === 'represented' ? (
+        <ListView groupedArtists={groupedArtists} />
+      ) : (
         <RepresentedView 
-          artists={artists} 
+          visibleColumns={getVisibleColumns()}
           hoveredArtist={hoveredArtist}
           setHoveredArtist={setHoveredArtist}
+          currentColumnIndex={currentColumnIndex}
+          maxColumnIndex={maxColumnIndex}
+          nextColumn={nextColumn}
+          prevColumn={prevColumn}
+          totalColumns={columns.length}
         />
-      ) : (
-        <ListView groupedArtists={groupedArtists} />
       )}
     </div>
   );
 }
-
-// Componente para la vista de imágenes (REPRESENTED)
-interface RepresentedViewProps {
-  artists: Artist[];
-  hoveredArtist: string | null;
-  setHoveredArtist: (slug: string | null) => void;
-}
-
-const RepresentedView = ({ artists, hoveredArtist, setHoveredArtist }: RepresentedViewProps) => {
-  return (
-    <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      {/* Desktop Layout */}
-      <div className="hidden lg:grid lg:grid-cols-3 gap-6">
-        {/* COLUMNA 1 */}
-        <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-6">
-            <ArtistCard artist={artists[3]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[3].slug} />
-            <ArtistCard artist={artists[2]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[2].slug} />
-          </div>
-          <ArtistCard artist={artists[1]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[1].slug} isLarge />
-          <ArtistCard artist={artists[8]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[8].slug} isLarge />
-        </div>
-
-        {/* COLUMNA 2 */}
-        <div className="space-y-6">
-          <ArtistCard artist={artists[0]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[0].slug} isLarge />
-          <ArtistCard artist={artists[5]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[5].slug} isLarge />
-          <ArtistCard artist={artists[9]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[9].slug} isLarge />
-        </div>
-
-        {/* COLUMNA 3 */}
-        <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-6">    
-            <ArtistCard artist={artists[4]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[4].slug} />
-            <ArtistCard artist={artists[6]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[6].slug} />
-          </div>
-          <ArtistCard artist={artists[7]} onHover={setHoveredArtist} isHovered={hoveredArtist === artists[7].slug} isLarge />
-        </div>
-      </div>
-
-      {/* Mobile/Tablet Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 lg:hidden">
-        {artists.map((artist) => (
-          <motion.div
-            key={artist.slug}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <ArtistCard 
-              artist={artist}
-              onHover={setHoveredArtist}
-              isHovered={hoveredArtist === artist.slug}
-              isLarge={false}
-            />
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 // Componente para la vista de lista (LIST)
 interface ListViewProps {
@@ -198,7 +184,6 @@ const ListView = ({ groupedArtists }: ListViewProps) => {
                     <div className="text-gray-400 group-hover:text-black transition-all duration-500 text-sm md:text-base lg:text-lg xl:text-xl tracking-wide uppercase font-light leading-relaxed transform group-hover:translate-x-1 group-hover:scale-[1.02] transition-transform">
                       {artist.name}
                     </div>
-                    {/* Línea animada que aparece al hover */}
                     <div className="h-px bg-gradient-to-r from-red-500 to-transparent w-0 group-hover:w-full transition-all duration-500 mt-1"></div>
                   </div>
                 </Link>
@@ -211,83 +196,235 @@ const ListView = ({ groupedArtists }: ListViewProps) => {
   );
 };
 
-interface ArtistCardProps {
-  artist: Artist;
-  onHover: (slug: string | null) => void;
-  isHovered: boolean;
-  isLarge?: boolean;
+// Componente para la vista de columnas deslizantes (REPRESENTED)
+interface RepresentedViewProps {
+  visibleColumns: Array<{type: string; artists: Artist[]; index: number}>;
+  hoveredArtist: string | null;
+  setHoveredArtist: (slug: string | null) => void;
+  currentColumnIndex: number;
+  maxColumnIndex: number;
+  nextColumn: () => void;
+  prevColumn: () => void;
+  totalColumns: number;
 }
 
-const ArtistCard = ({ artist, onHover, isHovered, isLarge = false }: ArtistCardProps) => {
+const RepresentedView = ({ 
+  visibleColumns,
+  hoveredArtist, 
+  setHoveredArtist,
+  currentColumnIndex,
+  maxColumnIndex,
+  nextColumn,
+  prevColumn,
+  totalColumns
+}: RepresentedViewProps) => {
+
   return (
-    <div 
-      className={`relative group ${isLarge ? 'h-[400px]' : 'h-[280px]'}`}
-      onMouseEnter={() => onHover(artist.slug)}
-      onMouseLeave={() => onHover(null)}
-    >
-      <div className="absolute inset-0 overflow-hidden">
-        <Image
-          src={artist.imageUrl}
-          alt={artist.name}
-          fill
-          className="object-cover object-center grayscale transition-all duration-700 ease-out transform group-hover:scale-[1.03] group-hover:grayscale-0"
-        />
-        
+    <div className="w-full relative">
+      {/* Navigation arrows - Solo mostrar si hay más columnas */}
+      {totalColumns > 3 && (
+        <>
+          {currentColumnIndex > 0 && (
+            <motion.button
+              onClick={prevColumn}
+              className="fixed left-8 top-1/2 transform -translate-y-1/2 z-30 w-14 h-14 bg-white/90 backdrop-blur-sm hover:bg-white border border-gray-200 hover:border-black transition-all duration-300 flex items-center justify-center shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-600 hover:text-black transition-colors" />
+            </motion.button>
+          )}
+          
+          {currentColumnIndex < maxColumnIndex && (
+            <motion.button
+              onClick={nextColumn}
+              className="fixed right-8 top-1/2 transform -translate-y-1/2 z-30 w-14 h-14 bg-white/90 backdrop-blur-sm hover:bg-white border border-gray-200 hover:border-black transition-all duration-300 flex items-center justify-center shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ChevronRight className="w-6 h-6 text-gray-600 hover:text-black transition-colors" />
+            </motion.button>
+          )}
+        </>
+      )}
+
+      {/* Columns Grid - Ocupar todo el ancho */}
+      <div className="w-full h-screen overflow-hidden">
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ 
-            opacity: isHovered ? 1 : 0,
-            x: isHovered ? 0 : -20
+          className="w-full h-full grid grid-cols-3 gap-4 px-4"
+          key={currentColumnIndex}
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ 
+            duration: 0.8, 
+            ease: [0.25, 0.1, 0.25, 1]
           }}
-          transition={{ duration: 0.3 }}
         >
-          <div className="absolute bottom-3 left-0 p-4 z-10">
-            <div className="text-white text-lg font-light tracking-wider">
-              {artist.name}
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ 
-            opacity: isHovered ? 1 : 0,
-            y: isHovered ? 0 : 20
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Link href={`/artistas/${artist.slug}`}>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className={`
-                  px-4 py-2
-                  bg-white/10 backdrop-blur-sm
-                  border border-white/50
-                  hover:bg-white/20
-                  text-white 
-                  ${isLarge ? 'text-sm' : 'text-xs'}
-                  tracking-wider
-                  transition-all duration-300
-                  flex items-center gap-2
-                `}>
-                  VER ARTISTA
-                </div>
-              </motion.button>
-            </Link>
-          </div>
+          {visibleColumns.map((column, columnIndex) => (
+            <motion.div 
+              key={`${currentColumnIndex}-${columnIndex}`} 
+              className="h-full"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: columnIndex * 0.1,
+                ease: [0.25, 0.1, 0.25, 1]
+              }}
+            >
+              <ColumnLayout
+                column={column}
+                hoveredArtist={hoveredArtist}
+                setHoveredArtist={setHoveredArtist}
+              />
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </div>
+  );
+};
+
+// Componente para el layout de columnas
+interface ColumnLayoutProps {
+  column: {type: string; artists: Artist[]; index: number};
+  hoveredArtist: string | null;
+  setHoveredArtist: (slug: string | null) => void;
+}
+
+const ColumnLayout = ({ 
+  column,
+  hoveredArtist, 
+  setHoveredArtist 
+}: ColumnLayoutProps) => {
+  const { type, artists } = column;
+
+  if (type === 'odd') {
+    // Columnas impares: imagen horizontal arriba + imagen cuadrada abajo
+    return (
+      <div className="h-full flex flex-col gap-4">
+        {/* Imagen horizontal (60% de la altura) */}
+        {artists[0] && (
+          <div className="h-3/5">
+            <ArtistCard
+              artist={artists[0]}
+              hoveredArtist={hoveredArtist}
+              setHoveredArtist={setHoveredArtist}
+              aspectRatio="horizontal"
+            />
+          </div>
+        )}
+        
+        {/* Imagen cuadrada (40% de la altura) */}
+        {artists[1] && (
+          <div className="h-2/5">
+            <ArtistCard
+              artist={artists[1]}
+              hoveredArtist={hoveredArtist}
+              setHoveredArtist={setHoveredArtist}
+              aspectRatio="square"
+            />
+          </div>
+        )}
+      </div>
+    );
+  } else {
+    // Columnas pares: dos imágenes cuadradas
+    return (
+      <div className="h-full flex flex-col gap-4">
+        {artists.slice(0, 2).map((artist,) => (
+          <div key={artist.slug} className="h-1/2">
+            <ArtistCard
+              artist={artist}
+              hoveredArtist={hoveredArtist}
+              setHoveredArtist={setHoveredArtist}
+              aspectRatio="square"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+};
+
+// Componente individual para cada artista
+interface ArtistCardProps {
+  artist: Artist;
+  hoveredArtist: string | null;
+  setHoveredArtist: (slug: string | null) => void;
+  aspectRatio: 'horizontal' | 'square';
+}
+
+const ArtistCard = ({ 
+  artist, 
+  hoveredArtist, 
+  setHoveredArtist,
+}: ArtistCardProps) => {
+  const isHovered = hoveredArtist === artist.slug;
+  
+  return (
+    <motion.div
+      className="relative group overflow-hidden h-full cursor-pointer bg-gray-100"
+      onMouseEnter={() => setHoveredArtist(artist.slug)}
+      onMouseLeave={() => setHoveredArtist(null)}
+      whileHover={{ scale: 1.01 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+    >
+      <Link href={`/artistas/${artist.slug}`} className="block h-full">
+        <div className="relative w-full h-full">
+          <Image
+            src={artist.imageUrl}
+            alt={artist.name}
+            fill
+            className={`object-cover transition-all duration-700 ease-out ${
+              isHovered ? 'grayscale-0 brightness-90' : 'grayscale brightness-100'
+            }`}
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+          
+          {/* Overlay oscuro */}
+          <motion.div 
+            className="absolute inset-0 bg-black"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isHovered ? 0.2 : 0 }}
+            transition={{ duration: 0.3 }}
+          />
+
+          {/* Nombre del artista */}
+          <motion.div
+            className="absolute bottom-0 left-0 right-0 p-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: isHovered ? 1 : 0,
+              y: isHovered ? 0 : 20
+            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <h3 className="text-white text-base md:text-lg font-light tracking-wider">
+              {artist.name}
+            </h3>
+          </motion.div>
+
+          {/* Botón "Ver Artista" */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ 
+              opacity: isHovered ? 1 : 0,
+              scale: isHovered ? 1 : 0.8
+            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <motion.div
+              className="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white text-xs tracking-widest transition-all duration-300"
+              whileHover={{ scale: 1.05, borderColor: 'rgba(255,255,255,0.5)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              VER ARTISTA
+            </motion.div>
+          </motion.div>
+        </div>
+      </Link>
+    </motion.div>
   );
 };

@@ -70,33 +70,34 @@ export default function HomePage() {
   const newsItems: NewsItem[] = [
     {
       id: 3,
+      title: "Manolo Oyonarte presenta 'Oyonarte, Alicia y los Espejos' en Casa de Vacas",
+      description:
+        "Casa de Vacas del parque del Retiro de Madrid se convierte en el escenario de la presentación del nuevo libro de Manolo Oyonarte, que tendrá lugar el 16 de septiembre a las 19:00 horas.",
+      date: "16 Septiembre 2025",
+      image: "/images/obras/oyonarte/oyonarte32.jpg",
+      category: "Literatura",
+    },
+    {
+      id: 2,  
+      title: "Hilario Bravo y Moob Art Club presentan 'Haiku al cero' en Madrid",
+      description:
+        "La sede de Moob Art Club en Madrid acoge la exposición 'Haiku al cero' del artista extremeño Hilario Bravo, una muestra que constituye un hito dentro de su trayectoria artística.",
+      date: "12 Septiembre 2025",
+      image: "/images/obras/bravo/expohilario.jpg",
+      category: "Exposiciones",
+    },
+    {
+      
+      id: 1,
       title: "Jesús del Peso representa a España en Hispanic Heritage Month",
       description:
         "Jesús del Peso ha sido seleccionado para representar a España en el prestigioso evento del Hispanic Heritage Month que se celebrará el próximo 16 de septiembre de 2025 en Miami.",
       date: "15 Agosto 2025",
       image: "/images/obras/delpeso/delpeso27.jpg",
-      category: "Exposiciones",
+      category: "Eventos Internacionales",
     },
-    {
-      
-      id: 1,  
-      title: "Manolo Oyonarte presenta 'Nenúfares y Twombly' en La Neomudéjar",
-      description:
-        "El reconocido artista Manolo Oyonarte inaugura su última exposición 'Nenúfares y Twombly' en el emblemático museo La Neomudéjar.",
-      date: "26 Enero 2025",
-      image: "/images/obras/oyonarte/oyonarte1.jpg",
-      category: "Exposiciones",
-    },
-    {
-      id: 2,
-      title:
-        "'Las Venas del Dragón': Nueva obra literaria de José Manuel Ciria",
-      description:
-        "Casa de Vacas se convierte en el escenario de presentación del nuevo libro de José Manuel Ciria, 'Las Venas del Dragón'.",
-      date: "11 Noviembre 2024",
-      image: "/images/obras/ciria/librociria.jpg",
-      category: "Presentación",
-    },
+    
+    
     
   ];
   const fadeInUp = {
