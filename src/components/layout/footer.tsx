@@ -90,7 +90,7 @@ const Footer = () => {
 
         {/* Copyright y Enlaces Legales */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm">
-          <p>© 2024 XinkuArt. Todos los derechos reservados.</p>
+          <p>© 2026 XinkuArt. Todos los derechos reservados.</p>
           <div className="flex flex-wrap gap-4 mt-4 md:mt-0">
             <Link href="/legal/avisolegal" className="hover:text-[#FF0000] transition-colors duration-300">
               Aviso Legal
