@@ -27,7 +27,6 @@ const Navbar = () => {
     { id: 'about', label: 'Quienes Somos', href: '/about' },
     { id: 'artistas', label: 'Artistas', href: '/artistas' },
     { id: 'obras', label: 'Obras', href: '/obras' },
-    { id: 'exposiciones', label: 'Exposiciones 3D', href: '/exposiciones' },
     { id: 'actualidad', label: 'Actualidad', href: '/actualidad' },
     { id: 'contacto', label: 'Contacto', href: '/contacto' },
   ];

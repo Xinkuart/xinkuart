@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Instagram, Facebook, Twitter, Mail, MapPin, Phone } from 'lucide-react';
+import { Instagram, Mail, MapPin, Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -31,7 +31,7 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-['Cinzel',serif] text-lg mb-6">Explora</h3>
             <ul className="space-y-4">
-              {['Artistas', 'Obras', 'Exposiciones 3D', 'Actualidad'].map((item) => (
+              {['Artistas', 'Obras', 'Actualidad'].map((item) => (
                 <li key={item}>
                   <Link 
                     href={`/${item.toLowerCase().replace(' ', '-')}`}

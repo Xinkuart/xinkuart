@@ -7,12 +7,13 @@ import { X, Mail, Phone } from 'lucide-react';
 
 interface Obra {
   id: string;
-  imageUrl: string;
   titulo: string;
-  medidas: string;
-  tecnica: string;
+  artista?: string;
+  imageUrl: string;
+  medidas?: string;      // ✅ AÑADE EL ?
+  tecnica?: string;      // ✅ AÑADE EL ?
   año?: string;
-  artistaNombre: string;
+  artistaNombre?: string;
 }
 
 interface ContactModalProps {

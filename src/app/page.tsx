@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, } from "lucide-react";
 import {Playfair_Display, Raleway,} from "next/font/google";
 
 
@@ -25,16 +26,6 @@ const welcomeImages = [
   "/images/obras/hero/hs2.jpg",
   "/images/obras/hero/hs3.jpg",
 ];
-
-// Tipos
-type Exhibition = {
-  id: number;
-  title: string;
-  artist: string;
-  dates: string;
-  image: string;
-  isVirtual: boolean;
-};
 
 type NewsItem = {
   id: number;
@@ -97,34 +88,6 @@ export default function HomePage() {
       sessionStorage.setItem("introShownV2", "true");
     }, 1000);
   };
-
-  // Datos
-  const exhibitions: Exhibition[] = [
-    {
-      id: 1,
-      title: "ABRASAR LOS OJOS",
-      artist: "José Manuel Ciria",
-      dates: "DICIEMBRE 2024",
-      image: "/images/obras/ciria/ciria11.jpg",
-      isVirtual: true,
-    },
-    {
-      id: 2,
-      title: "Oyonarte, Alicia y los espejos",
-      artist: "Manolo Oyonarte",
-      dates: "ABRIL 2025",
-      image: "/images/obras/oyonarte/oyonarte31.jpg",
-      isVirtual: false,
-    },
-    {
-      id: 3,
-      title: "Fragmentos del Espacio",
-      artist: "Jesús del Peso",
-      dates: "AGOSTO 2025",
-      image: "/images/obras/delpeso/delpeso26.jpg",
-      isVirtual: true,
-    },
-  ];
 
   const newsItems: NewsItem[] = [
     {
@@ -470,89 +433,223 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        
-
-        {/* RESTO DEL CONTENIDO DE LA HOME */}
-        {/* Sección de Exposiciones Destacadas */}
-        <section className="py-20 px-6 lg:px-16 relative overflow-hidden">
-          <div className="container mx-auto">
+                {/* Artistas Destacados */}
+        <section className="py-24 px-6 lg:px-16 bg-black overflow-hidden">
+          <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="flex flex-col md:flex-row md:items-center justify-between mb-12"
+              className="mb-16 max-w-3xl"
             >
-              <div>
-                <h2 className="text-sm sm:text-base tracking-widest text-red-600 font-medium mb-2">
-                  EXPERIENCIAS INMERSIVAS
-                </h2>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-light">
-                  Exposiciones destacadas
-                </h3>
-              </div>
-              <Link href="/exposiciones">
+              <h2 className="text-sm tracking-widest text-red-600 font-light mb-3">
+                TALENTOS EXTRAORDINARIOS
+              </h2>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 text-white">
+                Artistas destacados
+              </h3>
+              <p className="text-gray-400 font-light">
+                XinkuArt presenta una selección de artistas contemporáneos de
+                reconocida trayectoria nacional e internacional que representan la
+                diversidad y riqueza del panorama artístico actual.
+              </p>
+            </motion.div>
+
+            <div className="overflow-hidden py-4 relative">
+              <div className="absolute left-0 top-0 w-24 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
+              <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
+
+              <motion.div
+                initial={{ x: "-10%" }}
+                whileInView={{ x: "-100%" }}
+                transition={{
+                  duration: 60,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "linear",
+                }}
+                viewport={{ once: true }}
+                className="flex whitespace-nowrap mb-10"
+              >
+                <div className="flex items-center space-x-14 px-4">
+                  {Array(2).fill(0).map((_, arrayIndex) => (
+                    <React.Fragment key={`artist-row-1-${arrayIndex}`}>
+                      <Link href="/artistas/delpeso">
+                        <motion.span
+                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
+                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
+                        >
+                          Jesús del Peso
+                          <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileHover={{ scaleX: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                          />
+                        </motion.span>
+                      </Link>
+                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
+                      <Link href="/artistas/oyonarte">
+                        <motion.span
+                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
+                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
+                        >
+                          Manolo Oyonarte
+                          <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileHover={{ scaleX: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                          />
+                        </motion.span>
+                      </Link>
+                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
+                      <Link href="/artistas/ciria">
+                        <motion.span
+                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
+                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
+                        >
+                          José Manuel Ciria
+                          <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileHover={{ scaleX: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                          />
+                        </motion.span>
+                      </Link>
+                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
+                      <Link href="/artistas/ayela">
+                        <motion.span
+                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
+                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
+                        >
+                          Aurelio Ayela
+                          <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileHover={{ scaleX: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                          />
+                        </motion.span>
+                      </Link>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ x: "-90%" }}
+                whileInView={{ x: "0%" }}
+                transition={{
+                  duration: 60,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "linear",
+                }}
+                viewport={{ once: true }}
+                className="flex whitespace-nowrap"
+              >
+                <div className="flex items-center space-x-14 px-4">
+                  {Array(2).fill(0).map((_, arrayIndex) => (
+                    <React.Fragment key={`artist-row-2-${arrayIndex}`}>
+                      <Link href="/artistas/gaber">
+                        <motion.span
+                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
+                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
+                        >
+                          William Gaber
+                          <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileHover={{ scaleX: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                          />
+                        </motion.span>
+                      </Link>
+                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
+                      <Link href="/artistas/bravo">
+                        <motion.span
+                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-40 hover:opacity-80 transition-all duration-300 cursor-pointer group relative inline-block"
+                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
+                        >
+                          Hilario Bravo
+                          <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileHover={{ scaleX: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                          />
+                        </motion.span>
+                      </Link>
+                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
+                      <Link href="/artistas/lamo">
+                        <motion.span
+                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-40 hover:opacity-80 transition-all duration-300 cursor-pointer group relative inline-block"
+                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
+                        >
+                          José María Lamo
+                          <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileHover={{ scaleX: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                          />
+                        </motion.span>
+                      </Link>
+                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
+                      <Link href="/artistas/zinnia">
+                        <motion.span
+                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
+                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
+                        >
+                          Zinnia Clavo
+                          <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileHover={{ scaleX: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                          />
+                        </motion.span>
+                      </Link>
+                      <Link href="/artistas/pasquin">
+                        <motion.span
+                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
+                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
+                        >
+                          Pedro Pasquín
+                          <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileHover={{ scaleX: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
+                          />
+                        </motion.span>
+                      </Link>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="mt-12 text-center">
+              <Link href="/artistas">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="mt-4 md:mt-0 flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group bg-transparent border border-zinc-800 text-white/80 px-8 py-3 inline-flex items-center gap-2 hover:border-white hover:text-white transition-all duration-300"
                 >
-                  Ver todas <ArrowRight size={18} />
+                  <span className="font-light">Descubrir todos los artistas</span>
+                  <span className="group-hover:translate-x-1 transition-transform duration-300">
+                    <ArrowRight size={18} />
+                  </span>
                 </motion.button>
               </Link>
-            </motion.div>
-
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {exhibitions.map((exhibition, i) => (
-                <motion.div
-                  key={exhibition.id}
-                  custom={i}
-                  variants={fadeInUp}
-                  className="group relative"
-                >
-                  <div className="h-[400px] relative overflow-hidden">
-                    <Image
-                      src={exhibition.image}
-                      alt={exhibition.title}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      className="transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-40"></div>
-                    {exhibition.isVirtual && (
-                      <div className="absolute top-4 right-4 bg-red-600 text-white text-xs px-3 py-1">
-                        Exposición virtual
-                      </div>
-                    )}
-                    <div className="absolute bottom-0 left-0 p-6 w-full">
-                      <div className="flex items-center text-sm text-gray-300 mb-2">
-                        <Calendar size={14} className="mr-2" />
-                        <span>{exhibition.dates}</span>
-                      </div>
-                      <h4 className="text-xl font-medium mb-1">
-                        {exhibition.title}
-                      </h4>
-                      <p className="text-gray-300">{exhibition.artist}</p>
-                    </div>
-                  </div>
-                  <motion.div
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute bottom-0 left-0 right-0 h-1 bg-red-600 origin-left"
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
+            </div>
           </div>
         </section>
-
+        
         {/* Resto de secciones - se mantienen igual */}
         {/* CTA, Obras Destacadas, Split Screen, Artistas, Actualidad */}
         {/* (Tu código existente continúa aquí sin cambios) */}
@@ -947,222 +1044,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Artistas Destacados */}
-        <section className="py-24 px-6 lg:px-16 bg-black overflow-hidden">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="mb-16 max-w-3xl"
-            >
-              <h2 className="text-sm tracking-widest text-red-600 font-light mb-3">
-                TALENTOS EXTRAORDINARIOS
-              </h2>
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 text-white">
-                Artistas destacados
-              </h3>
-              <p className="text-gray-400 font-light">
-                XinkuArt presenta una selección de artistas contemporáneos de
-                reconocida trayectoria nacional e internacional que representan la
-                diversidad y riqueza del panorama artístico actual.
-              </p>
-            </motion.div>
 
-            <div className="overflow-hidden py-4 relative">
-              <div className="absolute left-0 top-0 w-24 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
-              <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
-
-              <motion.div
-                initial={{ x: "-10%" }}
-                whileInView={{ x: "-100%" }}
-                transition={{
-                  duration: 60,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "linear",
-                }}
-                viewport={{ once: true }}
-                className="flex whitespace-nowrap mb-10"
-              >
-                <div className="flex items-center space-x-14 px-4">
-                  {Array(2).fill(0).map((_, arrayIndex) => (
-                    <React.Fragment key={`artist-row-1-${arrayIndex}`}>
-                      <Link href="/artistas/delpeso">
-                        <motion.span
-                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
-                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
-                        >
-                          Jesús del Peso
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
-                          />
-                        </motion.span>
-                      </Link>
-                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
-                      <Link href="/artistas/oyonarte">
-                        <motion.span
-                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
-                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
-                        >
-                          Manolo Oyonarte
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
-                          />
-                        </motion.span>
-                      </Link>
-                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
-                      <Link href="/artistas/ciria">
-                        <motion.span
-                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
-                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
-                        >
-                          José Manuel Ciria
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
-                          />
-                        </motion.span>
-                      </Link>
-                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
-                      <Link href="/artistas/ayela">
-                        <motion.span
-                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
-                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
-                        >
-                          Aurelio Ayela
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
-                          />
-                        </motion.span>
-                      </Link>
-                    </React.Fragment>
-                  ))}
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ x: "-90%" }}
-                whileInView={{ x: "0%" }}
-                transition={{
-                  duration: 60,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "linear",
-                }}
-                viewport={{ once: true }}
-                className="flex whitespace-nowrap"
-              >
-                <div className="flex items-center space-x-14 px-4">
-                  {Array(2).fill(0).map((_, arrayIndex) => (
-                    <React.Fragment key={`artist-row-2-${arrayIndex}`}>
-                      <Link href="/artistas/gaber">
-                        <motion.span
-                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
-                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
-                        >
-                          William Gaber
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
-                          />
-                        </motion.span>
-                      </Link>
-                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
-                      <Link href="/artistas/bravo">
-                        <motion.span
-                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-40 hover:opacity-80 transition-all duration-300 cursor-pointer group relative inline-block"
-                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
-                        >
-                          Hilario Bravo
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
-                          />
-                        </motion.span>
-                      </Link>
-                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
-                      <Link href="/artistas/lamo">
-                        <motion.span
-                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-40 hover:opacity-80 transition-all duration-300 cursor-pointer group relative inline-block"
-                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
-                        >
-                          José María Lamo
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
-                          />
-                        </motion.span>
-                      </Link>
-                      <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
-                      <Link href="/artistas/zinnia">
-                        <motion.span
-                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
-                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
-                        >
-                          Zinnia Clavo
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
-                          />
-                        </motion.span>
-                      </Link>
-                      <Link href="/artistas/pasquin">
-                        <motion.span
-                          className="text-4xl md:text-5xl lg:text-6xl font-extralight text-white/80 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group relative inline-block"
-                          whileHover={{ color: "rgba(255, 255, 255, 0.95)", y: -2, transition: { duration: 0.2 } }}
-                        >
-                          Pedro Pasquín
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-red-600 origin-left"
-                          />
-                        </motion.span>
-                      </Link>
-                    </React.Fragment>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            <div className="mt-12 text-center">
-              <Link href="/artistas">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group bg-transparent border border-zinc-800 text-white/80 px-8 py-3 inline-flex items-center gap-2 hover:border-white hover:text-white transition-all duration-300"
-                >
-                  <span className="font-light">Descubrir todos los artistas</span>
-                  <span className="group-hover:translate-x-1 transition-transform duration-300">
-                    <ArrowRight size={18} />
-                  </span>
-                </motion.button>
-              </Link>
-            </div>
-          </div>
-        </section>
 
         {/* Actualidad */}
         <section className="py-20 px-6 lg:px-16 bg-[#151515]">
