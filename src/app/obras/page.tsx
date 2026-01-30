@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ObraGrid from "@/components/obras/ObraGrid";
 
 // Función para mezclar array aleatoriamente
@@ -14,11 +14,34 @@ function shuffleArray<T>(array: T[]): T[] {
   return newArray;
 }
 
+// ============================================
+// TIPOS
+// ============================================
+
+interface Obra {
+  id: string;
+  titulo: string;
+  artista?: string;
+  imageUrl: string;
+  medidas?: string;  // ✅ OPCIONAL
+  tecnica?: string;  // ✅ OPCIONAL
+  año?: string;
+  artistaNombre?: string;
+}
+
+interface ArtistaData {
+  id: string;
+  nombre: string;
+  obras: Obra[];
+}
+
 export default function ObrasPage() {
   const [artistaSeleccionado, setArtistaSeleccionado] = useState("");
-  const [obrasAleatorias, setObrasAleatorias] = useState<any[]>([]);
+  const [obrasAleatorias, setObrasAleatorias] = useState<Obra[]>([]);
 
-  const artistas = [
+  // ⚠️ AQUÍ VA TU ARRAY DE ARTISTAS - NO LO MODIFICO
+  // Solo envuélvelo con useMemo así:
+  const artistas: ArtistaData[] = useMemo(() => [
     {
       id: "ciria",
       nombre: "Jose Manuel Ciria",
@@ -2283,137 +2306,103 @@ export default function ObrasPage() {
         // ... resto de obras
       ],
     },
-    // ... resto de artistas
-  ];
+
+  ], []);
 
   // Mezclar obras aleatoriamente al cargar la página
   useEffect(() => {
-    const todasLasObras = artistas.flatMap((artista) =>
+    const todasLasObras: Obra[] = artistas.flatMap((artista) =>
       artista.obras.map((obra) => ({
         ...obra,
         artistaNombre: artista.nombre,
       }))
     );
     setObrasAleatorias(shuffleArray(todasLasObras));
-  }, []);
+  }, [artistas]);
 
   // Obtener las obras a mostrar según el filtro
-  const obrasAMostrar = artistaSeleccionado
-    ? artistas.find((artista) => artista.nombre === artistaSeleccionado)
-        ?.obras || []
-    : obrasAleatorias;
+  const obrasAMostrar: Obra[] = useMemo(() => {
+    if (artistaSeleccionado) {
+      const artistaEncontrado = artistas.find(
+        (artista) => artista.nombre === artistaSeleccionado
+      );
+      return artistaEncontrado
+        ? artistaEncontrado.obras.map((obra) => ({
+            ...obra,
+            artistaNombre: artistaEncontrado.nombre,
+          }))
+        : [];
+    }
+    return obrasAleatorias;
+  }, [artistaSeleccionado, artistas, obrasAleatorias]);
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      {/* Hero Section mejorado para la página de Obras */}
-      <section className="relative h-[60vh] overflow-hidden">
-        {/* Fondo con overlay de gradiente */}
+      {/* Hero Section - Minimalista y elegante */}
+      <section className="relative h-[70vh] overflow-hidden bg-black">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/images/obras/ciria/ciria5.jpg')] bg-cover bg-center" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80" />
+          <div className="absolute inset-0 bg-[url('/images/obras/ciria/ciria5.jpg')] bg-cover bg-center opacity-40" />
         </div>
 
-        <div className="relative container mx-auto h-full flex flex-col items-center justify-center px-4">
+        <div className="relative container mx-auto h-full flex items-center justify-center px-4">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center space-y-6"
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center space-y-8"
           >
-            {/* Línea decorativa superior */}
-            <div className="w-12 h-1 bg-[#FF0000] mx-auto mb-2" />
-
-            <h1 className="text-5xl md:text-7xl font-light tracking-wider text-white">
-              Colección de <span className="text-[#FF0000]">Obras</span>
+            <h1 className="text-6xl md:text-8xl font-extralight tracking-[0.2em] text-white uppercase">
+              Colección
             </h1>
-
-            <p className="text-xl font-light text-white/80 max-w-2xl mx-auto">
-              Descubra nuestra selección de arte contemporáneo de artistas
-              nacionales e internacionales con trayectorias consolidadas
+            
+            <div className="w-24 h-px bg-white/60 mx-auto" />
+            
+            <p className="text-sm md:text-base font-light text-white/80 tracking-[0.3em] uppercase">
+              Arte Contemporáneo
             </p>
-
-            {/* Indicador de scroll animado */}
-            <motion.div
-              className="absolute bottom-12"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            ></motion.div>
           </motion.div>
         </div>
-
-        {/* Degradado inferior */}
-        <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-[#f8f8f8] to-transparent" />
       </section>
 
-      {/* Sección de navegación y filtros mejorada */}
-      <section className="bg-[#f8f8f8] py-14 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            {/* Panel informativo */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="md:w-1/2 space-y-6"
-            >
-              <h2 className="text-3xl font-light text-gray-800 flex items-center gap-3">
-                <span className="w-6 h-1 bg-[#FF0000] inline-block"></span>
-                Nuestra Colección
-              </h2>
-              <p className="text-gray-600 text-lg font-light max-w-xl">
-                XinkuArt presenta una cuidada selección de obras de artistas
-                reconocidos internacionalmente y emergentes con gran proyección.
-              </p>
-
-              {/* Estadísticas */}
-              <div className="flex flex-wrap gap-8 pt-4">
-                <div className="space-y-1">
-                  <p className="text-4xl font-light text-[#FF0000]">
-                    {artistas.length}
-                  </p>
-                  <p className="text-sm text-gray-500 uppercase tracking-wider">
-                    Artistas
-                  </p>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-4xl font-light text-[#FF0000]">
-                    {artistas.reduce(
-                      (total, artista) => total + artista.obras.length,
-                      0
-                    )}
-                  </p>
-                  <p className="text-sm text-gray-500 uppercase tracking-wider">
-                    Obras
-                  </p>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-4xl font-light text-[#FF0000]">7</p>
-                  <p className="text-sm text-gray-500 uppercase tracking-wider">
-                    Técnicas
-                  </p>
-                </div>
+      {/* Filtros - Limpio y minimalista */}
+      <section className="border-b border-gray-100">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            
+            {/* Stats minimalistas */}
+            <div className="flex items-center gap-12">
+              <div className="text-center">
+                <p className="text-3xl font-extralight text-gray-900">
+                  {artistas.length}
+                </p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest mt-1">
+                  Artistas
+                </p>
               </div>
-            </motion.div>
+              <div className="text-center">
+                <p className="text-3xl font-extralight text-gray-900">
+                  {artistas.reduce((total, artista) => total + artista.obras.length, 0)}
+                </p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest mt-1">
+                  Obras
+                </p>
+              </div>
+            </div>
 
-            {/* Filtro de artistas mejorado */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="md:w-1/2 bg-white p-8 rounded-lg shadow-lg border border-gray-100"
-            >
-              <h3 className="text-xl font-medium text-gray-800 mb-6">
-                Filtrar por artista
-              </h3>
-
-              <div className="relative">
+            {/* Selector de artista - Elegante */}
+            <div className="flex items-center gap-4">
+              <span className="text-xs text-gray-400 uppercase tracking-widest whitespace-nowrap">
+                Filtrar por
+              </span>
+              
+              <div className="relative flex-1 lg:w-80">
                 <select
                   value={artistaSeleccionado}
                   onChange={(e) => setArtistaSeleccionado(e.target.value)}
-                  className="w-full appearance-none bg-white border-2 border-gray-300 px-6 py-4 pr-12
-              focus:outline-none focus:border-[#FF0000] hover:border-[#FF0000] transition-colors
-              cursor-pointer text-lg font-light rounded-md"
+                  className="w-full appearance-none bg-white border-b border-gray-200 
+                    px-4 py-3 pr-10 text-sm font-light text-gray-900
+                    focus:outline-none focus:border-gray-900 transition-colors
+                    cursor-pointer uppercase tracking-wider"
                 >
                   <option value="">Todos los artistas</option>
                   {artistas.map((artista) => (
@@ -2422,128 +2411,75 @@ export default function ObrasPage() {
                     </option>
                   ))}
                 </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+                
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
                   <svg
-                    className="fill-current h-5 w-5 text-gray-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
+                    className="h-3 w-3 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </div>
               </div>
-
-              {/* Botones rápidos de artistas específicos */}
-              <div className="mt-6 space-y-3">
-                <p className="text-sm text-gray-500 mb-2">Acceso rápido:</p>
-                <div className="flex flex-wrap gap-2">
-                  {/* Artistas específicos indicados */}
-                  <button
-                    onClick={() => setArtistaSeleccionado("Jose Manuel Ciria")}
-                    className={`px-4 py-2 text-sm rounded-full transition-colors ${
-                      artistaSeleccionado === "Jose Manuel Ciria"
-                        ? "bg-[#FF0000] text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    Ciria
-                  </button>
-
-                  <button
-                    onClick={() => setArtistaSeleccionado("Manolo Oyonarte")}
-                    className={`px-4 py-2 text-sm rounded-full transition-colors ${
-                      artistaSeleccionado === "Manolo Oyonarte"
-                        ? "bg-[#FF0000] text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    Oyonarte
-                  </button>
-
-                  <button
-                    onClick={() => setArtistaSeleccionado("Aurelio Ayela")}
-                    className={`px-4 py-2 text-sm rounded-full transition-colors ${
-                      artistaSeleccionado === "Aurelio Ayela"
-                        ? "bg-[#FF0000] text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    Ayela
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      setArtistaSeleccionado("Zinnia Clavo")
-                    }
-                    className={`px-4 py-2 text-sm rounded-full transition-colors ${
-                      artistaSeleccionado === "Zinnia Clavo"
-                        ? "bg-[#FF0000] text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    Zinnia
-                  </button>
-
-                  <button
-                    onClick={() => setArtistaSeleccionado("")}
-                    className={`px-4 py-2 text-sm rounded-full transition-colors ${
-                      artistaSeleccionado === ""
-                        ? "bg-[#FF0000] text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    Ver todos
-                  </button>
-                </div>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Cabecera de resultados */}
-      <section className="py-12 px-4 bg-white">
-        <div className="max-w-[1600px] mx-auto">
-          <div className="flex justify-between items-center border-b border-gray-200 pb-6 mb-10">
-            <div>
-              <h2 className="text-2xl font-light text-gray-800">
-                {artistaSeleccionado
-                  ? `Obras de ${artistaSeleccionado}`
-                  : "Todas las obras"}
-              </h2>
-              <p className="text-gray-500 mt-1">
-                Mostrando {obrasAMostrar.length} obras
-              </p>
-            </div>
+      {/* Header de resultados - Minimalista */}
+      <section className="border-b border-gray-100">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex items-center justify-between">
+            <AnimatePresence mode="wait">
+              <motion.h2
+                key={artistaSeleccionado}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="text-xl font-light text-gray-900"
+              >
+                {artistaSeleccionado || "Todas las obras"}
+                <span className="text-sm text-gray-400 ml-3">
+                  ({obrasAMostrar.length})
+                </span>
+              </motion.h2>
+            </AnimatePresence>
 
             {artistaSeleccionado && (
               <button
                 onClick={() => setArtistaSeleccionado("")}
-                className="flex items-center gap-2 text-[#FF0000] hover:text-[#cc0000] transition-colors"
+                className="text-xs text-gray-400 hover:text-gray-900 uppercase tracking-wider transition-colors"
               >
-                <span>Ver todas las obras</span>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
+                Limpiar filtro
               </button>
             )}
           </div>
         </div>
       </section>
 
-      {/* Se mantiene el grid original de obras */}
-      <section className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <ObraGrid obras={obrasAMostrar} />
+      {/* Grid de obras - Espacioso y elegante */}
+      <section className="bg-[#FAFAFA]">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={artistaSeleccionado}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ObraGrid obras={obrasAMostrar} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </section>
     </div>
   );
