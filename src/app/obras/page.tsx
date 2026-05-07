@@ -23,8 +23,8 @@ interface Obra {
   titulo: string;
   artista?: string;
   imageUrl: string;
-  medidas?: string;      // ✅ AÑADE EL ?
-  tecnica?: string;      // ✅ AÑADE EL ?
+  medidas?: string; // ✅ AÑADE EL ?
+  tecnica?: string; // ✅ AÑADE EL ?
   año?: string;
   artistaNombre?: string;
 }
@@ -619,7 +619,7 @@ export default function ObrasPage() {
           tecnica: "Óleo sobre Lienzo",
           año: "2023",
         },
-        
+
         {
           id: "gaber-15",
           titulo: "Monumento #P6",
@@ -644,7 +644,7 @@ export default function ObrasPage() {
           tecnica: "Óleo sobre Lienzo",
           año: "2023",
         },
-        
+
         {
           id: "gaber-1",
           titulo: "Monumento #P13",
@@ -812,7 +812,6 @@ export default function ObrasPage() {
           tecnica: "Técnica: Mixta sobre Retablo",
           año: "2024",
         },
-        
       ],
     },
     {
@@ -1887,166 +1886,133 @@ export default function ObrasPage() {
       id: "jesus",
       nombre: "Jesús del Peso",
       obras: [
-        {
-          id: "jesus-19",
-          imageUrl: "/images/obras/delpeso/delpeso12.jpg",
-          titulo: "Apertura del cubo I",
-          medidas: "70 x 70 cm",
-          tecnica: "Acrílico sobre lienzo",
-        },
-        {
-          id: "jesus-20",
-          imageUrl: "/images/obras/delpeso/delpeso13.jpg",
-          titulo: "Apertura del cubo II",
-          medidas: "70 x 70 cm",
-          tecnica: "Acrílico sobre lienzo",
-        },
-        {
-          id: "jesus-21",
-          imageUrl: "/images/obras/delpeso/delpeso14.jpg",
-          titulo: "Apertura del cubo III",
-          medidas: "70 x 70 cm",
-          tecnica: "Acrílico sobre lienzo",
-        },
-        {
-          id: "jesus-22",
-          imageUrl: "/images/obras/delpeso/delpeso10.jpg",
-          titulo: "Vibración Espacial IV",
-          medidas: "70 x 50 cm",
-          tecnica: "Acrílico sobre lienzo",
-        },
-        {
-          id: "jesus-23",
-          imageUrl: "/images/obras/delpeso/delpeso7.jpg",
-          titulo: "Vibración Espacial I",
-          medidas: "70 x 70 cm",
-          tecnica: "Acrílico sobre lienzo",
-        },
+        // JESÚS DEL PESO — Esculturas
         {
           id: "jesus-1",
-          imageUrl: "/images/obras/delpeso/delpeso6.jpg",
-          titulo: "Apertura de la esfera en el plano",
-          medidas: "150 x 90 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Zenit",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso1.jpg",
+          medidas: "235 x 95 x 41 cm",
+          tecnica: "Acero corten",
+          vendido: true,
         },
         {
           id: "jesus-2",
-          imageUrl: "/images/obras/delpeso/delpeso4.jpg",
-          titulo: "",
-          medidas: "162 x 114 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Tonatiuh en expansión",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso2.jpg",
+          medidas: "90 x 66 x 17 cm",
+          tecnica: "Acero corten pintado",
         },
         {
           id: "jesus-3",
-          imageUrl: "/images/obras/delpeso/delpeso5.jpg",
-          titulo: "",
-          medidas: "100 x 81 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Silencio Vertical",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso3.jpg",
+          medidas: "210 x 40 x 50 cm",
+          tecnica: "Acero corten pintado",
         },
         {
           id: "jesus-4",
-          imageUrl: "/images/obras/delpeso/delpeso24.jpg",
-          titulo: "Horizonte Vertical I",
-          medidas: "195 x 130 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Materia de luz",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso4.jpg",
+          medidas: "200 x 79,5 x 39,5 cm",
+          tecnica: "Acero corten pintado",
         },
         {
           id: "jesus-5",
-          imageUrl: "/images/obras/delpeso/delpeso20.jpg",
-          titulo: "Babylon",
-          medidas: "110 x 89 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Espacio angular II",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso5.jpg",
+          medidas: "70 x 44 x 40 cm",
+          tecnica: "Acero",
         },
         {
           id: "jesus-6",
-          imageUrl: "/images/obras/delpeso/delpeso3.jpg",
-          titulo: "",
-          medidas: "130 x 60 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Géminis",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso6.jpg",
+          medidas: "88 x 76 x 42 cm",
+          tecnica: "Acero",
         },
         {
           id: "jesus-7",
-          imageUrl: "/images/obras/delpeso/delpeso2.jpg",
-          titulo: "",
-          medidas: "130 x 60 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Gredos III",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso7.jpg",
+          medidas: "114 x 40 x 30 cm",
+          tecnica: "Acero corten",
         },
         {
           id: "jesus-8",
-          imageUrl: "/images/obras/delpeso/delpeso8.jpg",
-          titulo: "Vibración Espacial III",
-          medidas: "80 x 30 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Minotauro",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso8.jpg",
+          medidas: "60,5 x 26,5 x 23,5 cm",
+          tecnica: "Acero corten",
         },
         {
           id: "jesus-9",
-          imageUrl: "/images/obras/delpeso/delpeso9.jpg",
-          titulo: "Vibración Espacial II",
-          medidas: "80 x 30 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Horizonte Vertical VIII",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso9.jpg",
+          medidas: "220 x 80 x 70 cm",
+          tecnica: "Acero corten",
         },
         {
           id: "jesus-10",
-          imageUrl: "/images/obras/delpeso/delpeso21.jpg",
-          titulo: "",
-          medidas: "70 x 50 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Espacio Vertical Contenido",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso10.jpg",
+          medidas: "54 x 15 x 10 cm",
+          tecnica: "Acero corten pintado",
         },
         {
           id: "jesus-11",
-          imageUrl: "/images/obras/delpeso/delpeso22.jpg",
-          titulo: "",
-          medidas: "60 x 60 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Espacio vertical en tensión",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso11.jpg",
+          medidas: "180 x 40 x 50 cm",
+          tecnica: "Acero corten pintado",
         },
         {
           id: "jesus-12",
-          imageUrl: "/images/obras/delpeso/delpeso15.jpg",
-          titulo: "Orión",
-          medidas: "195 x 195 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Sin título",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso12.jpg",
+          medidas: "164 x 84 x 57 cm",
+          tecnica: "Acero corten",
         },
         {
           id: "jesus-13",
-          imageUrl: "/images/obras/delpeso/delpeso23.jpg",
-          titulo: "Géminis",
-          medidas: "114 x 162 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Gredos V",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso13.jpg",
+          medidas: "230 x 65 x 65 cm",
+          tecnica: "Acero corten pintado en esmalte",
         },
         {
           id: "jesus-14",
-          imageUrl: "/images/obras/delpeso/delpeso17.jpg",
-          titulo: "",
-          medidas: "116 x 97 cm",
-          tecnica: "Acrílico sobre lienzo",
-        },
-        {
-          id: "jesus-15",
-          imageUrl: "/images/obras/delpeso/delpeso25.jpg",
-          titulo: "",
-          medidas: "116 x 97 cm",
-          tecnica: "Acrílico sobre lienzo",
-        },
-        {
-          id: "jesus-16",
-          imageUrl: "/images/obras/delpeso/delpeso19.jpg",
-          titulo: "",
-          medidas: "195 x 130 cm",
-          tecnica: "Acrílico sobre lienzo",
-        },
-        {
-          id: "jesus-17",
-          imageUrl: "/images/obras/delpeso/delpeso16.jpg",
-          titulo: "",
-          medidas: "132 x 114 cm",
-          tecnica: "Acrílico sobre lienzo",
-        },
-        {
-          id: "jesus-18",
-          imageUrl: "/images/obras/delpeso/delpeso16.jpg",
-          titulo: "",
-          medidas: "132 x 114 cm",
-          tecnica: "Acrílico sobre lienzo",
+          titulo: "Tauro",
+          artista: "Jesús del Peso",
+          artistaNombre: "Jesús del Peso",
+          imageUrl: "/images/obras/delpeso/jdelpeso14.jpg",
+          medidas: "260 x 60 x 80 cm",
+          tecnica: "Acero corten",
         },
         // ... resto de obras
       ],
@@ -2306,7 +2272,7 @@ export default function ObrasPage() {
       artista.obras.map((obra) => ({
         ...obra,
         artistaNombre: artista.nombre,
-      }))
+      })),
     );
     setObrasAleatorias(shuffleArray(todasLasObras));
   }, []);
@@ -2394,7 +2360,7 @@ export default function ObrasPage() {
                   <p className="text-4xl font-light text-[#FF0000]">
                     {artistas.reduce(
                       (total, artista) => total + artista.obras.length,
-                      0
+                      0,
                     )}
                   </p>
                   <p className="text-sm text-gray-500 uppercase tracking-wider">
@@ -2486,9 +2452,7 @@ export default function ObrasPage() {
                   </button>
 
                   <button
-                    onClick={() =>
-                      setArtistaSeleccionado("Zinnia Clavo")
-                    }
+                    onClick={() => setArtistaSeleccionado("Zinnia Clavo")}
                     className={`px-4 py-2 text-sm rounded-full transition-colors ${
                       artistaSeleccionado === "Zinnia Clavo"
                         ? "bg-[#FF0000] text-white"
