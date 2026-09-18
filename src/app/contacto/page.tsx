@@ -151,7 +151,7 @@ export default function ContactPage() {
             className="text-center max-w-3xl mx-auto"
           >
             <p className="text-2xl text-white/90 font-light italic">
-              "El arte es la expresión de los sueños más profundos, una ventana a las emociones que nos conectan con el mundo"
+              &quot;El arte es la expresión de los sueños más profundos, una ventana a las emociones que nos conectan con el mundo&quot;
             </p>
             <div className="w-16 h-1 bg-[#FF0000] mx-auto mt-8" />
           </motion.div>

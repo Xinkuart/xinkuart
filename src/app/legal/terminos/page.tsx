@@ -8,7 +8,7 @@ export default function Terminos() {
       <section className="space-y-6">
         <h2 className="text-xl text-white mt-8 mb-4">1. Introducción</h2>
         <p>
-          Estos términos y condiciones regulan el uso del sitio web www.xinkuart.com (en adelante, "el Sitio Web"), propiedad de LANZA ARTE MCH, S.L., con CIF B-70931720 y domicilio en Pº de la Castellana nº 123, esc dcha 5º C, 28056 Madrid.
+          Estos términos y condiciones regulan el uso del sitio web www.xinkuart.com (en adelante, &quot;el Sitio Web&quot;), propiedad de LANZA ARTE MCH, S.L., con CIF B-70931720 y domicilio en Pº de la Castellana nº 123, esc dcha 5º C, 28056 Madrid.
         </p>
 
         <h2 className="text-xl text-white mt-8 mb-4">2. Naturaleza del servicio</h2>

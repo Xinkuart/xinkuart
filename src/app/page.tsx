@@ -1,31 +1,24 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, } from "lucide-react";
-import {Playfair_Display, Raleway,} from "next/font/google";
+import { ArrowRight, Calendar, MapPin, ChevronDown } from "lucide-react";
+import {Raleway, Montserrat,} from "next/font/google";
 
 
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
 
 const raleway = Raleway({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500"],
 });
 
-// Imágenes para el slider de bienvenida
-const welcomeImages = [
-  "/images/obras/hero/hs1.jpg",
-  "/images/obras/hero/hs2.jpg",
-  "/images/obras/hero/hs3.jpg",
-];
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
+});
 
 type NewsItem = {
   id: number;
@@ -37,57 +30,7 @@ type NewsItem = {
 };
 
 export default function HomePage() {
-  // Estados - ACTUALIZADO con showCurtain
-  const [showIntro, setShowIntro] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
-  const [showCurtain, setShowCurtain] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [heroLoaded, setHeroLoaded] = useState(false);
-
-  // Verificar si ya se mostró la intro
-  useEffect(() => {
-    const isDevelopment = window.location.hostname === "localhost";
-    
-    if (!isDevelopment) {
-      const introShown = sessionStorage.getItem("introShownV2");
-      if (introShown === "true") {
-        setShowIntro(false);
-        setHeroLoaded(true);
-      }
-    }
-  }, []);
-
-  // Cambio automático de imágenes del slider
-  useEffect(() => {
-    if (showIntro && !isExiting) {
-      const interval = setInterval(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % welcomeImages.length);
-      }, 4000);
-      return () => clearInterval(interval);
-    }
-  }, [showIntro, isExiting]);
-
-  // Manejar entrada al sitio - ACTUALIZADO con transición correcta
-  const handleEnter = () => {
-    setIsExiting(true);
-    
-    // Paso 1: Fade out de la intro (300ms)
-    setTimeout(() => {
-      setShowIntro(false);
-      setShowCurtain(true); // Mostrar cortina negra
-    }, 300);
-    
-    // Paso 2: Abrir cortina revelando hero (400ms después)
-    setTimeout(() => {
-      setHeroLoaded(true);
-    }, 400);
-    
-    // Paso 3: Quitar cortina completamente (1000ms después de iniciar)
-    setTimeout(() => {
-      setShowCurtain(false);
-      sessionStorage.setItem("introShownV2", "true");
-    }, 1000);
-  };
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   const newsItems: NewsItem[] = [
     {
@@ -142,294 +85,159 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ========================================
-          PANTALLA DE BIENVENIDA - VERSIÓN FINAL
-          ======================================== */}
-      {showIntro && (
-        <motion.div
-          initial={{ opacity: 1 }}
-          animate={{ opacity: isExiting ? 0 : 1 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-50 bg-black"
-        >
-          {/* Slider de Imágenes de Fondo */}
+      {/* CONTENIDO PRINCIPAL - HERO SECTION Y RESTO DE LA PÁGINA */}
+      <main className="bg-black text-white overflow-x-hidden">
+        {/* HERO SECTION - Exposición activa */}
+        <section className="relative min-h-screen w-full overflow-hidden bg-black">
+          {/* Imagen de fondo a gran formato, prácticamente sin oscurecer */}
           <div className="absolute inset-0">
-            {welcomeImages.map((image, index) => (
-              <motion.div
-                key={image}
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: currentImageIndex === index ? 1 : 0,
-                }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={image}
-                  alt={`XinkuArt Gallery ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                  quality={95}
-                />
-              </motion.div>
-            ))}
-            {/* Overlay sutil solo en los bordes */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent" />
+            <Image
+              src="/images/obras/gaber/obra65.jpg"
+              alt="UMBRALES - William Gaber"
+              fill
+              priority
+              quality={90}
+              className="object-cover"
+            />
+            {/* Capa mínima, solo para asegurar contraste base */}
+            <div className="absolute inset-0 bg-black/10" />
           </div>
 
-          {/* Contenido Principal */}
-          <div className="relative z-10 h-full flex flex-col justify-between px-6 sm:px-8 md:px-12 lg:px-16 py-12">
-            {/* Contenido de texto - Abajo Izquierda en Desktop */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-auto mb-20 max-w-2xl text-center md:text-left mx-auto md:mx-0"
-            >
-              {/* Logo principal */}
+          {/* Contenido centrado, en tarjeta de cristal esmerilado */}
+          <div className="relative z-10 min-h-screen flex items-center justify-center px-6 sm:px-8 md:px-12 py-16 md:py-20">
+            <div className="max-w-3xl w-full backdrop-blur-md bg-black/20 border border-white/10 px-6 sm:px-10 md:px-14 py-10 md:py-14 text-center">
+              {/* Logo de la galería */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.4, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="mb-8"
+                transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="flex justify-center mb-8 md:mb-10"
               >
-                <div className="relative w-[280px] sm:w-[340px] md:w-[400px] lg:w-[480px] h-[90px] sm:h-[110px] md:h-[130px] lg:h-[155px] mx-auto md:mx-0">
+                <div className="relative w-[130px] sm:w-[150px] h-[42px] sm:h-[48px]">
                   <Image
                     src="/images/logo/logoxinkuart.png"
                     alt="XinkuArt Logo"
                     fill
-                    className="object-contain object-center md:object-left"
-                    priority
+                    className="object-contain opacity-90"
                   />
                 </div>
               </motion.div>
 
-              {/* Línea decorativa */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1.2, delay: 1, ease: "easeOut" }}
-                className="w-24 h-[1px] bg-white/40 mb-10 origin-left mx-auto md:mx-0"
-              />
+              {/* Eyebrow */}
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className={`${raleway.className} block text-[10px] sm:text-xs uppercase tracking-[0.4em] text-[#FF0000] font-medium mb-4`}
+              >
+                Exposición Actual
+              </motion.span>
 
-              {/* Botón Descubre la Galería */}
+              {/* Título editorial */}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.2, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className={`${montserrat.className} font-black text-white text-5xl sm:text-7xl md:text-8xl leading-[1.35] tracking-tight mb-6`}
+              >
+                UMBRALES
+              </motion.h1>
+
+              {/* Artista */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="flex items-center justify-center gap-4 mb-8 md:mb-10"
+              >
+                <div className="w-10 h-[1px] bg-[#FF0000]" />
+                <p
+                  className={`${raleway.className} text-white/90 text-lg sm:text-xl uppercase tracking-[0.25em] font-light`}
+                >
+                  William Gaber
+                </p>
+                <div className="w-10 h-[1px] bg-[#FF0000]" />
+              </motion.div>
+
+              {/* Datos prácticos - diferenciados del título */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                className="border-y border-white/15 py-5 mb-8 mx-auto max-w-xl text-left space-y-3"
+              >
+                <div className="flex items-start gap-3">
+                  <Calendar size={18} className="text-[#FF0000] mt-0.5 flex-shrink-0" />
+                  <p className={`${raleway.className} text-white/80 text-sm tracking-wide`}>
+                    Del 2 al 25 de octubre de 2026
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin size={18} className="text-[#FF0000] mt-0.5 flex-shrink-0" />
+                  <p className={`${raleway.className} text-white/80 text-sm tracking-wide leading-relaxed`}>
+                    Centro Cultural Casa de Vacas, Paseo de Colombia, 1 (Parque de El
+                    Retiro, frente al embarcadero), 28009 Madrid
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Texto descriptivo con "Leer más" */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
+                className={`${raleway.className} max-w-xl mx-auto text-left text-white/70 text-sm sm:text-base leading-relaxed font-light`}
               >
-                <motion.button
-                  onClick={handleEnter}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className={`${raleway.className} group relative overflow-hidden px-12 py-5 bg-white/10 backdrop-blur-md text-white 
-                    text-sm uppercase tracking-[0.25em] font-light transition-all duration-500
-                    border border-white/20 hover:border-red-600 hover:bg-red-600`}
-                >
-                  <span className="relative z-10 flex items-center gap-3">
-                    Descubre la Galería
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
+                <p>
+                  UMBRALES es una serie de trabajos del artista William Gaber que
+                  incluye pintura, escultura e instalación. Como gran parte de su
+                  obra reciente, Gaber emplea elementos arquitectónicos celosías y
+                  estructuras modulares para explorar la idea de umbrales y límites
+                  como zonas de tránsito y encuentro.
+                </p>
+
+                <AnimatePresence>
+                  {showFullDescription && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="overflow-hidden"
                     >
-                      <ArrowRight size={16} className="opacity-70 group-hover:opacity-100" />
-                    </motion.span>
-                  </span>
-                </motion.button>
-              </motion.div>
-            </motion.div>
-          </div>
-        </motion.div>
-      )}
+                      <p className="mt-4">
+                        El concepto subyacente de este conjunto de obras es cuestionar
+                        la rigidez de los límites y revelar su naturaleza permeable.
+                        Estas celosías actúan como membranas que filtran la luz, el
+                        espacio y la forma, generando una experiencia visual en
+                        constante transformación según el punto de vista del
+                        espectador.
+                      </p>
+                      <p className="mt-4">
+                        La instalación central, construida con tubos de cobre y
+                        pájaros impresos en 3D, ancla el conjunto en una dimensión
+                        táctil y escultórica que dialoga con las pinturas,
+                        completando un recorrido donde la geometría, el ritmo y la
+                        repetición se convierten en el verdadero lenguaje de la
+                        exposición.
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-      {/* CORTINA NEGRA CON APERTURA */}
-      {showCurtain && (
-        <div className="fixed inset-0 z-[60] pointer-events-none">
-          {/* Cortina superior */}
-          <motion.div
-            initial={{ scaleY: 1 }}
-            animate={{ scaleY: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 top-0 h-1/2 bg-black origin-top"
-          />
-          {/* Cortina inferior */}
-          <motion.div
-            initial={{ scaleY: 1 }}
-            animate={{ scaleY: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 bottom-0 h-1/2 bg-black origin-bottom"
-          />
-        </div>
-      )}
-
-      {/* CONTENIDO PRINCIPAL - HERO SECTION Y RESTO DE LA PÁGINA */}
-      <main className="bg-black text-white overflow-x-hidden">
-        {/* HERO SECTION */}
-        <section className="relative h-screen w-full overflow-hidden bg-black">
-          <div className="absolute inset-0">
-            <div className="grid grid-cols-12 gap-0 h-full">
-              {/* COLUMNA IZQUIERDA - Imagen */}
-              <div className="col-span-12 md:col-span-7 relative h-[50vh] md:h-full bg-black overflow-hidden">
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={heroLoaded ? { opacity: 1 } : {}}
-                  transition={{
-                    duration: 1.5,
-                    delay: 0.5,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="absolute inset-0"
+                <button
+                  onClick={() => setShowFullDescription(!showFullDescription)}
+                  className="mt-4 inline-flex items-center gap-2 text-[#FF0000] hover:opacity-80 transition-opacity duration-300 text-xs uppercase tracking-[0.2em] font-medium"
                 >
-                  <div className="relative w-full h-full">
-                    <Image
-                      src="/images/hero/he14.png"
-                      alt="XinkuArt - Arte Contemporáneo"
-                      fill
-                      className="object-cover object-left-top"
-                      priority
-                      quality={95}
-                    />
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* COLUMNA DERECHA - Contenido */}
-              <div className="col-span-12 md:col-span-5 relative flex items-center justify-center bg-black px-6 sm:px-8 lg:px-12 py-12 md:py-0">
-                <motion.div
-                  initial={{ scaleY: 0 }}
-                  animate={heroLoaded ? { scaleY: 1 } : {}}
-                  transition={{ duration: 1.2, delay: 1.5, ease: "easeOut" }}
-                  className="absolute left-0 top-1/4 bottom-1/4 w-[1px] bg-gradient-to-b from-transparent via-red-600/30 to-transparent origin-top hidden md:block"
-                />
-
-                <div className="max-w-md w-full relative z-10">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={heroLoaded ? { opacity: 1, y: 0 } : {}}
-                    transition={{
-                      duration: 1,
-                      delay: 0.8,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="mb-4"
-                  >
-                    <span
-                      className={`${raleway.className} text-[9px] sm:text-[10px] uppercase tracking-[0.4em] text-red-600 font-medium`}
-                    >
-                      Galería de Arte Contemporáneo
-                    </span>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={heroLoaded ? { opacity: 1, y: 0 } : {}}
-                    transition={{
-                      duration: 1.2,
-                      delay: 1,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="mb-4"
-                  >
-                    <div className="relative w-[200px] sm:w-[240px] lg:w-[280px] aspect-[3/1]">
-                      <Image
-                        src="/images/logo/logoxinkuart.png"
-                        alt="XinkuArt Logo"
-                        fill
-                        priority
-                        className="object-contain"
-                      />
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ scaleX: 0 }}
-                    animate={heroLoaded ? { scaleX: 1 } : {}}
-                    transition={{
-                      duration: 1.5,
-                      delay: 1.4,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="w-16 h-[2px] bg-gradient-to-r from-red-600 to-red-600/20 mb-5 origin-left"
+                  {showFullDescription ? "Leer menos" : "Leer más"}
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-300 ${
+                      showFullDescription ? "rotate-180" : ""
+                    }`}
                   />
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={heroLoaded ? { opacity: 1, y: 0 } : {}}
-                    transition={{
-                      duration: 1,
-                      delay: 1.2,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="mb-6"
-                  >
-                    <h1
-                      className={`${playfair.className} text-xl sm:text-2xl lg:text-3xl font-normal text-white leading-tight tracking-wide mb-3 whitespace-nowrap`}
-                    >
-                      Espacio de Arte Contemporáneo
-                    </h1>
-                    <p
-                      className={`${raleway.className} text-xs sm:text-sm text-white/50 font-light leading-relaxed tracking-wide`}
-                    >
-                      Descubre obras de artistas consolidados y emergentes en un
-                      espacio virtual único.
-                    </p>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={heroLoaded ? { opacity: 1, y: 0 } : {}}
-                    transition={{
-                      duration: 1,
-                      delay: 1.4,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="flex flex-col sm:flex-row gap-3"
-                  >
-                    <Link href="/obras">
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`${raleway.className} group relative overflow-hidden bg-red-600 hover:bg-red-700 text-white px-6 py-3 text-[10px] font-medium uppercase tracking-[0.2em] transition-all duration-500`}
-                      >
-                        <span className="relative z-10 flex items-center gap-2">
-                          Explorar Obras
-                          <ArrowRight
-                            size={14}
-                            className="group-hover:translate-x-2 transition-transform duration-300"
-                          />
-                        </span>
-                      </motion.button>
-                    </Link>
-
-                    <Link href="/artistas">
-                      <motion.button
-                        whileHover={{
-                          scale: 1.02,
-                          borderColor: "rgba(255,255,255,0.6)",
-                        }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`${raleway.className} border border-white/20 hover:bg-white/5 text-white/70 hover:text-white px-6 py-3 text-[10px] font-light uppercase tracking-[0.2em] transition-all duration-300`}
-                      >
-                        Nuestros Artistas
-                      </motion.button>
-                    </Link>
-                  </motion.div>
-                </div>
-
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={heroLoaded ? { opacity: 0.02 } : {}}
-                  transition={{
-                    duration: 2,
-                    delay: 2,
-                  }}
-                  className="absolute -right-20 -bottom-20 text-[300px] font-bold text-white select-none pointer-events-none hidden md:block"
-                >
-                  X
-                </motion.div>
-              </div>
+                </button>
+              </motion.div>
             </div>
           </div>
         </section>
