@@ -13,10 +13,12 @@ import {
 } from "lucide-react";
 import { Montserrat, Raleway, Playfair_Display } from "next/font/google";
 
-// Montserrat: solo para el título "UMBRALES" del hero (se mantiene como estaba).
+// Montserrat: solo para el título "UMBRALES" del hero. Declaración idéntica a
+// la de la home (src/app/page.tsx) para que next/font reutilice la misma
+// configuración ya validada en producción.
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["900"],
+  weight: ["700", "800", "900"],
 });
 
 // Raleway: eyebrows, texto de lectura y etiquetas — igual que en el resto de la web.
@@ -25,11 +27,12 @@ const raleway = Raleway({
   weight: ["200", "300", "400", "500"],
 });
 
-// Playfair Display: títulos y citas — la misma fuente que usan /about y el resto
-// de páginas de contenido del sitio.
+// Playfair Display: títulos y citas. Declaración idéntica a la de /about
+// (src/app/about/page.tsx) para que next/font reutilice la misma
+// configuración ya validada en producción.
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
 });
 
 /* ============================================================
