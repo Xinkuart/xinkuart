@@ -242,6 +242,26 @@ export default function HomePage() {
                   />
                 </button>
               </motion.div>
+
+              {/* CTA - Ver la exposición completa */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-8 flex justify-center"
+              >
+                <Link
+                  href="/exposiciones/umbrales"
+                  aria-label="Ver la exposición UMBRALES de William Gaber"
+                  className={`${raleway.className} group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#FF0000] hover:bg-[#CC0000] text-white px-8 py-4 text-xs sm:text-sm uppercase tracking-[0.2em] font-medium rounded-sm transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white`}
+                >
+                  Ver la exposición
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </Link>
+              </motion.div>
             </div>
           </div>
         </section>
