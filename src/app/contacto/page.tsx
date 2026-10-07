@@ -3,11 +3,14 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 import Image from 'next/image';
-import { Raleway } from "next/font/google";
+import localFont from "next/font/local";
 
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["200", "300", "400"],
+const raleway = localFont({
+  src: "../../fonts/raleway-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 export default function ContactPage() {

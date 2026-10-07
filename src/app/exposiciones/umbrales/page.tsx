@@ -11,28 +11,44 @@ import {
   ChevronDown,
   X,
 } from "lucide-react";
-import { Montserrat, Raleway, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 
-// Montserrat: solo para el título "UMBRALES" del hero. Declaración idéntica a
-// la de la home (src/app/page.tsx) para que next/font reutilice la misma
-// configuración ya validada en producción.
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["700", "800", "900"],
+// Montserrat: solo para el título "UMBRALES" del hero.
+const montserrat = localFont({
+  src: "../../../fonts/montserrat-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 // Raleway: eyebrows, texto de lectura y etiquetas — igual que en el resto de la web.
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
+const raleway = localFont({
+  src: "../../../fonts/raleway-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
-// Playfair Display: títulos y citas. Declaración idéntica a la de /about
-// (src/app/about/page.tsx) para que next/font reutilice la misma
-// configuración ya validada en producción.
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+// Playfair Display: títulos y citas. Incluye el archivo itálico real porque
+// las citas de "La exposición" usan la clase CSS `italic`.
+const playfair = localFont({
+  src: [
+    {
+      path: "../../../fonts/playfair-display-latin-wght-normal.woff2",
+      weight: "400 900",
+      style: "normal",
+    },
+    {
+      path: "../../../fonts/playfair-display-latin-wght-italic.woff2",
+      weight: "400 900",
+      style: "italic",
+    },
+  ],
+  display: "swap",
+  adjustFontFallback: "Times New Roman",
+  fallback: ["Georgia", "serif"],
 });
 
 /* ============================================================

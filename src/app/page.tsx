@@ -6,18 +6,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Calendar, MapPin, ChevronDown } from "lucide-react";
-import {Raleway, Montserrat,} from "next/font/google";
+import localFont from "next/font/local";
 
-
-
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
+const raleway = localFont({
+  src: "../fonts/raleway-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["700", "800", "900"],
+const montserrat = localFont({
+  src: "../fonts/montserrat-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 type NewsItem = {

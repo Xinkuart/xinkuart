@@ -3,17 +3,22 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Monoton } from "next/font/google";
-import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 
-const monoton = Monoton({
-  subsets: ["latin"],
-  weight: ["400"],
+const monoton = localFont({
+  src: "../fonts/monoton-latin-400-normal.woff2",
+  weight: "400",
+  style: "normal",
+  display: "swap",
+  fallback: ["sans-serif"],
 });
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+const montserrat = localFont({
+  src: "../fonts/montserrat-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 const heroImages = [

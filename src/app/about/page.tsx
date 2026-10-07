@@ -3,17 +3,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, } from "framer-motion";
-import { Playfair_Display, Raleway } from "next/font/google";
+import localFont from "next/font/local";
 import { ArrowRight, Sparkles, Target, Users, Lightbulb } from "lucide-react";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const playfair = localFont({
+  src: "../../fonts/playfair-display-latin-wght-normal.woff2",
+  weight: "400 900",
+  style: "normal",
+  display: "swap",
+  adjustFontFallback: "Times New Roman",
+  fallback: ["Georgia", "serif"],
 });
 
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
+const raleway = localFont({
+  src: "../../fonts/raleway-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 export default function QuienesSomosPage() {
@@ -220,98 +227,6 @@ export default function QuienesSomosPage() {
                     museos de prestigio a nivel mundial.
                   </p>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Segunda Fila - Layout Invertido */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Contenido Izquierda */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="lg:col-span-5 flex flex-col justify-center space-y-8 order-2 lg:order-1"
-            >
-              <div>
-                <h3
-                  className={`${playfair.className} text-3xl md:text-4xl font-light mb-6`}
-                >
-                  Proceso Curatorial
-                </h3>
-                <p
-                  className={`${raleway.className} text-gray-600 leading-relaxed font-light mb-6`}
-                >
-                  Nuestro proceso curatorial se centra en crear diálogos
-                  significativos entre las obras y los espacios. Cada exposición
-                  está cuidadosamente diseñada para ofrecer una experiencia
-                  inmersiva.
-                </p>
-                <Link
-                  href="/exposiciones"
-                  className="inline-flex items-center gap-2 text-red-600 hover:gap-4 transition-all duration-300 group"
-                >
-                  <span
-                    className={`${raleway.className} text-sm uppercase tracking-[0.2em] font-medium`}
-                  >
-                    Ver Exposiciones
-                  </span>
-                  <ArrowRight
-                    size={16}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
-                </Link>
-              </div>
-
-              {/* Tarjeta de estadística */}
-              <div className="bg-gray-50 p-8 relative overflow-hidden group border border-gray-100">
-                <div className="relative z-10">
-                  <Target className="text-red-600 mb-4" size={32} />
-                  <h4
-                    className={`${playfair.className} text-2xl mb-2 font-light`}
-                  >
-                    Experiencia Inmersiva
-                  </h4>
-                  <p
-                    className={`${raleway.className} text-gray-600 text-sm font-light leading-relaxed`}
-                  >
-                    Destacamos la singularidad de cada pieza y su contribución
-                    al arte contemporáneo mediante espacios cuidadosamente
-                    diseñados.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Imagen Grande Derecha */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-7 relative h-[500px] lg:h-[700px] group overflow-hidden order-1 lg:order-2"
-            >
-              <Image
-                src="/images/obras/ciria/ciria11.jpg"
-                alt="Proceso Curatorial"
-                fill
-                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                <h3
-                  className={`${playfair.className} text-3xl text-white mb-3`}
-                >
-                  Curaduría de Excelencia
-                </h3>
-                <p
-                  className={`${raleway.className} text-white/90 text-sm leading-relaxed font-light`}
-                >
-                  Cada exposición está meticulosamente curada para crear
-                  narrativas visuales que conectan con el espectador a nivel
-                  emocional e intelectual.
-                </p>
               </div>
             </motion.div>
           </div>

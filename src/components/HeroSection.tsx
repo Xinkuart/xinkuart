@@ -5,16 +5,23 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Playfair_Display, Raleway } from "next/font/google";
+import localFont from "next/font/local";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const playfair = localFont({
+  src: "../fonts/playfair-display-latin-wght-normal.woff2",
+  weight: "400 900",
+  style: "normal",
+  display: "swap",
+  adjustFontFallback: "Times New Roman",
+  fallback: ["Georgia", "serif"],
 });
 
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
+const raleway = localFont({
+  src: "../fonts/raleway-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 export default function HeroSection() {
